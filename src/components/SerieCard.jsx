@@ -35,13 +35,13 @@ const SerieCard = ({ serie, token, user }) => {
   };
 
   return (
-    <div className="flex gap-3 my-3 w-full bg-red-200">
-      <div className=" gap-x-2 w-[78%] border-r-2">
+    <div className="flex my-3 w-full bg-blanco">
+      <div className="gap-x-2 w-[78%] border-r-4">
         <div className="flex gap-x-2">
           <div className="h-full">
             <img src={BASE_URL + serie.poster_path} width={200} />
           </div>
-          <div className="h-[300px] w-[72%] flex flex-col justify-between py-2 items-center">
+          <div className="h-[300px] w-[72%] flex flex-col justify-between py-3 items-center">
             <div className="flex flex-col gap-y-2 items-center h-[80%]">
               <h1 className="text-3xl font-semibolds font-lato text-center">
                 {serie.name}
@@ -53,7 +53,7 @@ const SerieCard = ({ serie, token, user }) => {
             <div className="items-center">
               <button
                 onClick={(e) => handleSubmit(e, serie.id)}
-                className="text-lg font-semibold text-purpuraoscuro"
+                className="text-lg hover:bg-purpuraoscuro hover:text-blanco px-10 font-semibold text-purpuraoscuro"
               >
                 AGREGAR A FAVORITOS
               </button>
@@ -61,37 +61,40 @@ const SerieCard = ({ serie, token, user }) => {
           </div>
         </div>
       </div>
-      <div className="w-[20%]">
-        <div className="flex h-full flex-col justify-between py-3 items-center">
+      <div className="w-[22%] bg-purpuraoscuro py-1 px-5">
+        <div className="flex h-full flex-col justify-between py-[10px] w-full items-center">
           <div>
-            <span className="text-2xl font-semibold">
+            <span className="text-3xl font-semibold text-blanco">
               {serie.first_air_date.slice(0, 4)}
             </span>
           </div>
           <div>
-            <div className="text-center">
+            <div className="text-center text-blanco">
               {serie.genres.map((genre) => genre.name).join(", ")}
             </div>
           </div>
-          <div>
+          <div className="text-center">
             <div>
-              <h2>
-                Episodes <span>{serie.number_of_episodes}</span>
+              <h2 className="text-blanco text-lg">
+                Seasons: <span>{serie.number_of_seasons}</span>
               </h2>
             </div>
-            <div>
-              <h2>
-                Seasons <span>{serie.number_of_seasons}</span>
+            <div className="">
+              <h2 className="text-blanco text-lg">
+                Episodes: <span>{serie.number_of_episodes}</span>
               </h2>
             </div>
           </div>
           <div>
-            <h2>
-              Rating <span>{parseFloat(serie.vote_average.toFixed(2))}</span>
+            <h2 className="text-amarillo text-2xl font-semibold">
+              {parseFloat(serie.vote_average.toFixed(2))}
             </h2>
           </div>
-          <div>
-            <button className="text-lg font-semibold text-purpuraoscuro">
+          <div className="">
+            <button
+              onClick={() => navigate(`/${serie.id}`)}
+              className="text-lg hover:bg-blanco hover:text-purpuraoscuro px-10  text-blanco font-semibold text-"
+            >
               VER DETALLES
             </button>
           </div>
@@ -100,19 +103,5 @@ const SerieCard = ({ serie, token, user }) => {
     </div>
   );
 };
-
-{
-  /* <button
-              onClick={(e) => {
-                handleSubmit(e, serie.id);
-              }}
-            >
-              AGREGAR
-            </button> */
-}
-
-//   <div>
-//   <Link to={`/serie/${serie.id}`}>VER DETALLES</Link>
-// </div>
 
 export default SerieCard;

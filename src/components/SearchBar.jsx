@@ -58,7 +58,7 @@ const SearchBar = ({ setSerie }) => {
   };
 
   return (
-    <div className="w-full bg-negroclaro h-16 flex justify-center items-center">
+    <div className="w-full bg-negro h-16 flex justify-center items-center">
       <input
         className="w-1/3 bg-blanco rounded-lg px-3 h-10 text-white text-xl"
         value={text}

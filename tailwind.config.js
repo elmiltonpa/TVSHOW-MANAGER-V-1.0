@@ -16,6 +16,8 @@ export default {
       negroclaro: "#333745",
       negropurpura: "#1C0B19",
       rojo: "#BA1200",
+      negro: "#04080F",
+      amarillo: "#FDE12D",
     },
     extend: {
       fontFamily: {

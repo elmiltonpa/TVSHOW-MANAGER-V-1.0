@@ -11,8 +11,8 @@ const Header = ({ user, setUser, setToken }) => {
       <div className="w-[90vw] pl-36 bg-purpuraoscuro h-full flex justify-between items-center">
         <ul className="flex gap-5">
           <li className="">
-            <Link className="text-blanco" to="/home">
-              HOME
+            <Link className="text-blanco font-bold" to="/home">
+              TVSHOW MANAGER
             </Link>
           </li>
         </ul>

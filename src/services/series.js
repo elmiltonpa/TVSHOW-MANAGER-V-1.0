@@ -1,9 +1,11 @@
 import axios from "axios";
 
-const baseURL = "http://localhost:3002/api/series";
+const baseURL = `${import.meta.env.VITE_API_URL}/api/series`;
+
+// const baseURL = "http://localhost:3002/api/series";
 
 const getSeriesByUserId = async (id) => {
-  const request = await axios.get(`${baseURL}/${id}`);
+  const request = await axios.get(`${import.meta.env.VITE_API_URL}/${id}`);
   return request.data;
 };
 

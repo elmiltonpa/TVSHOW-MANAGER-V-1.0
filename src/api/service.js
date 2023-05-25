@@ -1,9 +1,6 @@
 import axios from "axios";
-import getApiKey from "../services/getApikey";
 
-const API_KEY = await getApiKey();
-
-// const API_KEY = "a80c7159f4cda3c1c89186637908e44f";
+const API_KEY = "a80c7159f4cda3c1c89186637908e44f";
 
 const searchTvSeasonById = async (id, number) => {
   const request = await axios.get(

@@ -28,7 +28,7 @@ const App = () => {
                 element={<Home user={user} token={token} />}
               />
               <Route
-                path="/serie/:id"
+                path="/:id"
                 element={<SerieDetail token={token} user={user} />}
               />
               <Route path="/:username" element={<Profile user={user} />} />

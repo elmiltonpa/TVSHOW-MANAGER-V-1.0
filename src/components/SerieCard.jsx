@@ -6,7 +6,7 @@ const BASE_URL = "https://image.tmdb.org/t/p/w500/";
 
 const SerieCard = ({ serie, token, user }) => {
   const navigate = useNavigate();
-  console.log(serie);
+
   const handleSubmit = async (e, serieId) => {
     e.preventDefault();
     try {

@@ -1,8 +1,8 @@
 import axios from "axios";
 
-// const baseURL = "https://backend-tvshowmanagerv2.vercel.app/api/series";
+const baseURL = "https://backend-tvshowmanager.vercel.app/api/series";
 
-const baseURL = "http://localhost:3002/api/series";
+// const baseURL = "http://localhost:3002/api/series";
 
 const getSeriesByUserId = async (id) => {
   const request = await axios.get(`${baseURL}/${id}`);

@@ -11,7 +11,7 @@ import { useState } from "react";
 const App = () => {
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(null);
-
+  console.log(user);
   return (
     <>
       <BrowserRouter>
@@ -28,7 +28,7 @@ const App = () => {
                 element={<Home user={user} token={token} />}
               />
               <Route
-                path="/:id"
+                path="/home/:id"
                 element={<SerieDetail token={token} user={user} />}
               />
               <Route path="/:username" element={<Profile user={user} />} />

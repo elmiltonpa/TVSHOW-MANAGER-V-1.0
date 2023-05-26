@@ -92,7 +92,7 @@ const SerieCard = ({ serie, token, user }) => {
           </div>
           <div className="">
             <button
-              onClick={() => navigate(`/${serie.id}`)}
+              onClick={() => navigate(`/home/${serie.id}`)}
               className="text-lg hover:bg-blanco hover:text-purpuraoscuro px-10  text-blanco font-semibold text-"
             >
               VER DETALLES

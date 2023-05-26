@@ -14,7 +14,7 @@ const Login = ({ setUser, setToken }) => {
 
     try {
       const user = await login({ username, password }).then((res) => res);
-
+      console.log(user);
       if (user) {
         setUser(user);
         setToken(user.token);

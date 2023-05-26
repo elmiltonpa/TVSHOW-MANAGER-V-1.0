@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseURL = `${import.meta.env.VITE_API_URL}/api/register`;
+const baseURL = "https://backend-tvshowmanagerv2.vercel.app/api/register";
 
 // const baseURL = "http://localhost:3002/api/register";
 

@@ -1,17 +1,17 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
-import Login from "./components/Login";
+import Login from "./pages/Login";
 import SerieProfile from "./components/SerieProfile";
-import SerieDetail from "./components/SerieDetail";
-import Register from "./components/Register";
-import Home from "./components/Home";
-import Profile from "./components/Profile";
+import SerieDetail from "./pages/SerieDetail";
+import Register from "./pages/Register";
+import Home from "./pages/Home";
+import Profile from "./pages/Profile";
 import Header from "./components/Header";
 import { useState } from "react";
 
 const App = () => {
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(null);
-  console.log(user);
+
   return (
     <>
       <BrowserRouter>
@@ -22,7 +22,6 @@ const App = () => {
           <div className="">
             <Routes>
               <Route path="/" element={<Navigate to="/home"></Navigate>} />
-
               <Route
                 path="/home"
                 element={<Home user={user} token={token} />}

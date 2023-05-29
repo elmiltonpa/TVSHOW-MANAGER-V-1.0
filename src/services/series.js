@@ -1,11 +1,9 @@
 import axios from "axios";
 
-const baseURL = "https://backend-tvshowmanager.vercel.app/api/series";
-
-// const baseURL = "http://localhost:3002/api/series";
+const APIURL = import.meta.env.VITE_API_URL + "/api/series";
 
 const getSeriesByUserId = async (id) => {
-  const request = await axios.get(`${baseURL}/${id}`);
+  const request = await axios.get(`${APIURL}/${id}`);
   return request.data;
 };
 
@@ -15,7 +13,7 @@ const createSerie = async (serie, token) => {
       Authorization: `Bearer ${token}`,
     },
   };
-  const request = await axios.post(baseURL, serie, config);
+  const request = await axios.post(APIURL, serie, config);
   return request;
 };
 

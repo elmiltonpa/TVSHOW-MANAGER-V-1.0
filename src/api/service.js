@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_KEY = "a80c7159f4cda3c1c89186637908e44f";
+const API_KEY = import.meta.env.VITE_API_KEY;
 
 const searchTvSeasonById = async (id, number) => {
   const request = await axios.get(

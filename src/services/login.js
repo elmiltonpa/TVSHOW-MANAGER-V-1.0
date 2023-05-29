@@ -1,11 +1,9 @@
 import axios from "axios";
 
-// const baseURL = "http://localhost:3002/api/login";
-
-const baseURL = "https://backend-tvshowmanager.vercel.app/api/login";
+const APIURL = import.meta.env.VITE_API_URL + "/api/login";
 
 const login = async (credentials) => {
-  const request = await axios.post(baseURL, credentials);
+  const request = await axios.post(APIURL, credentials);
   return request.data;
 };
 

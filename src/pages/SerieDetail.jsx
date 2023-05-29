@@ -53,12 +53,16 @@ const SerieDetail = ({ token, user }) => {
   }, [id]);
 
   if (isLoading) {
-    return <div>Cargando...</div>;
+    return (
+      <div className="h-screen flex justify-center items-center pb-56 bg-blancoblanco text-3xl font-bold">
+        Cargando...
+      </div>
+    );
   }
 
   return (
     <div className=" bg-negro pb-10">
-      <div className=" bg-negro flex justify-center  pb-10 pt-10">
+      <div className=" bg-neg flex justify-center pb-10 pt-10">
         <div className="w-[75%] bg-blanco p-5 rounded-md flex flex-col gap-3">
           <div className="flex gap-4">
             <img

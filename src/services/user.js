@@ -1,10 +1,9 @@
 import axios from "axios";
 
-// const baseURL = "http://localhost:3002/api/users";
-const baseURL = "https://backend-tvshowmanager.vercel.app/api/users";
+const APIURL = import.meta.env.VITE_API_URL + "/api/users";
 
 const getUser = async (username) => {
-  const request = await axios.get(baseURL + "/" + username);
+  const request = await axios.get(APIURL + "/" + username);
   return request.data;
 };
 

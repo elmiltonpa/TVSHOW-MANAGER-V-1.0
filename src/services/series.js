@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const APIURL = import.meta.env.VITE_API_URL + "/api/series";
+const APIURL = "https://backend-tvshowmanager.vercel.app/api/series";
 
 const getSeriesByUserId = async (id) => {
   const request = await axios.get(`${APIURL}/${id}`);

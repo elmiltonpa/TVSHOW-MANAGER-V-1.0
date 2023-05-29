@@ -38,19 +38,19 @@ const SerieCard = ({ serie, token, user }) => {
     <div className="flex my-3 w-full bg-blanco">
       <div className="gap-x-2 w-[78%] border-r-4">
         <div className="flex gap-x-2">
-          <div className="h-full">
-            <img src={BASE_URL + serie.poster_path} width={200} />
+          <div className="h-full ">
+            <img className="" src={BASE_URL + serie.poster_path} width={200} />
           </div>
-          <div className="h-[300px] w-[72%] flex flex-col justify-between py-3 items-center">
+          <div className="h-[300px] w-[73%] flex flex-col flex-1 pr-5 pl-3 justify-between py-3 items-center">
             <div className="flex flex-col gap-y-2 items-center h-[80%]">
-              <h1 className="text-3xl font-semibolds font-lato text-center">
+              <h1 className="text-3xl font-black font-lato text-center">
                 {serie.name}
               </h1>
               <p className="text-base overflow-auto  font-overview text-center">
                 {serie.overview}
               </p>
             </div>
-            <div className="items-center">
+            <div className="items-center border-t-2 w-full flex justify-center">
               <button
                 onClick={(e) => handleSubmit(e, serie.id)}
                 className="text-lg hover:bg-purpuraoscuro hover:text-blanco px-10 font-semibold text-purpuraoscuro"

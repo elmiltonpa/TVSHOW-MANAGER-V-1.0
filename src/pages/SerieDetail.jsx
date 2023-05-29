@@ -57,8 +57,8 @@ const SerieDetail = ({ token, user }) => {
   }
 
   return (
-    <div className=" bg-blanco">
-      <div className=" bg-negro flex justify-center pr-16 pb-36 pt-10">
+    <div className=" bg-negro pb-10">
+      <div className=" bg-negro flex justify-center  pb-10 pt-10">
         <div className="w-[75%] bg-blanco p-5 rounded-md flex flex-col gap-3">
           <div className="flex gap-4">
             <img
@@ -143,8 +143,10 @@ const SerieDetail = ({ token, user }) => {
           </div>
         </div>
       </div>
-      <div>
-        <SerieProfile />
+      <div className="flex justify-center items-center w-full">
+        <div className="w-[75%] ">
+          <SerieProfile />
+        </div>
       </div>
     </div>
   );

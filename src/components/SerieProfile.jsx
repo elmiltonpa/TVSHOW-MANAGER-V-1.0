@@ -21,15 +21,15 @@ const SerieProfile = () => {
   }, [id]);
 
   return (
-    <div>
+    <div className="flex flex-col gap-4 w-full">
       {seasons ? (
         seasons.map((season) => (
-          <div
-            key={season.id}
-            className="bg-red-300 my-10 flex flex-col gap-10"
-          >
-            <div>
-              <SectionSeason episodes={season.episodes} />
+          <div key={season.id} className="bg-red-300 flex flex-col">
+            <div className="bg-purpuraoscuro h-full flex flex-col gap justify-center items-center">
+              <SectionSeason
+                season={season.season_number}
+                episodes={season.episodes}
+              />
             </div>
           </div>
         ))

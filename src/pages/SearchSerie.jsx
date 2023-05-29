@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
-import SearchBar from "./SearchBar";
+import SearchBar from "../components/SearchBar";
 import api from "../api/service";
-import SerieCard from "./SerieCard";
+import SerieCard from "../components/SerieCard";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const useQuery = () => {
@@ -57,21 +57,23 @@ const SearchSerie = ({ token, user }) => {
     }, 1000);
   }, [search, navigate]);
   return (
-    <div className="">
-      <div>
-        <SearchBar setSerie={setSerie} />
-      </div>
-      {serie.length > 0 ? (
-        serie.map((serie) => (
-          <div className="flex-col gap-3 h-full bg-grisclaro" key={serie.id}>
-            <SerieCard serie={serie} token={token} user={user} />
-          </div>
-        ))
-      ) : (
-        <div className="h-screen text-blanco text-3xl flex justify-center">
-          Cargando...
+    <div className="bg-negro px-32 py-2">
+      <div className="">
+        <div>
+          <SearchBar setSerie={setSerie} />
         </div>
-      )}
+        {serie.length > 0 ? (
+          serie.map((serie) => (
+            <div className="flex-col gap-3 h-full bg-grisclaro" key={serie.id}>
+              <SerieCard serie={serie} token={token} user={user} />
+            </div>
+          ))
+        ) : (
+          <div className="h-screen text-blanco text-3xl flex justify-center">
+            Cargando...
+          </div>
+        )}
+      </div>
     </div>
   );
 };

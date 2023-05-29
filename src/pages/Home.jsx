@@ -1,4 +1,4 @@
-import SearchSerie from "../components/SearchSerie";
+import SearchSerie from "./SearchSerie";
 
 const Home = ({ token, user }) => {
   return (

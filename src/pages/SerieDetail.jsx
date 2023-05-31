@@ -24,7 +24,7 @@ const SerieDetail = ({ token, user }) => {
         return;
       }
 
-      const User = await getUser(user.username);
+      const User = await getUser(user);
 
       const userSeries = await serieService.getSeriesByUserId(User.id);
 

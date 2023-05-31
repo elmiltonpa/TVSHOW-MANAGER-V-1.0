@@ -1,7 +1,7 @@
 import { Link, useLocation } from "react-router-dom";
 const Header = ({ user, setUser, setToken }) => {
   const location = useLocation().pathname;
-
+  console.log(user);
   return (
     <div
       className={`bg-purpuraoscuro ${
@@ -31,6 +31,7 @@ const Header = ({ user, setUser, setToken }) => {
                     onClick={() => {
                       setToken(null);
                       setUser(null);
+                      window.localStorage.removeItem("session");
                     }}
                   >
                     CERRAR SESION

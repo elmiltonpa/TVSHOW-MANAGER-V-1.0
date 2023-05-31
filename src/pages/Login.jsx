@@ -9,15 +9,28 @@ const Login = ({ setUser, setToken }) => {
 
   const navigate = useNavigate();
 
+  const setSessionInLocalStorage = (user) => {
+    const sessionDurationInSeconds = 172800;
+    const expirationDate = Date.now() + sessionDurationInSeconds * 1000;
+
+    const session = {
+      token: user.token,
+      username: user.username,
+      expirationDate,
+    };
+
+    window.localStorage.setItem("session", JSON.stringify(session));
+  };
+
   const handleLogin = async (e) => {
     e.preventDefault();
 
     try {
       const user = await login({ username, password }).then((res) => res);
-      console.log(user);
       if (user) {
-        setUser(user);
+        setUser(user.username);
         setToken(user.token);
+        setSessionInLocalStorage(user);
         navigate("/");
       }
     } catch (error) {

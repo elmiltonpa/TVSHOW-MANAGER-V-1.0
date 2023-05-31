@@ -15,7 +15,7 @@ const SerieCard = ({ serie, token, user }) => {
         return;
       }
 
-      const User = await getUser(user.username);
+      const User = await getUser(user);
 
       const userSeries = await serieService.getSeriesByUserId(User.id);
 
@@ -29,6 +29,7 @@ const SerieCard = ({ serie, token, user }) => {
       }
 
       await serieService.createSerie({ id: serieId }, token);
+      console.log("agregada");
     } catch (error) {
       console.log("no hay token pa");
     }

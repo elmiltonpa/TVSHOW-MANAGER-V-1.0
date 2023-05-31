@@ -6,11 +6,27 @@ import Register from "./pages/Register";
 import SearchSerie from "./pages/SearchSerie";
 import Profile from "./pages/Profile";
 import Header from "./components/Header";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const App = () => {
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(null);
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      const session = JSON.parse(window.localStorage.getItem("session"));
+      if (session && session.expirationDate > Date.now()) {
+        const token = session.token;
+        setToken(token);
+        setUser({ username: session.username });
+      } else {
+        setUser(null);
+        setToken(null);
+        window.localStorage.removeItem("session");
+      }
+    };
+    fetchUser();
+  }, []);
 
   return (
     <>

@@ -41,21 +41,24 @@ const SearchSerie = ({ token, user }) => {
         Promise.all(promesas).then((data) => {
           setSerie(Filtro(data));
         });
-        navigate("/home");
-        return;
+      } else {
+        const response = await api.searchTvShow(search).then((res) => res);
+
+        const promesas = response.results.map((serie) =>
+          api.searchTvShowById(serie.id)
+        );
+
+        Promise.all(promesas).then((data) => {
+          setSerie(Filtro(data));
+        });
       }
-
-      const response = await api.searchTvShow(search).then((res) => res);
-
-      const promesas = response.results.map((serie) =>
-        api.searchTvShowById(serie.id)
-      );
-
-      Promise.all(promesas).then((data) => {
-        setSerie(Filtro(data));
-      });
     }, 1000);
+
+    if (!search) {
+      navigate("/home");
+    }
   }, [search, navigate]);
+
   return (
     <div className="bg-negro px-32 py-2">
       <div className="">

@@ -37,7 +37,7 @@ const Login = ({ setUser, setToken }) => {
               <div className="flex flex-col gap-y-2 items-center">
                 <label className="text-[18px] font-semibold">Username</label>
                 <input
-                  className="px-2 py-1 border-2 border-purpuraoscuro"
+                  className="px-2 py-1 border-2 focus:shadow-input focus:shadow-purpuraoscuro border-purpuraoscuro"
                   placeholder="Your username"
                   onChange={(e) => setUsername(e.target.value)}
                 />
@@ -46,7 +46,7 @@ const Login = ({ setUser, setToken }) => {
                 <label className="text-[18px] font-semibold">Password</label>
                 <input
                   type="password"
-                  className="px-2 py-1 border-2 border-purpuraoscuro"
+                  className="px-2 py-1 border-2 focus:shadow-input focus:shadow-purpuraoscuro border-purpuraoscuro"
                   placeholder="Your password"
                   onChange={(e) => setPassword(e.target.value)}
                 />

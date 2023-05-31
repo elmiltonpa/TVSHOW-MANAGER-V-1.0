@@ -5,7 +5,7 @@ const Header = ({ user, setUser, setToken }) => {
   return (
     <div
       className={`bg-purpuraoscuro ${
-        location == "/login" ? "hidden" : "block"
+        location == "/login" || location == "/register" ? "hidden" : "block"
       }  h-16 w-full `}
     >
       <div className="w-[90vw] pl-36 bg-purpuraoscuro h-full flex justify-between items-center">

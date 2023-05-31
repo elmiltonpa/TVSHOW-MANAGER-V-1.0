@@ -28,6 +28,7 @@ export default {
       },
       boxShadow: {
         login: "1px 1px 35px 10px rgba(128,0,128,0.75)",
+        input: "0px 0px 25px 4px",
       },
     },
   },

@@ -2,18 +2,14 @@ import { useEffect, useRef, useState } from "react";
 import SearchBar from "../components/SearchBar";
 import api from "../api/service";
 import SerieCard from "../components/SerieCard";
-import getUser from "../services/user";
-import serieService from "../services/series";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const useQuery = () => {
   return new URLSearchParams(useLocation().search);
 };
 
-const Home = ({ token, user }) => {
-  const [userSeries, setUserSeries] = useState([]);
+const SearchSerie = ({ token, user }) => {
   const [serie, setSerie] = useState([]);
-
   const searchRef = useRef();
   const navigate = useNavigate();
 
@@ -32,27 +28,13 @@ const Home = ({ token, user }) => {
   };
 
   useEffect(() => {
-    const fetchData = async () => {
-      const User = await getUser(user.username);
-      const series = await serieService.getSeriesByUserId(User.id);
-      setUserSeries(series);
-    };
-    if (user) {
-      fetchData();
-    }
-
-    document.title = "Home - TvShowManager";
-  }, [user]);
-
-  useEffect(() => {
     if (searchRef.current) {
       clearTimeout(searchRef.current);
     }
 
     searchRef.current = setTimeout(async () => {
       if (!search) {
-        const response = await api.popularTvShow();
-
+        const response = await api.popularTvShow().then((res) => res);
         const promesas = response.results.map((serie) =>
           api.searchTvShowById(serie.id)
         );
@@ -84,15 +66,9 @@ const Home = ({ token, user }) => {
           <SearchBar setSerie={setSerie} />
         </div>
         {serie.length > 0 ? (
-          serie.map((serie, index) => (
-            <div className="flex-col gap-3 h-full bg-grisclaro" key={index}>
-              <SerieCard
-                serie={serie}
-                token={token}
-                user={user}
-                userSeries={userSeries}
-                setUserSeries={setUserSeries}
-              />
+          serie.map((serie) => (
+            <div className="flex-col gap-3 h-full bg-grisclaro" key={serie.id}>
+              <SerieCard serie={serie} token={token} user={user} />
             </div>
           ))
         ) : (
@@ -105,4 +81,4 @@ const Home = ({ token, user }) => {
   );
 };
 
-export default Home;
+export default SearchSerie;

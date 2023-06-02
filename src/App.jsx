@@ -3,7 +3,7 @@ import Login from "./pages/Login";
 import SerieProfile from "./components/SerieProfile";
 import SerieDetail from "./pages/SerieDetail";
 import Register from "./pages/Register";
-import SearchSerie from "./pages/SearchSerie";
+import Home from "./pages/Home";
 import Profile from "./pages/Profile";
 import Header from "./components/Header";
 import { useEffect, useState } from "react";
@@ -40,7 +40,7 @@ const App = () => {
               <Route path="/" element={<Navigate to="/home"></Navigate>} />
               <Route
                 path="/home"
-                element={<SearchSerie user={user} token={token} />}
+                element={<Home user={user} token={token} />}
               />
               <Route
                 path="/home/:id"

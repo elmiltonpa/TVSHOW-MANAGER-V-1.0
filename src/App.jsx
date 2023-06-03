@@ -7,6 +7,7 @@ import Home from "./pages/Home";
 import Profile from "./pages/Profile";
 import Header from "./components/Header";
 import { useEffect, useState } from "react";
+import Footer from "./components/Footer";
 
 const App = () => {
   const [user, setUser] = useState(null);
@@ -58,6 +59,9 @@ const App = () => {
               <Route path="/register" element={<Register />} />
             </Routes>
           </div>
+          <footer>
+            <Footer />
+          </footer>
         </div>
       </BrowserRouter>
     </>

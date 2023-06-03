@@ -4,7 +4,7 @@ const IMG = "https://image.tmdb.org/t/p/w500";
 
 const SectionSeason = ({ season, episodes }) => {
   const [IsOpen, setIsOpen] = useState(false);
-  console.log(episodes);
+
   return (
     <div className="h-full w-full">
       <div className="w-full flex justify-center items-center border-b-4 h-20">
@@ -38,7 +38,7 @@ const SectionSeason = ({ season, episodes }) => {
                       {episode.name}
                     </h1>
                   </div>
-                  <div className="px-2">
+                  <div className="px-2 overflow-y-auto">
                     <p className="text-center font-overview">
                       {episode.overview}
                     </p>

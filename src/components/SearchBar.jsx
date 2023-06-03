@@ -20,12 +20,12 @@ const SearchBar = ({ setSerie }) => {
   };
 
   useEffect(() => {
-    const searchValue = searchParams.get("search") || "";
+    const searchValue = searchParams.get("s") || "";
     setText(searchValue);
   }, [searchParams]);
 
   const onChangeSearch = (event) => {
-    navigate("/home?search=" + event.target.value, { replace: true });
+    navigate("/home?s=" + event.target.value, { replace: true });
     if (searchRef.current) {
       clearTimeout(searchRef.current);
     }
@@ -56,19 +56,34 @@ const SearchBar = ({ setSerie }) => {
       });
     }, 1000);
   };
+  const clearInput = () => {
+    setText("");
+    onChangeSearch({ target: { value: "" } });
+  };
 
   return (
-    <div className="w-full bg-negro h-16 flex justify-center items-center">
-      <input
-        className="w-1/3 bg-blanco rounded-lg px-3 h-10 text-white text-xl"
-        value={text}
-        type="text"
-        placeholder="Buscar..."
-        onChange={(e) => {
-          setText(e.target.value);
-          onChangeSearch(e);
-        }}
-      />
+    <div className="w-full bg-negro h-16 flex pr-16 justify-center items-center">
+      <div className="relative w-1/3">
+        <input
+          className="bg-blanco w-full rounded-lg px-3 h-10 text-white text-xl"
+          value={text}
+          type="text"
+          placeholder="Buscar..."
+          onChange={(e) => {
+            setText(e.target.value);
+            onChangeSearch(e);
+          }}
+        />
+
+        {text && (
+          <button
+            className="absolute right-2 text-2xl text-rojo font-bold top-1/2 transform -translate-y-1/2"
+            onClick={clearInput}
+          >
+            X
+          </button>
+        )}
+      </div>
     </div>
   );
 };

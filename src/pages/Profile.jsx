@@ -6,10 +6,13 @@ import { useEffect, useState } from "react";
 const Profile = () => {
   const [userSeries, setUserSeries] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [user, setUser] = useState(null);
 
   const { username } = useParams();
 
   useEffect(() => {
+    const session = JSON.parse(window.localStorage.getItem("session"));
+
     const fetchData = async () => {
       const User = await getUser(username);
       const Series = await series.getSeriesByUserId(User.id);
@@ -17,7 +20,13 @@ const Profile = () => {
       setUserSeries(Series);
       setIsLoading(false);
     };
-    fetchData();
+    if (session) {
+      fetchData();
+      setUser(true);
+    } else {
+      setUser(null);
+      setIsLoading(false);
+    }
   }, [username]);
 
   if (isLoading) {
@@ -26,16 +35,22 @@ const Profile = () => {
 
   return (
     <div>
-      {userSeries ? (
-        userSeries.map((series) => (
-          <div key={series.tv_id}>
-            <Link to={`/${username}/${series.tv_id}`}>
-              <h2>{series.tv_title}</h2>
-            </Link>
-          </div>
-        ))
+      {user ? (
+        userSeries ? (
+          userSeries.map((series) => (
+            <div key={series.tv_id}>
+              <Link to={`/${username}/${series.tv_id}`}>
+                <h2>{series.tv_title}</h2>
+              </Link>
+            </div>
+          ))
+        ) : (
+          <div>NO HAY SERIES</div>
+        )
       ) : (
-        <div>NO HAY SERIES</div>
+        <div>
+          <h1>NO ESTAS LOGUEADO</h1>
+        </div>
       )}
     </div>
   );

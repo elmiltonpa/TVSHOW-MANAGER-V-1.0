@@ -10,7 +10,7 @@ const Login = ({ setUser, setToken }) => {
   const navigate = useNavigate();
 
   const setSessionInLocalStorage = (user) => {
-    const sessionDurationInSeconds = 172800;
+    const sessionDurationInSeconds = 600;
     const expirationDate = Date.now() + sessionDurationInSeconds * 1000;
 
     const session = {
@@ -39,7 +39,7 @@ const Login = ({ setUser, setToken }) => {
   };
 
   return (
-    <div className="bg-purpuraoscuro flex justify-center items-center w-screen h-screen overflow-y-auto">
+    <div className="bg-purpuraoscuro flex justify-center items-center  h-screen overflow-y-auto">
       <div className="bg-blanco shadow-login shadow-negropurpura h-5/6 w-[40%] flex flex-col items-center">
         <div className="text-4xl font-bold pt-16">
           <Link to="/">TVSHOW MANAGER</Link>

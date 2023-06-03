@@ -20,7 +20,7 @@ const Header = ({ user, setUser, setToken }) => {
           {user ? (
             <>
               <li>
-                <Link className="text-blanco" to={`/${user.username}`}>
+                <Link className="text-blanco" to={`/${user}`}>
                   MY PROFILE
                 </Link>
               </li>

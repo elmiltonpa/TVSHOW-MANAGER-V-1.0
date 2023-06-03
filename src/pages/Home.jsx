@@ -9,12 +9,12 @@ const useQuery = () => {
 };
 
 const SearchSerie = ({ token, user }) => {
-  const [serie, setSerie] = useState([]);
+  const [serie, setSerie] = useState(null);
   const searchRef = useRef();
   const navigate = useNavigate();
 
   const query = useQuery();
-  const search = query.get("search");
+  const search = query.get("s");
 
   const Filtro = (series) => {
     const newSeries = series.filter(
@@ -33,7 +33,7 @@ const SearchSerie = ({ token, user }) => {
     }
 
     searchRef.current = setTimeout(async () => {
-      if (!search) {
+      if (search === null || search === "") {
         const response = await api.popularTvShow().then((res) => res);
         const promesas = response.results.map((serie) =>
           api.searchTvShowById(serie.id)
@@ -59,18 +59,34 @@ const SearchSerie = ({ token, user }) => {
     }
   }, [search, navigate]);
 
+  useEffect(() => {
+    document.title = "Home - TvShowManager";
+  }, []);
+
   return (
-    <div className="bg-negro px-32 py-2">
+    <div
+      className={`${
+        serie && serie.length == 1 ? "h-screen" : ""
+      } bg-negro px-32 py-2`}
+    >
       <div className="">
-        <div>
-          <SearchBar setSerie={setSerie} />
-        </div>
-        {serie.length > 0 ? (
-          serie.map((serie) => (
-            <div className="flex-col gap-3 h-full bg-grisclaro" key={serie.id}>
-              <SerieCard serie={serie} token={token} user={user} />
+        <SearchBar setSerie={setSerie} />
+
+        {serie ? (
+          serie.length == 0 ? (
+            <div className="h-screen text-blanco text-3xl flex justify-center">
+              No se encontraron series :(
             </div>
-          ))
+          ) : (
+            serie.map((serieItem) => (
+              <div
+                className="flex-col gap-3 h-full bg-grisclaro"
+                key={serieItem.id}
+              >
+                <SerieCard serie={serieItem} token={token} user={user} />
+              </div>
+            ))
+          )
         ) : (
           <div className="h-screen text-blanco text-3xl flex justify-center">
             Cargando...

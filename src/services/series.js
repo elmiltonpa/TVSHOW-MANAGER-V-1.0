@@ -17,4 +17,14 @@ const createSerie = async (serie, token) => {
   return request;
 };
 
-export default { getSeriesByUserId, createSerie };
+const deleteSerie = async (id, token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  const request = await axios.delete(`${APIURL}/${id}`, config);
+  return request;
+};
+
+export default { getSeriesByUserId, createSerie, deleteSerie };

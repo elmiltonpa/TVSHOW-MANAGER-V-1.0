@@ -74,7 +74,7 @@ const Home = ({ token, user }) => {
       fetchData();
     }
   }, [user]);
-  console.log(seriesAdded);
+
   useEffect(() => {
     document.title = "Home - TvShowManager";
   }, []);

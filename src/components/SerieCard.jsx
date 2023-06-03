@@ -5,8 +5,6 @@ import { useNavigate } from "react-router-dom";
 const BASE_URL = "https://image.tmdb.org/t/p/w500/";
 
 const SerieCard = ({ serie, token, user, setSeriesAdded, seriesAdded }) => {
-  console.log("porfa no");
-
   const navigate = useNavigate();
 
   const handleSubmit = async (e, serieId) => {
@@ -37,6 +35,25 @@ const SerieCard = ({ serie, token, user, setSeriesAdded, seriesAdded }) => {
     }
   };
 
+  const handleDelete = async (e, serieId) => {
+    e.preventDefault();
+    //NO ES LA ID DEL ARRAY DE SERIES, ES EL ID DE LA SEREI
+    try {
+      if (!token) {
+        navigate("/login");
+        return;
+      }
+      const User = await getUser(user.username);
+      const seriesUser = await serieService.getSeriesByUserId(User.id);
+      const serieToDelete = seriesUser.find((serie) => serie.tv_id == serieId);
+      await serieService.deleteSerie(serieToDelete.id, token);
+      setSeriesAdded(seriesAdded.filter((serie) => serie !== serieId));
+      console.log("eliminada");
+    } catch (error) {
+      console.log("no hay token pa");
+    }
+  };
+
   return (
     <div className="flex my-3 w-full bg-blanco">
       <div className="gap-x-2 w-[78%] border-r-4">
@@ -55,7 +72,12 @@ const SerieCard = ({ serie, token, user, setSeriesAdded, seriesAdded }) => {
             </div>
             <div className="items-center border-t-2 w-full flex justify-center">
               {seriesAdded.includes(serie.id) ? (
-                <div>QUITAR DE FAVORITOS</div>
+                <button
+                  onClick={(e) => handleDelete(e, serie.id)}
+                  className="text-lg hover:bg-purpuraoscuro hover:text-blanco px-10 font-semibold text-purpuraoscuro"
+                >
+                  QUITAR DE FAVORITOS
+                </button>
               ) : (
                 <button
                   onClick={(e) => handleSubmit(e, serie.id)}

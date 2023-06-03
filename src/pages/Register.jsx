@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import register from "../services/register";
 const Register = () => {
   const [name, setName] = useState(null);
@@ -8,6 +8,10 @@ const Register = () => {
   const [registered, setRegistered] = useState(null);
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    document.title = "Register - TvShowManager";
+  }, []);
 
   const handleRegister = async (e) => {
     e.preventDefault();

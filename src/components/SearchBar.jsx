@@ -29,7 +29,7 @@ const SearchBar = ({ setSerie }) => {
     if (searchRef.current) {
       clearTimeout(searchRef.current);
     }
-    console.log(searchRef.current);
+
     searchRef.current = setTimeout(async () => {
       if (event.target.value == "") {
         const response = await api.popularTvShow().then((res) => res);
@@ -62,8 +62,8 @@ const SearchBar = ({ setSerie }) => {
   };
 
   return (
-    <div className="w-full bg-negro h-16 flex pr-16 justify-center items-center">
-      <div className="relative w-1/3">
+    <div className="w-full bg-negro h-16 flex justify-center items-center">
+      <div className="relative w-[30%]">
         <input
           className="bg-blanco w-full rounded-lg px-3 h-10 text-white text-xl"
           value={text}

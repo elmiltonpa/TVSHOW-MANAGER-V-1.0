@@ -11,6 +11,10 @@ const Profile = () => {
   const { username } = useParams();
 
   useEffect(() => {
+    document.title = `${username} - TvShowManager`;
+  }, [username]);
+
+  useEffect(() => {
     const session = JSON.parse(window.localStorage.getItem("session"));
 
     const fetchData = async () => {

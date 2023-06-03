@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import login from "../services/login";
 import { useNavigate, Link } from "react-router-dom";
 
@@ -8,6 +8,10 @@ const Login = ({ setUser, setToken }) => {
   const [error, setError] = useState(null);
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    document.title = "Login - TvShowManager";
+  }, []);
 
   const setSessionInLocalStorage = (user) => {
     const sessionDurationInSeconds = 600;

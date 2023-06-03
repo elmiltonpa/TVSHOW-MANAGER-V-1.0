@@ -12,7 +12,7 @@ import Footer from "./components/Footer";
 const App = () => {
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(null);
-  console.log(user);
+
   useEffect(() => {
     const fetchUser = async () => {
       const session = JSON.parse(window.localStorage.getItem("session"));

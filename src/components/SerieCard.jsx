@@ -4,7 +4,9 @@ import { useNavigate } from "react-router-dom";
 
 const BASE_URL = "https://image.tmdb.org/t/p/w500/";
 
-const SerieCard = ({ serie, token, user }) => {
+const SerieCard = ({ serie, token, user, setSeriesAdded, seriesAdded }) => {
+  console.log("porfa no");
+
   const navigate = useNavigate();
 
   const handleSubmit = async (e, serieId) => {
@@ -15,7 +17,7 @@ const SerieCard = ({ serie, token, user }) => {
         return;
       }
 
-      const User = await getUser(user);
+      const User = await getUser(user.username);
 
       const userSeries = await serieService.getSeriesByUserId(User.id);
 
@@ -27,7 +29,7 @@ const SerieCard = ({ serie, token, user }) => {
         console.log("serie ya agregada");
         return;
       }
-
+      setSeriesAdded([...seriesAdded, serieId]);
       await serieService.createSerie({ id: serieId }, token);
       console.log("agregada");
     } catch (error) {
@@ -52,12 +54,16 @@ const SerieCard = ({ serie, token, user }) => {
               </p>
             </div>
             <div className="items-center border-t-2 w-full flex justify-center">
-              <button
-                onClick={(e) => handleSubmit(e, serie.id)}
-                className="text-lg hover:bg-purpuraoscuro hover:text-blanco px-10 font-semibold text-purpuraoscuro"
-              >
-                AGREGAR A FAVORITOS
-              </button>
+              {seriesAdded.includes(serie.id) ? (
+                <div>QUITAR DE FAVORITOS</div>
+              ) : (
+                <button
+                  onClick={(e) => handleSubmit(e, serie.id)}
+                  className="text-lg hover:bg-purpuraoscuro hover:text-blanco px-10 font-semibold text-purpuraoscuro"
+                >
+                  AGREGAR A FAVORITOS
+                </button>
+              )}
             </div>
           </div>
         </div>

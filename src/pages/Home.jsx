@@ -3,13 +3,17 @@ import SearchBar from "../components/SearchBar";
 import api from "../api/service";
 import SerieCard from "../components/SerieCard";
 import { useLocation, useNavigate } from "react-router-dom";
+import getUser from "../services/user";
+import serieService from "../services/series";
 
 const useQuery = () => {
   return new URLSearchParams(useLocation().search);
 };
 
-const SearchSerie = ({ token, user }) => {
+const Home = ({ token, user }) => {
   const [serie, setSerie] = useState(null);
+  const [seriesAdded, setSeriesAdded] = useState([]);
+
   const searchRef = useRef();
   const navigate = useNavigate();
 
@@ -60,6 +64,18 @@ const SearchSerie = ({ token, user }) => {
   }, [search, navigate]);
 
   useEffect(() => {
+    const fetchData = async () => {
+      const User = await getUser(user.username);
+      const series = await serieService.getSeriesByUserId(User.id);
+      const ids = series.map((serie) => parseInt(serie.tv_id));
+      setSeriesAdded(ids);
+    };
+    if (user) {
+      fetchData();
+    }
+  }, [user]);
+  console.log(seriesAdded);
+  useEffect(() => {
     document.title = "Home - TvShowManager";
   }, []);
 
@@ -83,7 +99,13 @@ const SearchSerie = ({ token, user }) => {
                 className="flex-col gap-3 h-full bg-grisclaro"
                 key={serieItem.id}
               >
-                <SerieCard serie={serieItem} token={token} user={user} />
+                <SerieCard
+                  serie={serieItem}
+                  token={token}
+                  user={user}
+                  seriesAdded={seriesAdded}
+                  setSeriesAdded={setSeriesAdded}
+                />
               </div>
             ))
           )
@@ -97,4 +119,4 @@ const SearchSerie = ({ token, user }) => {
   );
 };
 
-export default SearchSerie;
+export default Home;

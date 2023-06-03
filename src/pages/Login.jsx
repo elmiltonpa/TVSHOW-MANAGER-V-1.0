@@ -32,7 +32,7 @@ const Login = ({ setUser, setToken }) => {
     try {
       const user = await login({ username, password }).then((res) => res);
       if (user) {
-        setUser(user.username);
+        setUser({ username: user.username });
         setToken(user.token);
         setSessionInLocalStorage(user);
         navigate("/");

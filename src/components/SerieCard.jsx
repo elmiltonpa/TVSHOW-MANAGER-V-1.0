@@ -1,58 +1,11 @@
-import serieService from "../services/series";
-import getUser from "../services/user";
 import { useNavigate } from "react-router-dom";
+import useSeries from "../utils/useSeries";
 
 const BASE_URL = "https://image.tmdb.org/t/p/w500/";
 
 const SerieCard = ({ serie, token, user, setSeriesAdded, seriesAdded }) => {
   const navigate = useNavigate();
-
-  const handleSubmit = async (e, serieId) => {
-    e.preventDefault();
-    try {
-      if (!token) {
-        navigate("/login");
-        return;
-      }
-
-      const User = await getUser(user.username);
-
-      const userSeries = await serieService.getSeriesByUserId(User.id);
-
-      const serieAlreadyAdded = userSeries.some(
-        (serie) => serie.tv_id == serieId
-      );
-
-      if (serieAlreadyAdded) {
-        console.log("serie ya agregada");
-        return;
-      }
-      setSeriesAdded([...seriesAdded, serieId]);
-      await serieService.createSerie({ id: serieId }, token);
-      console.log("agregada");
-    } catch (error) {
-      console.log("no hay token pa");
-    }
-  };
-
-  const handleDelete = async (e, serieId) => {
-    e.preventDefault();
-    //NO ES LA ID DEL ARRAY DE SERIES, ES EL ID DE LA SEREI
-    try {
-      if (!token) {
-        navigate("/login");
-        return;
-      }
-      const User = await getUser(user.username);
-      const seriesUser = await serieService.getSeriesByUserId(User.id);
-      const serieToDelete = seriesUser.find((serie) => serie.tv_id == serieId);
-      await serieService.deleteSerie(serieToDelete.id, token);
-      setSeriesAdded(seriesAdded.filter((serie) => serie !== serieId));
-      console.log("eliminada");
-    } catch (error) {
-      console.log("no hay token pa");
-    }
-  };
+  const { handleSubmit, handleDelete } = useSeries();
 
   return (
     <div className="flex my-3 w-full bg-blanco">
@@ -73,14 +26,32 @@ const SerieCard = ({ serie, token, user, setSeriesAdded, seriesAdded }) => {
             <div className="items-center border-t-2 w-full flex justify-center">
               {seriesAdded.includes(serie.id) ? (
                 <button
-                  onClick={(e) => handleDelete(e, serie.id)}
+                  onClick={(e) =>
+                    handleDelete(
+                      e,
+                      serie.id,
+                      user,
+                      token,
+                      setSeriesAdded,
+                      seriesAdded
+                    )
+                  }
                   className="text-lg hover:bg-purpuraoscuro hover:text-blanco px-10 font-semibold text-purpuraoscuro"
                 >
                   QUITAR DE FAVORITOS
                 </button>
               ) : (
                 <button
-                  onClick={(e) => handleSubmit(e, serie.id)}
+                  onClick={(e) =>
+                    handleSubmit(
+                      e,
+                      serie.id,
+                      user,
+                      token,
+                      setSeriesAdded,
+                      seriesAdded
+                    )
+                  }
                   className="text-lg hover:bg-purpuraoscuro hover:text-blanco px-10 font-semibold text-purpuraoscuro"
                 >
                   AGREGAR A FAVORITOS

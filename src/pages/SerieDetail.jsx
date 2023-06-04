@@ -2,9 +2,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import api from "../api/service";
-import { useNavigate } from "react-router-dom";
-import getUser from "../services/user";
-import serieService from "../services/series";
+import useSeries from "../utils/useSeries";
 import SerieProfile from "../components/SerieProfile";
 
 const IMG = "https://image.tmdb.org/t/p/w500/";
@@ -12,36 +10,10 @@ const IMG = "https://image.tmdb.org/t/p/w500/";
 const SerieDetail = ({ token, user }) => {
   const [serie, setSerie] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
-  const navigate = useNavigate();
+
+  const { handleSubmit } = useSeries();
 
   const { id } = useParams();
-
-  const handleSubmit = async (e, serieId) => {
-    e.preventDefault();
-    try {
-      if (!token) {
-        navigate("/login");
-        return;
-      }
-
-      const User = await getUser(user.username);
-
-      const userSeries = await serieService.getSeriesByUserId(User.id);
-
-      const serieAlreadyAdded = userSeries.some(
-        (serie) => serie.tv_id == serieId
-      );
-
-      if (serieAlreadyAdded) {
-        console.log("serie ya agregada");
-        return;
-      }
-
-      await serieService.createSerie({ id: serieId }, token);
-    } catch (error) {
-      console.log("no hay token pa");
-    }
-  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -140,7 +112,7 @@ const SerieDetail = ({ token, user }) => {
           <div className="w-full border-t-2 flex py-3 justify-center">
             <button
               className="text-lg hover:bg-purpuraoscuro hover:text-blancoblanco px-10 font-semibold text-purpuraoscuro"
-              onClick={(e) => handleSubmit(e, id)}
+              onClick={(e) => handleSubmit(e, id, token, user)}
             >
               AGREGAR A FAVORITOS
             </button>

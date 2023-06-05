@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
-import SearchBar from "../components/SearchBar";
 import api from "../api/service";
-import SerieCard from "../components/SerieCard";
+import SearchBar from "../components/home/SearchBar";
+import SerieCard from "../components/home/SerieCard";
 import { useLocation, useNavigate } from "react-router-dom";
 import getUser from "../services/user";
 import serieService from "../services/series";

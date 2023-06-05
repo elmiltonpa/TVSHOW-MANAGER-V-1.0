@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import useSeries from "../utils/useSeries";
+import useSeries from "../../utils/useSeries";
 
 const BASE_URL = "https://image.tmdb.org/t/p/w500/";
 

@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
-import SectionSeason from "./SectionSeason";
-import api from "../api/service";
+import SectionSeason from "../SectionSeason";
+import api from "../../api/service";
 import { useEffect, useState } from "react";
 
 const SerieProfile = () => {

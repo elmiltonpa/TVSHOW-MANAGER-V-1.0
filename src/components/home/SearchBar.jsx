@@ -1,6 +1,6 @@
 import { useRef, useState, useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import api from "../api/service";
+import api from "../../api/service";
 
 const SearchBar = ({ setSerie }) => {
   const [text, setText] = useState("");

@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import api from "../api/service";
 import useSeries from "../utils/useSeries";
-import SerieProfile from "../components/SerieProfile";
+import SerieProfile from "../components/profile/SeasonsProfile";
 
 const IMG = "https://image.tmdb.org/t/p/w500/";
 

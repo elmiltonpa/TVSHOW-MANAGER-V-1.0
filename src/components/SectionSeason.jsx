@@ -26,14 +26,8 @@ const SectionSeason = ({ season, episodes }) => {
                 <div className="">
                   <img width={250} src={IMG + episode.still_path} />
                 </div>
-                {/* <div className="w-[4%] items-center flex justify-center pb-4 text-xl  font-black text-purpuraoscuro">
-                  <h1>
-                    {season}x{episode.episode_number}
-                  </h1>
-                </div> */}
                 <div className="flex-1 flex flex-col justify-between">
                   <div className="flex">
-                    {/* <h1>Episode {episode.episode_number}</h1> */}
                     <h1 className="flex-1 pt-2 underline text-xl font-semibold flex justify-center items-center">
                       {episode.name}
                     </h1>

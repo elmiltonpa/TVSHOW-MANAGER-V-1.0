@@ -38,19 +38,31 @@ const Profile = () => {
   }
 
   return (
-    <div>
+    <div className="">
       {user ? (
-        userSeries ? (
-          userSeries.map((series) => (
-            <div key={series.tv_id}>
-              <Link to={`/${username}/${series.tv_id}`}>
-                <h2>{series.tv_title}</h2>
-              </Link>
+        <div className="h-full">
+          <div className="bg-negro flex justify-center items-center h-[50px]">
+            <h1 className="text-blancoblanco text-4xl">{username}</h1>
+          </div>
+          <div className="h-[85vh] flex">
+            <div className="h-full w-[20%] bg-rosaclaro">
+              {userSeries.length > 0 ? (
+                userSeries.map((series) => (
+                  <div className="bg-negroclaro" key={series.tv_id}>
+                    <div className="">
+                      <Link to={`/${username}/${series.tv_id}`}>
+                        <h2>{series.tv_title}</h2>
+                      </Link>
+                    </div>
+                  </div>
+                ))
+              ) : (
+                <div className=" w-full">NO HAY SERIES EN TUS FAVORITOS</div>
+              )}
             </div>
-          ))
-        ) : (
-          <div>NO HAY SERIES</div>
-        )
+            <div>Series vistas</div>
+          </div>
+        </div>
       ) : (
         <div>
           <h1>NO ESTAS LOGUEADO</h1>

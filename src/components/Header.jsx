@@ -20,21 +20,21 @@ const Header = ({ user, setUser, setToken }) => {
           {user ? (
             <>
               <li>
-                <Link className="text-blanco" to={`/${user.username}`}>
-                  MY PROFILE
+                <Link className="text-blanco text-lg" to={`/${user.username}`}>
+                  Mi Perfil
                 </Link>
               </li>
               <li>
                 <Link to="/">
                   <button
-                    className="text-blanco"
+                    className="text-blanco text-lg"
                     onClick={() => {
                       setToken(null);
                       setUser(null);
                       window.localStorage.removeItem("session");
                     }}
                   >
-                    CERRAR SESION
+                    Cerrar Sesión
                   </button>
                 </Link>
               </li>

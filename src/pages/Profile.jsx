@@ -1,7 +1,8 @@
 import { useParams, Link } from "react-router-dom";
 import getUser from "../services/user";
-import series from "../services/series";
+import seriesService from "../services/series";
 import { useEffect, useState } from "react";
+import { FavSeries } from "../components/profile/FavSeries";
 
 const Profile = () => {
   const [userSeries, setUserSeries] = useState(null);
@@ -19,7 +20,7 @@ const Profile = () => {
 
     const fetchData = async () => {
       const User = await getUser(username);
-      const Series = await series.getSeriesByUserId(User.id);
+      const Series = await seriesService.getSeriesByUserId(User.id);
 
       setUserSeries(Series);
       setIsLoading(false);
@@ -34,34 +35,46 @@ const Profile = () => {
   }, [username]);
 
   if (isLoading) {
-    return <div>Cargando...</div>;
+    return (
+      <div className="h-screen flex justify-center bg-negro text-blancoblanco text-3xl py-16">
+        Cargando...
+      </div>
+    );
   }
 
+  //   <div className="h-full">
+  //   <div className="bg-negro flex justify-center items-center h-[50px]">
+  //     <h1 className="text-blancoblanco text-4xl">{username}</h1>
+  //   </div>
+  //   <div className="h-[85vh] flex">
+  //     <div className="h-full w-[20%] bg-rosaclaro">
+  //       {userSeries.length > 0 ? (
+  //         userSeries.map((series) => (
+  //           <div className="bg-negroclaro" key={series.tv_id}>
+  //             <div className="">
+  //               <Link to={`/${username}/${series.tv_id}`}>
+  //                 <h2>{series.tv_title}</h2>
+  //               </Link>
+  //             </div>
+  //           </div>
+  //         ))
+  //       ) : (
+  //         <div className=" w-full">NO HAY SERIES EN TUS FAVORITOS</div>
+  //       )}
+  //     </div>
+  //     <div>Series vistas</div>
+  //   </div>
+  // </div>
+  // console.log(series);
   return (
     <div className="">
       {user ? (
-        <div className="h-full">
-          <div className="bg-negro flex justify-center items-center h-[50px]">
-            <h1 className="text-blancoblanco text-4xl">{username}</h1>
+        <div className="h-screen flex">
+          <div className="w-[25%]">
+            <FavSeries series={userSeries} username={username} />
           </div>
-          <div className="h-[85vh] flex">
-            <div className="h-full w-[20%] bg-rosaclaro">
-              {userSeries.length > 0 ? (
-                userSeries.map((series) => (
-                  <div className="bg-negroclaro" key={series.tv_id}>
-                    <div className="">
-                      <Link to={`/${username}/${series.tv_id}`}>
-                        <h2>{series.tv_title}</h2>
-                      </Link>
-                    </div>
-                  </div>
-                ))
-              ) : (
-                <div className=" w-full">NO HAY SERIES EN TUS FAVORITOS</div>
-              )}
-            </div>
-            <div>Series vistas</div>
-          </div>
+          <div className="w-1/2 bg-purpura"></div>
+          <div className="w-[25%] bg-blancoblanco"></div>
         </div>
       ) : (
         <div>

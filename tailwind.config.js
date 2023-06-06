@@ -20,6 +20,12 @@ export default {
       amarillo: "#FDE12D",
       verde: "#0CCA4A",
       blancoblanco: "#FFFFFF",
+      rosa: "#FF1493",
+      rosa2: "#D90480",
+      verde2: "#04D95B",
+      amarillo2: "#D9A604",
+      purpuraclaro2: "#FF00FF",
+      purpura: "#BBADFF",
     },
     extend: {
       fontFamily: {

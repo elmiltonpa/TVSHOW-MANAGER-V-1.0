@@ -52,14 +52,13 @@ const SerieDetail = () => {
       <div className=" bg-neg flex justify-center pb-10 pt-10">
         <div className="w-[75%] bg-blanco p-5 rounded-md flex flex-col gap-3">
           <div className="flex gap-4">
-            <div className="h-full w-full">
-              <img
-                className="h-full rounded-lg"
-                width={270}
-                src={IMG + serie.poster_path}
-                alt=""
-              />
-            </div>
+            <img
+              className="h-full rounded-lg"
+              width={270}
+              src={IMG + serie.poster_path}
+              alt=""
+            />
+
             <div className="">
               <div className="flex gap-1 ">
                 <h1 className="text-negro text-4xl pb-3 font-bold">

@@ -50,77 +50,82 @@ const SerieDetail = () => {
   return (
     <div className=" bg-negro pb-10">
       <div className=" bg-neg flex justify-center pb-10 pt-10">
-        <div className="w-[75%] bg-blanco p-5 rounded-md flex flex-col gap-3">
-          <div className="flex gap-4">
-            <img
-              className="h-full rounded-lg"
-              width={270}
-              src={IMG + serie.poster_path}
-              alt=""
-            />
-
-            <div className="">
-              <div className="flex gap-1 ">
-                <h1 className="text-negro text-4xl pb-3 font-bold">
-                  {serie.name}
+        <div className="w-[75%] bg-blanco p-5 rounded-md gap-3">
+          <div className="flex w-full gap-4">
+            <div className="w-[25%] flex flex-col justify-center items-center h-full">
+              <img
+                className="h-full rounded-lg"
+                src={IMG + serie.poster_path}
+                alt=""
+              />
+              <div className="flex flex-col justify-center py-4 items-center">
+                <h1 className="text-xl font-semibold text-purpuraoscuro">
+                  TEMPORADAS: {serie.number_of_seasons}
+                </h1>
+                <h1 className="text-xl font-semibold text-purpuraoscuro">
+                  EPISODIOS: {serie.number_of_episodes}
                 </h1>
               </div>
-              <h1 className="pt-1 font-mono">
-                {serie.tagline ? `"${serie.tagline}"` : null}
-              </h1>
-              <div className="flex py-2">
-                <h3 className="text-purpuraoscuro text-xl font-black font-lato">
-                  {serie.first_air_date.slice(0, 4)}
-                </h3>
-                <span
-                  className={`px-5 font-bold ${
-                    serie.status == "Ended"
-                      ? "text-rojo"
-                      : `${
-                          serie.status == "Returning Series"
-                            ? "text-verde"
-                            : `${
-                                serie.status == "Canceled" ? "text-negro" : null
-                              }`
-                        }`
-                  }`}
-                >
-                  {serie.status}
-                </span>
+            </div>
+            <div className="flex w-[75%] flex-col justify-between">
+              <div>
+                <div className="flex gap-1 ">
+                  <h1 className="text-negro text-4xl pb-3 font-bold">
+                    {serie.name}
+                  </h1>
+                </div>
+                <h1 className="pt-1 font-mono">
+                  {serie.tagline ? `"${serie.tagline}"` : null}
+                </h1>
+                <div className="flex py-2">
+                  <h3 className="text-purpuraoscuro text-xl font-black font-lato">
+                    {serie.first_air_date.slice(0, 4)}
+                  </h3>
+                  <span
+                    className={`px-5 font-bold ${
+                      serie.status == "Ended"
+                        ? "text-rojo"
+                        : `${
+                            serie.status == "Returning Series"
+                              ? "text-verde"
+                              : `${
+                                  serie.status == "Canceled"
+                                    ? "text-negro"
+                                    : null
+                                }`
+                          }`
+                    }`}
+                  >
+                    {serie.status}
+                  </span>
+                </div>
+                <p className="py-2 border-t-2 font-overview font-medium text-lg">
+                  {serie.overview}
+                </p>
               </div>
-              <p className="py-2 border-t-2 font-overview font-medium text-lg">
-                {serie.overview}
-              </p>
+              <div className="flex justify-evenly gap-16 py-4">
+                <div className="items-center pl-4 flex flex-col justify-center">
+                  <h1 className="text-lg text-center font-normal">
+                    {serie.created_by.length > 0
+                      ? `Created by: ${serie.created_by[0].name}`
+                      : null}
+                  </h1>
+                  <h1 className="text-base font-medium">
+                    {serie.genres.map((genre) => genre.name).join(", ")}
+                  </h1>
+                </div>
+                <div className="flex flex-col justify-center items-center">
+                  <h2 className="text-purpuraoscuro text-2xl font-black">
+                    {parseFloat(serie.vote_average.toFixed(1))}/10
+                  </h2>
+                  <span className="font-medium">
+                    {serie.vote_count} votos de usuarios
+                  </span>
+                </div>
+              </div>
             </div>
           </div>
-          <div className="flex justify-evenly gap-44">
-            <div className="flex flex-col justify-center items-center">
-              <h1 className="text-xl font-semibold text-purpuraoscuro">
-                TEMPORADAS: {serie.number_of_seasons}
-              </h1>
-              <h1 className="text-xl font-semibold text-purpuraoscuro">
-                EPISODIOS: {serie.number_of_episodes}
-              </h1>
-            </div>
-            <div className="items-center pl-4 flex flex-col justify-center">
-              <h1 className="text-lg text-center font-normal">
-                {serie.created_by.length > 0
-                  ? `Created by: ${serie.created_by[0].name}`
-                  : null}
-              </h1>
-              <h1 className="text-base font-medium">
-                {serie.genres.map((genre) => genre.name).join(", ")}
-              </h1>
-            </div>
-            <div className="flex flex-col justify-center items-center">
-              <h2 className="text-purpuraoscuro text-2xl font-black">
-                {parseFloat(serie.vote_average.toFixed(1))}/10
-              </h2>
-              <span className="font-medium">
-                {serie.vote_count} votos de usuarios
-              </span>
-            </div>
-          </div>
+
           <div className="w-full border-t-2 flex py-3 justify-center">
             {serieAdded ? (
               <button

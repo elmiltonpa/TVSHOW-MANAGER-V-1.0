@@ -52,12 +52,14 @@ const SerieDetail = () => {
       <div className=" bg-neg flex justify-center pb-10 pt-10">
         <div className="w-[75%] bg-blanco p-5 rounded-md flex flex-col gap-3">
           <div className="flex gap-4">
-            <img
-              className="h-full rounded-lg"
-              width={270}
-              src={IMG + serie.poster_path}
-              alt=""
-            />
+            <div className="h-full w-full">
+              <img
+                className="h-full rounded-lg"
+                width={270}
+                src={IMG + serie.poster_path}
+                alt=""
+              />
+            </div>
             <div className="">
               <div className="flex gap-1 ">
                 <h1 className="text-negro text-4xl pb-3 font-bold">
@@ -93,22 +95,18 @@ const SerieDetail = () => {
             </div>
           </div>
           <div className="flex justify-evenly gap-44">
-            <div>
-              <div className="flex flex-col justify-center items-center">
-                <h1 className="text-xl font-semibold text-purpuraoscuro">
-                  TEMPORADAS: {serie.number_of_seasons}
-                </h1>
-                <h1 className="text-xl font-semibold text-purpuraoscuro">
-                  EPISODIOS: {serie.number_of_episodes}
-                </h1>
-              </div>
+            <div className="flex flex-col justify-center items-center">
+              <h1 className="text-xl font-semibold text-purpuraoscuro">
+                TEMPORADAS: {serie.number_of_seasons}
+              </h1>
+              <h1 className="text-xl font-semibold text-purpuraoscuro">
+                EPISODIOS: {serie.number_of_episodes}
+              </h1>
             </div>
             <div className="items-center pl-4 flex flex-col justify-center">
-              <h1 className="text-lg font-normal">
+              <h1 className="text-lg text-center font-normal">
                 {serie.created_by.length > 0
-                  ? `Created by: ${serie.created_by
-                      .map((created) => created.name)
-                      .join(", ")}`
+                  ? `Created by: ${serie.created_by[0].name}`
                   : null}
               </h1>
               <h1 className="text-base font-medium">

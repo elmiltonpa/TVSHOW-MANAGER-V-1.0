@@ -5,6 +5,7 @@ import SerieCard from "../components/home/SerieCard";
 import { useLocation, useNavigate } from "react-router-dom";
 import getUser from "../services/user";
 import serieService from "../services/series";
+import Spinner from "../components/Spinner";
 
 const useQuery = () => {
   return new URLSearchParams(useLocation().search);
@@ -111,7 +112,7 @@ const Home = ({ token, user }) => {
           )
         ) : (
           <div className="h-screen text-blanco text-3xl flex justify-center">
-            Cargando...
+            <Spinner />
           </div>
         )}
       </div>

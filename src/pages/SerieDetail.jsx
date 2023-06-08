@@ -2,32 +2,47 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import api from "../api/service";
+import serieService from "../services/series";
 import useSeries from "../utils/useSeries";
 import SerieProfile from "../components/profile/SeasonsProfile";
+import getUser from "../services/user";
+import Spinner from "../components/Spinner";
 
 const IMG = "https://image.tmdb.org/t/p/w500/";
 
-const SerieDetail = ({ token, user }) => {
+const SerieDetail = () => {
   const [serie, setSerie] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [serieAdded, setSerieAdded] = useState(false);
 
-  const { handleSubmit } = useSeries();
+  const { handleSubmit2, handleDelete3 } = useSeries();
 
   const { id } = useParams();
 
   useEffect(() => {
+    const session = JSON.parse(window.localStorage.getItem("session"));
+    const { username } = session;
     const fetchData = async () => {
       const request = await api.searchTvShowById(id);
+      const User = await getUser(username);
+      const Series = await serieService.getSeriesByUserId(User.id);
+      const serieIsAdded = Series.find((serie) => serie.tv_id == request.id);
+
+      if (serieIsAdded) {
+        setSerieAdded(true);
+      }
       setSerie(request);
       setIsLoading(false);
     };
-    fetchData();
+    if (session) {
+      fetchData();
+    }
   }, [id]);
 
   if (isLoading) {
     return (
       <div className="h-screen flex justify-center items-center pb-56 bg-blancoblanco text-3xl font-bold">
-        Cargando...
+        <Spinner />
       </div>
     );
   }
@@ -96,7 +111,7 @@ const SerieDetail = ({ token, user }) => {
                       .join(", ")}`
                   : null}
               </h1>
-              <h1 className="text-lg font-medium">
+              <h1 className="text-base font-medium">
                 {serie.genres.map((genre) => genre.name).join(", ")}
               </h1>
             </div>
@@ -110,12 +125,21 @@ const SerieDetail = ({ token, user }) => {
             </div>
           </div>
           <div className="w-full border-t-2 flex py-3 justify-center">
-            <button
-              className="text-lg hover:bg-purpuraoscuro hover:text-blancoblanco px-10 font-semibold text-purpuraoscuro"
-              onClick={(e) => handleSubmit(e, id, token, user)}
-            >
-              AGREGAR A FAVORITOS
-            </button>
+            {serieAdded ? (
+              <button
+                onClick={(e) => handleDelete3(e, serie.id, setSerieAdded)}
+                className="text-lg hover:bg-purpuraoscuro hover:text-blanco px-10 font-semibold text-amarillo3"
+              >
+                QUITAR DE FAVORITOS
+              </button>
+            ) : (
+              <button
+                onClick={(e) => handleSubmit2(e, serie.id, setSerieAdded)}
+                className="text-lg hover:bg-purpuraoscuro hover:text-blanco px-10 font-semibold text-purpuraoscuro"
+              >
+                AGREGAR A FAVORITOS
+              </button>
+            )}
           </div>
         </div>
       </div>

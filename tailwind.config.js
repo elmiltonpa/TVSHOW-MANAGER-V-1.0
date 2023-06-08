@@ -26,15 +26,18 @@ export default {
       amarillo2: "#D9A604",
       purpuraclaro2: "#FF00FF",
       purpura: "#BBADFF",
+      amarillo3: "#B0A613",
     },
     extend: {
       fontFamily: {
         overview: ["Roboto", "sans-serif"],
         lato: ["Lato", "sans-serif"],
+        noto: ["Noto Sans", "sans-serif"],
       },
       boxShadow: {
-        login: "1px 1px 35px 10px rgba(128,0,128,0.75)",
+        login: "1px 1px 35px 10px rgba(128, 0, 128, 0.75)",
         input: "0px 0px 25px 4px",
+        seriefav: "0px 2px 10px -7px rgba(0, 0, 0, 0.1)",
       },
     },
   },

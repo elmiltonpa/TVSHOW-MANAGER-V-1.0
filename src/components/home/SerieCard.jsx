@@ -27,16 +27,9 @@ const SerieCard = ({ serie, token, user, setSeriesAdded, seriesAdded }) => {
               {seriesAdded.includes(serie.id) ? (
                 <button
                   onClick={(e) =>
-                    handleDelete(
-                      e,
-                      serie.id,
-                      user,
-                      token,
-                      setSeriesAdded,
-                      seriesAdded
-                    )
+                    handleDelete(e, serie.id, setSeriesAdded, seriesAdded)
                   }
-                  className="text-lg hover:bg-purpuraoscuro hover:text-blanco px-10 font-semibold text-purpuraoscuro"
+                  className="text-lg hover:bg-purpuraoscuro hover:text-blanco px-10 font-semibold text-amarillo3"
                 >
                   QUITAR DE FAVORITOS
                 </button>

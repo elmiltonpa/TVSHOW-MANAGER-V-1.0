@@ -1,6 +1,7 @@
 import { useRef, useState, useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import api from "../../api/service";
+import { TiDelete } from "react-icons/ti";
 
 const SearchBar = ({ setSerie }) => {
   const [text, setText] = useState("");
@@ -68,7 +69,7 @@ const SearchBar = ({ setSerie }) => {
           className="bg-blanco w-full rounded-lg px-3 h-10 text-white text-xl"
           value={text}
           type="text"
-          placeholder="Buscar..."
+          placeholder="Buscar algo para ver..."
           onChange={(e) => {
             setText(e.target.value);
             onChangeSearch(e);
@@ -80,7 +81,7 @@ const SearchBar = ({ setSerie }) => {
             className="absolute right-2 text-2xl text-rojo font-bold top-1/2 transform -translate-y-1/2"
             onClick={clearInput}
           >
-            X
+            <TiDelete size={30} />
           </button>
         )}
       </div>

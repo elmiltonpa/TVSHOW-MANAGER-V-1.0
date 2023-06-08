@@ -77,14 +77,19 @@ const Register = () => {
           </div>
           <button
             onClick={(e) => handleRegister(e)}
-            className="bg-gris mt-10 hover:bg-purpuraoscuro hover:text-lavanda text-negropurpura px-7 py-[5px] text-xl font-bold border-2 border-purpuraoscuro"
+            className="bg-gris mt-10 hover:bg-purpuraoscuro hover:text-lavanda text-negropurpura w-full py-[5px] text-xl font-bold border-2 border-purpuraoscuro"
           >
             Register
           </button>
         </form>
         <div className="flex flex-col justify-center items-center">
           <h3>Already have an account?</h3>
-          <Link to="/login">Login</Link>
+          <Link
+            className="hover:bg-purpuraoscuro hover:text-lavanda px-2 pb-1 font-semibold"
+            to="/login"
+          >
+            Login
+          </Link>
         </div>
       </div>
     </div>

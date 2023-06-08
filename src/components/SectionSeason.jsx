@@ -33,7 +33,7 @@ const SectionSeason = ({ season, episodes }) => {
                     </h1>
                   </div>
                   <div className="px-2 overflow-y-auto">
-                    <p className="text-center font-overview">
+                    <p className="text-center overflow-hidden text-ellipsis line-clamp-3 font-overview">
                       {episode.overview}
                     </p>
                   </div>

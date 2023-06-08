@@ -73,7 +73,7 @@ const Login = ({ setUser, setToken }) => {
               {error ? error.response.data.message : " "}
             </div>
             <div className="items-center mt-10 flex flex-col justify-center">
-              <button className="bg-gris hover:bg-purpuraoscuro hover:text-lavanda text-negropurpura px-7 py-[5px] text-xl font-bold border-2 border-purpuraoscuro">
+              <button className="bg-gris hover:bg-purpuraoscuro hover:text-lavanda text-negropurpura w-full py-[5px] text-xl font-bold border-2 border-purpuraoscuro">
                 Login
               </button>
               <span className="text-[13px] mt-2 font-semibold font-sans">
@@ -82,7 +82,9 @@ const Login = ({ setUser, setToken }) => {
             </div>
           </form>
           <div>
-            <span>Create a new account</span>
+            <Link to="/register">
+              <span>Create a new account</span>
+            </Link>
           </div>
         </div>
       </div>

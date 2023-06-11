@@ -2,8 +2,8 @@ import { Link } from "react-router-dom";
 import { AiFillDelete } from "react-icons/ai";
 import useSeries from "../../utils/useSeries";
 
-export const FavSeries = ({ userSeries, username, setUserSeries }) => {
-  const { handleDelete2 } = useSeries();
+export const FavSeries = ({ seriesFav, username, setSeriesFav }) => {
+  const { handleUnfavoriteFromProfile } = useSeries();
 
   return (
     <div className="h-full flex pb-5 flex-col overflow-y-auto bg-blancoblanco gap-4">
@@ -12,8 +12,8 @@ export const FavSeries = ({ userSeries, username, setUserSeries }) => {
       </h1>
       <div className="flex flex-col px-5 gap-3 w-full">
         {" "}
-        {userSeries.length > 0 ? (
-          userSeries.map((serie) => (
+        {seriesFav.length > 0 ? (
+          seriesFav.map((serie) => (
             <div
               key={serie.id}
               className="flex shadow-seriefav h-16 rounded-lg shadow-negro"
@@ -27,8 +27,14 @@ export const FavSeries = ({ userSeries, username, setUserSeries }) => {
               </div>
               <div className="w-[17%] flex hover:bg-negro justify-center items-center">
                 <button
+                  title="Eliminar de favoritos"
                   onClick={(e) =>
-                    handleDelete2(e, serie.tv_id, userSeries, setUserSeries)
+                    handleUnfavoriteFromProfile(
+                      e,
+                      serie.tv_id,
+                      seriesFav,
+                      setSeriesFav
+                    )
                   }
                   className="h-full hover:text-blancoblanco w-full flex justify-center items-center"
                 >
@@ -39,7 +45,7 @@ export const FavSeries = ({ userSeries, username, setUserSeries }) => {
           ))
         ) : (
           <div className="text-2xl text-center">
-            Aun no tienes series favoritas :(
+            Aun no tienes series favoritas{}:(
           </div>
         )}
       </div>

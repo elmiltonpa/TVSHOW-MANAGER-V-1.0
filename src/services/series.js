@@ -27,4 +27,14 @@ const deleteSerie = async (id, token) => {
   return request;
 };
 
-export default { getSeriesByUserId, createSerie, deleteSerie };
+const updateSerie = async (id, serie, token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  const request = await axios.put(`${APIURL}/${id}`, serie, config);
+  return request;
+};
+
+export default { getSeriesByUserId, createSerie, deleteSerie, updateSerie };

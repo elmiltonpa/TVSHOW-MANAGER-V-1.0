@@ -5,9 +5,9 @@ import SerieDetail from "./pages/SerieDetail";
 import Register from "./pages/Register";
 import Home from "./pages/Home";
 import Profile from "./pages/Profile";
-import Header from "./components/Header";
+import Header from "./components/shared/Header";
 import { useEffect, useState } from "react";
-import Footer from "./components/Footer";
+import Footer from "./components/shared/Footer";
 
 const App = () => {
   const [user, setUser] = useState(null);

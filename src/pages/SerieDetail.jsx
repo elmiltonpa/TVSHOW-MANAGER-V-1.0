@@ -6,7 +6,7 @@ import serieService from "../services/series";
 import useSeries from "../utils/useSeries";
 import SerieProfile from "../components/profile/SeasonsProfile";
 import getUser from "../services/user";
-import Spinner from "../components/Spinner";
+import Spinner from "../components/shared/Spinner";
 
 const IMG = "https://image.tmdb.org/t/p/w500/";
 
@@ -14,8 +14,8 @@ const SerieDetail = () => {
   const [serie, setSerie] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [serieAdded, setSerieAdded] = useState(false);
-
-  const { handleSubmit2, handleDelete3 } = useSeries();
+  const [serieWatched, setSerieWatched] = useState(false);
+  const { handleSubmitFromSerieDetail, handleWatched } = useSeries();
 
   const { id } = useParams();
 
@@ -26,10 +26,17 @@ const SerieDetail = () => {
       const request = await api.searchTvShowById(id);
       const User = await getUser(username);
       const Series = await serieService.getSeriesByUserId(User.id);
-      const serieIsAdded = Series.find((serie) => serie.tv_id == request.id);
-
-      if (serieIsAdded) {
+      const serieIsFavorite = Series.some(
+        (serie) => serie.tv_id == request.id && serie.favorite == true
+      );
+      const serieIsWatched = Series.some(
+        (serie) => serie.tv_id == request.id && serie.watched == true
+      );
+      if (serieIsFavorite) {
         setSerieAdded(true);
+      }
+      if (serieIsWatched) {
+        setSerieWatched(true);
       }
       setSerie(request);
       setIsLoading(false);
@@ -129,17 +136,36 @@ const SerieDetail = () => {
           <div className="w-full border-t-2 flex py-3 justify-center">
             {serieAdded ? (
               <button
-                onClick={(e) => handleDelete3(e, serie.id, setSerieAdded)}
+                onClick={(e) =>
+                  handleSubmitFromSerieDetail(e, serie.id, setSerieAdded)
+                }
                 className="text-lg hover:bg-purpuraoscuro hover:text-blanco px-10 font-semibold text-amarillo3"
               >
                 QUITAR DE FAVORITOS
               </button>
             ) : (
               <button
-                onClick={(e) => handleSubmit2(e, serie.id, setSerieAdded)}
+                onClick={(e) =>
+                  handleSubmitFromSerieDetail(e, serie.id, setSerieAdded)
+                }
                 className="text-lg hover:bg-purpuraoscuro hover:text-blanco px-10 font-semibold text-purpuraoscuro"
               >
                 AGREGAR A FAVORITOS
+              </button>
+            )}
+            {serieWatched ? (
+              <button
+                className="text-lg hover:bg-purpuraoscuro hover:text-blanco px-10 font-semibold text-purpuraoscuro"
+                onClick={(e) => handleWatched(e, serie.id, setSerieWatched)}
+              >
+                QUITAR DE VISTOS
+              </button>
+            ) : (
+              <button
+                className="text-lg hover:bg-purpuraoscuro hover:text-blanco px-10 font-semibold text-purpuraoscuro"
+                onClick={(e) => handleWatched(e, serie.id, setSerieWatched)}
+              >
+                AGREGAR A VISTOS
               </button>
             )}
           </div>

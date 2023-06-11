@@ -5,13 +5,13 @@ import SerieCard from "../components/home/SerieCard";
 import { useLocation, useNavigate } from "react-router-dom";
 import getUser from "../services/user";
 import serieService from "../services/series";
-import Spinner from "../components/Spinner";
+import Spinner from "../components/shared/Spinner";
 
 const useQuery = () => {
   return new URLSearchParams(useLocation().search);
 };
 
-const Home = ({ token, user }) => {
+const Home = ({ user }) => {
   const [serie, setSerie] = useState(null);
   const [seriesAdded, setSeriesAdded] = useState([]);
 
@@ -68,7 +68,9 @@ const Home = ({ token, user }) => {
     const fetchData = async () => {
       const User = await getUser(user.username);
       const series = await serieService.getSeriesByUserId(User.id);
-      const ids = series.map((serie) => parseInt(serie.tv_id));
+      const ids = series
+        .filter((serie) => serie.favorite == true)
+        .map((serie) => parseInt(serie.tv_id));
       setSeriesAdded(ids);
     };
     if (user) {
@@ -102,8 +104,6 @@ const Home = ({ token, user }) => {
               >
                 <SerieCard
                   serie={serieItem}
-                  token={token}
-                  user={user}
                   seriesAdded={seriesAdded}
                   setSeriesAdded={setSeriesAdded}
                 />

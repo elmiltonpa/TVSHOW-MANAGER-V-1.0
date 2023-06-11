@@ -4,10 +4,12 @@ import seriesService from "../services/series";
 import { useEffect, useState } from "react";
 import { FavSeries } from "../components/profile/FavSeries";
 import Watching from "../components/profile/Watching";
-import Spinner from "../components/Spinner";
+import Spinner from "../components/shared/Spinner";
 
 const Profile = () => {
-  const [userSeries, setUserSeries] = useState(null);
+  // const [userSeries, setUserSeries] = useState(null);
+  const [seriesFav, setSeriesFav] = useState(null);
+  const [seriesWatched, setSeriesWatched] = useState(null);
 
   const [isLoading, setIsLoading] = useState(true);
   const [user, setUser] = useState(null);
@@ -24,8 +26,13 @@ const Profile = () => {
     const fetchData = async () => {
       const User = await getUser(username);
       const Series = await seriesService.getSeriesByUserId(User.id);
+      console.log(Series);
+      const FavSeries = Series.filter((serie) => serie.favorite == true);
+      const WatchedSeries = Series.filter((serie) => serie.watched == true);
 
-      setUserSeries(Series);
+      setSeriesFav(FavSeries);
+      setSeriesWatched(WatchedSeries);
+
       setIsLoading(false);
     };
     if (session) {
@@ -50,14 +57,14 @@ const Profile = () => {
         <div className="h-screen flex">
           <div className="w-[25%]">
             <FavSeries
-              userSeries={userSeries}
-              setUserSeries={setUserSeries}
+              seriesFav={seriesFav}
+              setSeriesFav={setSeriesFav}
               username={username}
             />
           </div>
           <div className="w-1/2 bg-purpura"></div>
           <div className="w-[25%] bg-blancoblanco">
-            <Watching />
+            <Watching seriesWatched={seriesWatched} />
           </div>
         </div>
       ) : (

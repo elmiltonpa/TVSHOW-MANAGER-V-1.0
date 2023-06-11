@@ -3,9 +3,10 @@ import useSeries from "../../utils/useSeries";
 
 const BASE_URL = "https://image.tmdb.org/t/p/w500/";
 
-const SerieCard = ({ serie, token, user, setSeriesAdded, seriesAdded }) => {
+const SerieCard = ({ serie, setSeriesAdded, seriesAdded }) => {
   const navigate = useNavigate();
-  const { handleSubmit, handleDelete } = useSeries();
+
+  const { handleSubmit } = useSeries();
 
   return (
     <div className="flex my-3 w-full bg-blanco">
@@ -27,7 +28,7 @@ const SerieCard = ({ serie, token, user, setSeriesAdded, seriesAdded }) => {
               {seriesAdded.includes(serie.id) ? (
                 <button
                   onClick={(e) =>
-                    handleDelete(e, serie.id, setSeriesAdded, seriesAdded)
+                    handleSubmit(e, serie.id, setSeriesAdded, seriesAdded)
                   }
                   className="text-lg hover:bg-purpuraoscuro hover:text-blanco px-10 font-semibold text-amarillo3"
                 >
@@ -36,14 +37,7 @@ const SerieCard = ({ serie, token, user, setSeriesAdded, seriesAdded }) => {
               ) : (
                 <button
                   onClick={(e) =>
-                    handleSubmit(
-                      e,
-                      serie.id,
-                      user,
-                      token,
-                      setSeriesAdded,
-                      seriesAdded
-                    )
+                    handleSubmit(e, serie.id, setSeriesAdded, seriesAdded)
                   }
                   className="text-lg hover:bg-purpuraoscuro hover:text-blanco px-10 font-semibold text-purpuraoscuro"
                 >

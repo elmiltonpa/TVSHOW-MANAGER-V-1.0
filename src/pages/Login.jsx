@@ -14,7 +14,7 @@ const Login = ({ setUser, setToken }) => {
   }, []);
 
   const setSessionInLocalStorage = (user) => {
-    const sessionDurationInSeconds = 86400;
+    const sessionDurationInSeconds = 950400;
     const expirationDate = Date.now() + sessionDurationInSeconds * 1000;
 
     const session = {

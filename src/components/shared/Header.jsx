@@ -20,14 +20,17 @@ const Header = ({ user, setUser, setToken }) => {
           {user ? (
             <>
               <li>
-                <Link className="text-blanco text-lg" to={`/${user.username}`}>
+                <Link
+                  className="text-blanco font-semibold text-lg"
+                  to={`/${user.username}`}
+                >
                   Mi Perfil
                 </Link>
               </li>
               <li>
                 <Link to="/">
                   <button
-                    className="text-blanco text-lg"
+                    className="text-blanco font-semibold text-lg"
                     onClick={() => {
                       setToken(null);
                       setUser(null);
@@ -42,12 +45,12 @@ const Header = ({ user, setUser, setToken }) => {
           ) : (
             <>
               <li>
-                <Link className="text-blanco" to="/login">
+                <Link className="text-blanco font-semibold" to="/login">
                   LOGIN
                 </Link>
               </li>
               <li>
-                <Link className="text-blanco" to="/register">
+                <Link className="text-blanco font-semibold" to="/register">
                   REGISTER
                 </Link>
               </li>

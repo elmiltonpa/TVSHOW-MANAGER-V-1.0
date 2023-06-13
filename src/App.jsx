@@ -8,6 +8,7 @@ import Profile from "./pages/Profile";
 import Header from "./components/shared/Header";
 import { useEffect, useState } from "react";
 import Footer from "./components/shared/Footer";
+import MySeries from "./pages/MySeries";
 
 const App = () => {
   const [user, setUser] = useState(null);
@@ -48,6 +49,7 @@ const App = () => {
                 element={<SerieDetail token={token} user={user} />}
               />
               <Route path="/:username" element={<Profile user={user} />} />
+              <Route path="/myseries" element={<MySeries to="/login" />} />
               <Route
                 path="/:username/:id"
                 element={<SerieProfile user={user} token={token} />}

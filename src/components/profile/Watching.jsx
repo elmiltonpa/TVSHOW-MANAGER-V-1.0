@@ -10,7 +10,9 @@ const Watching = ({ seriesWatched }) => {
             <div key={serie.id}>{serie.tv_title}</div>
           ))
         ) : (
-          <div>Todavia no viste ninguna serie</div>
+          <div className="text-2xl text-center">
+            Todavia no viste ninguna serie
+          </div>
         )}
       </div>
     </div>

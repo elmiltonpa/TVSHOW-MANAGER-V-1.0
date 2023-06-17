@@ -9,13 +9,13 @@ const useSeries = () => {
   const handleWatched = async (e, serieId, setSerieWatched) => {
     e.preventDefault();
     const session = JSON.parse(window.localStorage.getItem("session"));
-    const { token, username } = session;
 
-    if (!token) {
+    if (!session) {
       navigate("/login");
       return;
     }
     try {
+      const { token, username } = session;
       const User = await getUser(username);
 
       const seriesUser = await serieService.getSeriesByUserId(User.id);
@@ -56,16 +56,14 @@ const useSeries = () => {
   ) => {
     e.preventDefault();
     setIsLoadingToFavorite(true);
-    const { token, username } = JSON.parse(
-      window.localStorage.getItem("session")
-    );
+    const session = JSON.parse(window.localStorage.getItem("session"));
 
     try {
-      if (!token) {
+      if (!session) {
         navigate("/login");
         return;
       }
-
+      const { token, username } = session;
       const User = await getUser(username);
 
       const userSeries = await serieService.getSeriesByUserId(User.id);
@@ -110,12 +108,13 @@ const useSeries = () => {
   const handleSubmitFromSerieDetail = async (e, serieId, setSeriesAdded) => {
     e.preventDefault();
     const session = JSON.parse(window.localStorage.getItem("session"));
-    const { token, username } = session;
+
     try {
-      if (!token) {
+      if (!session) {
         navigate("/login");
         return;
       }
+      const { token, username } = session;
       const User = await getUser(username);
       const userSeries = await serieService.getSeriesByUserId(User.id);
       const serieAlreadyAdded = userSeries.find(
@@ -161,13 +160,13 @@ const useSeries = () => {
   ) => {
     e.preventDefault();
     const session = JSON.parse(window.localStorage.getItem("session"));
-    const { token, username } = session;
 
     try {
-      if (!token) {
+      if (!session) {
         navigate("/login");
         return;
       }
+      const { token, username } = session;
       const User = await getUser(username);
       const seriesUser = await serieService.getSeriesByUserId(User.id);
       const serieToDelete = seriesUser.find((serie) => serie.tv_id == serieId);

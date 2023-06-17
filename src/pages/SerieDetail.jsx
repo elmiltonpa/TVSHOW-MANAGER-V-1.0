@@ -150,14 +150,14 @@ const SerieDetail = () => {
                 onClick={(e) =>
                   handleSubmitFromSerieDetail(e, serie.id, setSerieAdded)
                 }
-                className="text-lg hover:bg-purpuraoscuro hover:text-blanco px-10 font-semibold text-purpuraoscuro"
+                className="text-lg  hover:bg-purpuraoscuro hover:text-blanco px-10 font-semibold text-purpuraoscuro"
               >
                 AGREGAR A FAVORITOS
               </button>
             )}
             {serieWatched ? (
               <button
-                className="text-lg hover:bg-purpuraoscuro hover:text-blanco px-10 font-semibold text-purpuraoscuro"
+                className="text-lg text-amarillo3 hover:bg-purpuraoscuro hover:text-blanco px-10 font-semibold "
                 onClick={(e) => handleWatched(e, serie.id, setSerieWatched)}
               >
                 QUITAR DE VISTOS

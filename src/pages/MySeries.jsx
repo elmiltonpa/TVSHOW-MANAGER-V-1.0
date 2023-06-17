@@ -53,7 +53,7 @@ const MySeries = () => {
   return (
     <div className="h-[90vh] flex flex-col items-center bg-purpura">
       {user ? (
-        <div className="bg-blancoblanco w-[70%] h-full px-44">
+        <div className="bg-blancoblanco  overflow-y-auto w-[70%] h-full px-44">
           <div className="py-5 h-[13%]">
             <h1 className="text-4xl text-center font-overview font-semibold">
               Mis series
@@ -62,12 +62,12 @@ const MySeries = () => {
               Si eliminas la serie, eliminas todos los datos
             </h3>
           </div>
-          <div className="h-[87%] flex flex-col gap-4 py-4 items-center">
+          <div className="flex flex-col gap-4 py-4 items-center">
             {series.length > 0 ? (
               series.map((serie, index) => (
                 <div
                   key={index}
-                  className="bg-blancoblanco shadow-seriefav shadow-negro flex w-[70%] h-[12%] "
+                  className="bg-blancoblanco shadow-seriefav shadow-negro flex w-[70%] h-16"
                 >
                   <div className="w-[90%] pl-12 flex justify-center items-center">
                     <Link to={`/home/${serie.tv_id}`}>
@@ -78,17 +78,17 @@ const MySeries = () => {
                   </div>
                   <div
                     className={`${
-                      isLoadingToDelete ? "hover:bg-blancoblanco" : ""
-                    } w-[10%] hover:bg-negro`}
+                      isLoadingToDelete ? "bg-blancoblanco" : "hover:bg-negro"
+                    } w-[10%] `}
                   >
                     <button
                       disabled={isLoadingToDelete}
                       onClick={(e) => handleDelete(e, serie.id, session.token)}
                       className={`${
                         isLoadingToDelete
-                          ? "cursor-not-allowed hover:text-negro"
-                          : ""
-                      } w-full h-full text-lg flex justify-center items-center hover:text-blancoblanco`}
+                          ? "cursor-not-allowed text-negro"
+                          : "hover:text-blancoblanco"
+                      } w-full h-full text-lg flex justify-center items-center`}
                     >
                       <AiFillDelete />
                     </button>

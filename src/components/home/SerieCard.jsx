@@ -33,7 +33,7 @@ const SerieCard = ({
             <div className="items-center border-t-2 w-full flex justify-center">
               {seriesAdded.includes(serie.id) ? (
                 <button
-                  disabled={isLoadingToFavorite}
+                  // disabled={isLoadingToFavorite}
                   onClick={(e) =>
                     handleSubmit(
                       e,
@@ -45,9 +45,9 @@ const SerieCard = ({
                   }
                   className={`${
                     isLoadingToFavorite
-                      ? "cursor-not-allowed hover:bg-blancoblanco hover:text-amarillo3"
-                      : ""
-                  } text-lg  hover:bg-purpuraoscuro hover:text-blanco px-10 font-semibold text-amarillo3`}
+                      ? "cursor-not-allowed bg-blancoblanco text-amarillo3"
+                      : " hover:bg-purpuraoscuro hover:text-blanco text-amarillo3"
+                  } text-lg  px-10 font-semibold `}
                 >
                   QUITAR DE FAVORITOS
                 </button>
@@ -65,9 +65,9 @@ const SerieCard = ({
                   }
                   className={`${
                     isLoadingToFavorite
-                      ? "cursor-not-allowed hover:bg-blancoblanco hover:text-purpuraoscuro"
-                      : ""
-                  } text-lg hover:bg-purpuraoscuro hover:text-blanco px-10 font-semibold text-purpuraoscuro`}
+                      ? "cursor-not-allowed bg-blancoblanco text-purpuraoscuro"
+                      : "hover:bg-purpuraoscuro hover:text-blanco text-purpuraoscuro"
+                  } text-lg  px-10 font-semibold`}
                 >
                   AGREGAR A FAVORITOS
                 </button>

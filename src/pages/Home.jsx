@@ -14,6 +14,7 @@ const useQuery = () => {
 const Home = ({ user }) => {
   const [serie, setSerie] = useState(null);
   const [seriesAdded, setSeriesAdded] = useState([]);
+  const [isLoadingToFavorite, setIsLoadingToFavorite] = useState(false);
 
   const searchRef = useRef();
   const navigate = useNavigate();
@@ -103,6 +104,8 @@ const Home = ({ user }) => {
                 key={serieItem.id}
               >
                 <SerieCard
+                  isLoadingToFavorite={isLoadingToFavorite}
+                  setIsLoadingToFavorite={setIsLoadingToFavorite}
                   serie={serieItem}
                   seriesAdded={seriesAdded}
                   setSeriesAdded={setSeriesAdded}

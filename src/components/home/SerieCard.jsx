@@ -3,7 +3,13 @@ import useSeries from "../../utils/useSeries";
 
 const BASE_URL = "https://image.tmdb.org/t/p/w500/";
 
-const SerieCard = ({ serie, setSeriesAdded, seriesAdded }) => {
+const SerieCard = ({
+  serie,
+  setSeriesAdded,
+  seriesAdded,
+  isLoadingToFavorite,
+  setIsLoadingToFavorite,
+}) => {
   const navigate = useNavigate();
 
   const { handleSubmit } = useSeries();
@@ -27,19 +33,41 @@ const SerieCard = ({ serie, setSeriesAdded, seriesAdded }) => {
             <div className="items-center border-t-2 w-full flex justify-center">
               {seriesAdded.includes(serie.id) ? (
                 <button
+                  disabled={isLoadingToFavorite}
                   onClick={(e) =>
-                    handleSubmit(e, serie.id, setSeriesAdded, seriesAdded)
+                    handleSubmit(
+                      e,
+                      serie.id,
+                      setSeriesAdded,
+                      seriesAdded,
+                      setIsLoadingToFavorite
+                    )
                   }
-                  className="text-lg hover:bg-purpuraoscuro hover:text-blanco px-10 font-semibold text-amarillo3"
+                  className={`${
+                    isLoadingToFavorite
+                      ? "cursor-not-allowed hover:bg-blancoblanco hover:text-amarillo3"
+                      : ""
+                  } text-lg  hover:bg-purpuraoscuro hover:text-blanco px-10 font-semibold text-amarillo3`}
                 >
                   QUITAR DE FAVORITOS
                 </button>
               ) : (
                 <button
+                  disabled={isLoadingToFavorite}
                   onClick={(e) =>
-                    handleSubmit(e, serie.id, setSeriesAdded, seriesAdded)
+                    handleSubmit(
+                      e,
+                      serie.id,
+                      setSeriesAdded,
+                      seriesAdded,
+                      setIsLoadingToFavorite
+                    )
                   }
-                  className="text-lg hover:bg-purpuraoscuro hover:text-blanco px-10 font-semibold text-purpuraoscuro"
+                  className={`${
+                    isLoadingToFavorite
+                      ? "cursor-not-allowed hover:bg-blancoblanco hover:text-purpuraoscuro"
+                      : ""
+                  } text-lg hover:bg-purpuraoscuro hover:text-blanco px-10 font-semibold text-purpuraoscuro`}
                 >
                   AGREGAR A FAVORITOS
                 </button>

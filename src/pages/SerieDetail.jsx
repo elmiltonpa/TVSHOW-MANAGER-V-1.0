@@ -19,32 +19,34 @@ const SerieDetail = () => {
 
   const { id } = useParams();
 
+  const session = JSON.parse(window.localStorage.getItem("session"));
+
   useEffect(() => {
-    const session = JSON.parse(window.localStorage.getItem("session"));
-    const { username } = session;
     const fetchData = async () => {
       const request = await api.searchTvShowById(id);
-      const User = await getUser(username);
-      const Series = await serieService.getSeriesByUserId(User.id);
-      const serieIsFavorite = Series.some(
-        (serie) => serie.tv_id == request.id && serie.favorite == true
-      );
-      const serieIsWatched = Series.some(
-        (serie) => serie.tv_id == request.id && serie.watched == true
-      );
-      if (serieIsFavorite) {
-        setSerieAdded(true);
-      }
-      if (serieIsWatched) {
-        setSerieWatched(true);
+      if (session) {
+        const { username } = session;
+        const User = await getUser(username);
+        const Series = await serieService.getSeriesByUserId(User.id);
+        const serieIsFavorite = Series.some(
+          (serie) => serie.tv_id == request.id && serie.favorite == true
+        );
+        const serieIsWatched = Series.some(
+          (serie) => serie.tv_id == request.id && serie.watched == true
+        );
+        if (serieIsFavorite) {
+          setSerieAdded(true);
+        }
+        if (serieIsWatched) {
+          setSerieWatched(true);
+        }
       }
       setSerie(request);
       setIsLoading(false);
     };
-    if (session) {
-      fetchData();
-    }
-  }, [id]);
+
+    fetchData();
+  }, [id, session]);
 
   if (isLoading) {
     return (

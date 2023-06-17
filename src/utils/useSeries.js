@@ -152,29 +152,6 @@ const useSeries = () => {
     }
   };
 
-  //PARA ELIMINAR SERIE DE FAVORITOS DESDE EL HOME??????????????
-  // const handleDelete = async (e, serieId, setSeriesAdded, seriesAdded) => {
-  //   e.preventDefault();
-  //   const session = JSON.parse(window.localStorage.getItem("session"));
-  //   const { token, username } = session;
-
-  //   try {
-  //     if (!token) {
-  //       navigate("/login");
-  //       return;
-  //     }
-  //     const User = await getUser(username);
-  //     const seriesUser = await serieService.getSeriesByUserId(User.id);
-  //     const serieToDelete = seriesUser.find((serie) => serie.tv_id == serieId);
-
-  //     await serieService.deleteSerie(serieToDelete.id, token);
-  //     setSeriesAdded(seriesAdded.filter((serie) => serie !== serieId));
-  //     console.log("eliminada");
-  //   } catch (error) {
-  //     console.log("Error al eliminar serie de favoritos");
-  //   }
-  // };
-
   //PARA ELIMINAR SERIE DE FAVORITOS DESDE EL PERFIL
   const handleUnfavoriteFromProfile = async (
     e,
@@ -206,26 +183,6 @@ const useSeries = () => {
       console.log("Error al eliminar serie de favoritos", error);
     }
   };
-
-  // const handleDelete3 = async (e, serieId, setSeriesAdded) => {
-  //   e.preventDefault();
-  //   const session = JSON.parse(window.localStorage.getItem("session"));
-  //   const { token, username } = session;
-  //   try {
-  //     if (!token) {
-  //       navigate("/login");
-  //       return;
-  //     }
-  //     const User = await getUser(username);
-  //     const seriesUser = await serieService.getSeriesByUserId(User.id);
-  //     const serieToDelete = seriesUser.find((serie) => serie.tv_id == serieId);
-  //     await serieService.deleteSerie(serieToDelete.id, token);
-  //     console.log("Eliminada");
-  //     setSeriesAdded(false);
-  //   } catch (error) {
-  //     console.log("Error al eliminar serie de favoritos");
-  //   }
-  // };
 
   return {
     handleSubmit,

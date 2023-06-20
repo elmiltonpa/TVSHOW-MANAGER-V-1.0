@@ -99,18 +99,14 @@ const Home = ({ user }) => {
             </div>
           ) : (
             serie.map((serieItem) => (
-              <div
-                className="flex-col gap-3 h-full bg-grisclaro"
+              <SerieCard
                 key={serieItem.id}
-              >
-                <SerieCard
-                  isLoadingToFavorite={isLoadingToFavorite}
-                  setIsLoadingToFavorite={setIsLoadingToFavorite}
-                  serie={serieItem}
-                  seriesAdded={seriesAdded}
-                  setSeriesAdded={setSeriesAdded}
-                />
-              </div>
+                isLoadingToFavorite={isLoadingToFavorite}
+                setIsLoadingToFavorite={setIsLoadingToFavorite}
+                serie={serieItem}
+                seriesAdded={seriesAdded}
+                setSeriesAdded={setSeriesAdded}
+              />
             ))
           )
         ) : (

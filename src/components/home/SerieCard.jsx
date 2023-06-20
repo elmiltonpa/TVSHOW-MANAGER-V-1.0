@@ -33,7 +33,7 @@ const SerieCard = ({
             <div className="items-center border-t-2 w-full flex justify-center">
               {seriesAdded.includes(serie.id) ? (
                 <button
-                  // disabled={isLoadingToFavorite}
+                  disabled={isLoadingToFavorite}
                   onClick={(e) =>
                     handleSubmit(
                       e,

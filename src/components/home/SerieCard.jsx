@@ -19,7 +19,12 @@ const SerieCard = ({
       <div className="gap-x-2 w-[78%] border-r-4">
         <div className="flex gap-x-2">
           <div className="h-full ">
-            <img className="" src={BASE_URL + serie.poster_path} width={200} />
+            <img
+              loading="lazy"
+              className=""
+              src={BASE_URL + serie.poster_path}
+              width={200}
+            />
           </div>
           <div className="h-[300px] w-[73%] flex flex-col flex-1 pr-5 pl-3 justify-between py-3 items-center">
             <div className="flex flex-col gap-y-2 items-center h-[80%]">

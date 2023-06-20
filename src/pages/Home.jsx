@@ -16,8 +16,35 @@ const Home = ({ user }) => {
   const [seriesAdded, setSeriesAdded] = useState([]);
   const [isLoadingToFavorite, setIsLoadingToFavorite] = useState(false);
 
+  const useIntersectionObserver = (ref, options) => {
+    const [isVisible, setIsVisible] = useState(false);
+
+    useEffect(() => {
+      const observer = new IntersectionObserver(([entry]) => {
+        setIsVisible(entry.isIntersecting);
+      }, options);
+
+      const currentRef = ref.current;
+
+      if (currentRef) {
+        observer.observe(currentRef);
+      }
+
+      return () => {
+        if (currentRef) {
+          observer.unobserve(currentRef);
+        }
+      };
+    }, [ref, options]);
+
+    return isVisible;
+  };
+
   const searchRef = useRef();
+  const serieCardRef = useRef(null);
   const navigate = useNavigate();
+
+  const isVisible = useIntersectionObserver(serieCardRef, { threshold: 0.1 });
 
   const query = useQuery();
   const search = query.get("s");
@@ -98,15 +125,21 @@ const Home = ({ user }) => {
               No se encontraron series :(
             </div>
           ) : (
-            serie.map((serieItem) => (
-              <SerieCard
+            serie.map((serieItem, index) => (
+              <div
                 key={serieItem.id}
-                isLoadingToFavorite={isLoadingToFavorite}
-                setIsLoadingToFavorite={setIsLoadingToFavorite}
-                serie={serieItem}
-                seriesAdded={seriesAdded}
-                setSeriesAdded={setSeriesAdded}
-              />
+                ref={index === serie.length - 1 ? serieCardRef : null}
+              >
+                {isVisible || index < serie.length - 1 ? (
+                  <SerieCard
+                    isLoadingToFavorite={isLoadingToFavorite}
+                    setIsLoadingToFavorite={setIsLoadingToFavorite}
+                    serie={serieItem}
+                    seriesAdded={seriesAdded}
+                    setSeriesAdded={setSeriesAdded}
+                  />
+                ) : null}
+              </div>
             ))
           )
         ) : (

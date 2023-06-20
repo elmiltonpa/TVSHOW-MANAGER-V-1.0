@@ -1,6 +1,6 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Login from "./pages/Login";
-import SerieProfile from "./components/profile/SeasonsProfile";
+import SeasonProfile from "./pages/SeasonsProfile";
 import SerieDetail from "./pages/SerieDetail";
 import Register from "./pages/Register";
 import Home from "./pages/Home";
@@ -52,7 +52,7 @@ const App = () => {
               <Route path="/myseries" element={<MySeries to="/login" />} />
               <Route
                 path="/:username/:id"
-                element={<SerieProfile user={user} token={token} />}
+                element={<SeasonProfile user={user} token={token} />}
               />
               <Route
                 path="/login"

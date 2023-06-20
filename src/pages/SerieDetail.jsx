@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import api from "../api/service";
 import serieService from "../services/series";
 import useSeries from "../utils/useSeries";
-import SerieProfile from "../components/profile/SeasonsProfile";
+import SeasonProfile from "./SeasonsProfile";
 import getUser from "../services/user";
 import Spinner from "../components/shared/Spinner";
 
@@ -19,10 +19,9 @@ const SerieDetail = () => {
 
   const { id } = useParams();
 
-  const session = JSON.parse(window.localStorage.getItem("session"));
-
   useEffect(() => {
     const fetchData = async () => {
+      const session = JSON.parse(window.localStorage.getItem("session"));
       const request = await api.searchTvShowById(id);
       if (session) {
         const { username } = session;
@@ -46,7 +45,7 @@ const SerieDetail = () => {
     };
 
     fetchData();
-  }, [id, session]);
+  }, [id]);
 
   if (isLoading) {
     return (
@@ -175,7 +174,7 @@ const SerieDetail = () => {
       </div>
       <div className="flex justify-center items-center w-full">
         <div className="w-[75%] ">
-          <SerieProfile />
+          <SeasonProfile />
         </div>
       </div>
     </div>

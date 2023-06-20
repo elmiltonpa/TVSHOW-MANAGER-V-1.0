@@ -1,9 +1,9 @@
 import { useParams } from "react-router-dom";
-import SectionSeason from "../SectionSeason";
-import api from "../../api/service";
+import SectionSeason from "../components/seasons/SectionSeason";
+import api from "../api/service";
 import { useEffect, useState } from "react";
 
-const SerieProfile = () => {
+const SeasonProfile = () => {
   const { id } = useParams();
   const [seasons, setSeasons] = useState([]);
 
@@ -19,7 +19,7 @@ const SerieProfile = () => {
     };
     fetchData();
   }, [id]);
-
+  console.log("kkkk");
   return (
     <div className="flex flex-col gap-4 w-full">
       {seasons ? (
@@ -29,6 +29,7 @@ const SerieProfile = () => {
               <SectionSeason
                 season={season.season_number}
                 episodes={season.episodes}
+                serieId={id}
               />
             </div>
           </div>
@@ -39,4 +40,4 @@ const SerieProfile = () => {
     </div>
   );
 };
-export default SerieProfile;
+export default SeasonProfile;

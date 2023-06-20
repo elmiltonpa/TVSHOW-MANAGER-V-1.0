@@ -1,6 +1,6 @@
 const Watching = ({ seriesWatched }) => {
   return (
-    <div className="bg-blancoblanco h-full">
+    <div className="bg-blancoblanco flex flex-col overflow-y-auto h-full gap-4">
       <h1 className="text-2xl text-center pt-2 font-bold text-purpuraoscuro">
         Series que ya vi
       </h1>

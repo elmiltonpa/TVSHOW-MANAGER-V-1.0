@@ -1,16 +1,27 @@
 import { useState } from "react";
-
+import useSeries from "../../utils/useSeries";
 const IMG = "https://image.tmdb.org/t/p/w500";
 
-const SectionSeason = ({ season, episodes }) => {
+const SectionSeason = ({ season, episodes, serieId }) => {
   const [IsOpen, setIsOpen] = useState(false);
+  const { handleCapWatched } = useSeries();
+
+  console.log("b");
+  const toggleOpen = () => {
+    console.log("a");
+    if (!IsOpen) {
+      setIsOpen(true);
+    } else {
+      setIsOpen(false);
+    }
+  };
 
   return (
     <div className="h-full w-full">
       <div className="w-full flex justify-center items-center border-b-4 h-20">
         <button
           className="text-3xl w-full hover:text-blancoblanco font-semibold"
-          onClick={() => setIsOpen(!IsOpen)}
+          onClick={toggleOpen}
         >
           Temporada {season}
         </button>
@@ -43,7 +54,20 @@ const SectionSeason = ({ season, episodes }) => {
                     </h1>
                   </div>
                 </div>
-                <div className="w-[10%] bg-purpuraoscuro"></div>
+                <div className="w-[10%] bg-purpuraoscuro">
+                  <button
+                    onClick={(e) =>
+                      handleCapWatched(
+                        e,
+                        serieId,
+                        season,
+                        episode.episode_number
+                      )
+                    }
+                  >
+                    VISTO
+                  </button>
+                </div>
               </div>
             ))}
           </div>

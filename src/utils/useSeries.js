@@ -5,6 +5,35 @@ import serieService from "../services/series";
 const useSeries = () => {
   const navigate = useNavigate();
 
+  const handleCapWatched = async (e, serieId, season, episode) => {
+    //PASAR EPISODE COMO episode.episode_number Y SEASON COMO season
+    e.preventDefault();
+    const session = JSON.parse(window.localStorage.getItem("session"));
+
+    try {
+      if (!session) {
+        navigate("/login");
+        return;
+      }
+      const { token, username } = session;
+      const User = await getUser(username);
+      const seriesUser = await serieService.getSeriesByUserId(User.id);
+      const serieUser = seriesUser.find((serie) => serie.tv_id == serieId);
+      const arrayWatched = serieUser.watching;
+      console.log(arrayWatched);
+      const update = {
+        $set: {
+          [`watching.${season - 1}.${episode - 1}`]:
+            !arrayWatched[season - 1][episode - 1],
+        },
+      };
+      console.log(update);
+      await serieService.updateSerie(serieUser.id, update, token);
+    } catch (error) {
+      console.log("Error al acutalizar serie", error);
+    }
+  };
+
   //AGREGAR A SERIES VISTAS DESDE EL DETALLE DE SERIE -----------
   const handleWatched = async (e, serieId, setSerieWatched) => {
     e.preventDefault();
@@ -188,6 +217,7 @@ const useSeries = () => {
     handleUnfavoriteFromProfile,
     handleSubmitFromSerieDetail,
     handleWatched,
+    handleCapWatched,
   };
 };
 

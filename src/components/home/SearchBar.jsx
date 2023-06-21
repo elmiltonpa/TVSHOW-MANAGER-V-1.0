@@ -1,24 +1,13 @@
-import { useRef, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import api from "../../api/service";
+
 import { TiDelete } from "react-icons/ti";
 
-const SearchBar = ({ setSerie }) => {
+const SearchBar = () => {
   const [text, setText] = useState("");
-  const searchRef = useRef();
+
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
-
-  const Filtro = (series) => {
-    const newSeries = series.filter(
-      (serie) =>
-        serie.overview.length < 650 &&
-        serie.overview !== "" &&
-        serie.poster_path !== null
-    );
-
-    return newSeries;
-  };
 
   useEffect(() => {
     const searchValue = searchParams.get("s") || "";
@@ -27,36 +16,8 @@ const SearchBar = ({ setSerie }) => {
 
   const onChangeSearch = (event) => {
     navigate("/home?s=" + event.target.value, { replace: true });
-    if (searchRef.current) {
-      clearTimeout(searchRef.current);
-    }
-
-    searchRef.current = setTimeout(async () => {
-      if (event.target.value == "") {
-        const response = await api.popularTvShow().then((res) => res);
-        const promesas = response.results.map((serie) =>
-          api.searchTvShowById(serie.id)
-        );
-        Promise.all(promesas).then((data) => {
-          setSerie(Filtro(data));
-        });
-
-        return;
-      }
-
-      const response = await api
-        .searchTvShow(event.target.value)
-        .then((res) => res);
-
-      const promesas = response.results.map((serie) =>
-        api.searchTvShowById(serie.id)
-      );
-
-      Promise.all(promesas).then((data) => {
-        setSerie(Filtro(data));
-      });
-    }, 1000);
   };
+
   const clearInput = () => {
     setText("");
     onChangeSearch({ target: { value: "" } });

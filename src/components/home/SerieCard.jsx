@@ -17,11 +17,11 @@ const SerieCard = ({
   return (
     <div className="flex my-3 w-full bg-blanco">
       <div className="gap-x-2 w-[78%] border-r-4">
-        <div className="flex gap-x-2">
-          <div className="h-full ">
+        <div className="h-full flex gap-x-2">
+          <div className="flex justify-center items-center">
             <img
               loading="lazy"
-              className=""
+              className="h-full"
               src={BASE_URL + serie.poster_path}
               width={200}
             />

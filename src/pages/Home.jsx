@@ -6,7 +6,6 @@ import { useLocation, useNavigate } from "react-router-dom";
 import getUser from "../services/user";
 import serieService from "../services/series";
 import Spinner from "../components/shared/Spinner";
-import Pagination from "../components/shared/Pagination";
 
 const useQuery = () => {
   return new URLSearchParams(useLocation().search);
@@ -119,7 +118,6 @@ const Home = ({ user }) => {
     >
       <div className="">
         <SearchBar setSerie={setSerie} />
-        <Pagination />
         {serie ? (
           serie.length == 0 ? (
             <div className="h-screen text-blanco text-3xl flex justify-center">

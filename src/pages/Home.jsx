@@ -12,13 +12,43 @@ const useQuery = () => {
 };
 
 const Home = ({ user }) => {
+  const [isVisible, setIsVisible] = useState(false);
+  const [page, setPage] = useState(1);
   const [serie, setSerie] = useState(null);
   const [seriesAdded, setSeriesAdded] = useState([]);
   const [isLoadingToFavorite, setIsLoadingToFavorite] = useState(false);
 
   const searchRef = useRef();
-
+  const visor = useRef(null);
   const navigate = useNavigate();
+
+  const handleScroll = (entries) => {
+    const [entry] = entries;
+    setIsVisible(entry.isIntersecting);
+  };
+
+  useEffect(() => {
+    const Visor = visor.current;
+    const options = {
+      root: null,
+      rootMargin: "0px",
+      threshold: 1.0,
+    };
+    const observer = new IntersectionObserver(handleScroll, options);
+    if (Visor) {
+      observer.observe(Visor);
+    }
+
+    return () => {
+      if (Visor) observer.unobserve(Visor);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (isVisible) {
+      setPage((page) => page + 1);
+    }
+  }, [isVisible]);
 
   const query = useQuery();
   const search = query.get("s");
@@ -92,29 +122,34 @@ const Home = ({ user }) => {
     >
       <div className="">
         <SearchBar setSerie={setSerie} />
-        {serie ? (
-          serie.length == 0 ? (
-            <div className="h-screen text-blanco text-3xl flex justify-center">
-              No se encontraron series :(
-            </div>
-          ) : (
-            serie.map((serieItem) => (
-              <div key={serieItem.id}>
-                <SerieCard
-                  isLoadingToFavorite={isLoadingToFavorite}
-                  setIsLoadingToFavorite={setIsLoadingToFavorite}
-                  serie={serieItem}
-                  seriesAdded={seriesAdded}
-                  setSeriesAdded={setSeriesAdded}
-                />
+        <div className="conteiner">
+          {serie ? (
+            serie.length == 0 ? (
+              <div className="h-screen text-blanco text-3xl flex justify-center">
+                No se encontraron series :(
               </div>
-            ))
-          )
-        ) : (
-          <div className="h-screen text-blanco text-3xl flex justify-center">
-            <Spinner />
+            ) : (
+              serie.map((serieItem) => (
+                <div key={serieItem.id}>
+                  <SerieCard
+                    isLoadingToFavorite={isLoadingToFavorite}
+                    setIsLoadingToFavorite={setIsLoadingToFavorite}
+                    serie={serieItem}
+                    seriesAdded={seriesAdded}
+                    setSeriesAdded={setSeriesAdded}
+                  />
+                </div>
+              ))
+            )
+          ) : (
+            <div className="h-screen text-blanco text-3xl flex justify-center">
+              <Spinner />
+            </div>
+          )}
+          <div ref={visor} className="text-blancoblanco">
+            aa
           </div>
-        )}
+        </div>
       </div>
     </div>
   );

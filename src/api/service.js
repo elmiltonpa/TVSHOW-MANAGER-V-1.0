@@ -9,9 +9,9 @@ const searchTvSeasonById = async (id, number) => {
   return request.data;
 };
 
-const searchTvShow = async (query) => {
+const searchTvShow = async (query,page) => {
   const request = await axios.get(`
-    https://api.themoviedb.org/3/search/tv?api_key=${API_KEY}&language=es&query=${query}`);
+    https://api.themoviedb.org/3/search/tv?api_key=${API_KEY}&language=es&query=${query}&page=${page}`);
   return request.data;
 };
 

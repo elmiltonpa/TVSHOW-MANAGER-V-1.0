@@ -13,12 +13,12 @@ const useQuery = () => {
 
 const Home = ({ user }) => {
   const [isVisible, setIsVisible] = useState(false);
-
   const [page, setPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1000);
+  const [totalPages, setTotalPages] = useState(0);
   const [serie, setSerie] = useState(null);
   const [seriesAdded, setSeriesAdded] = useState([]);
   const [isLoadingToFavorite, setIsLoadingToFavorite] = useState(false);
+  const [isFetchingMore, setIsFetchingMore] = useState(false);
 
   const searchRef = useRef();
   const isUpdatingPage = useRef(false);
@@ -40,6 +40,10 @@ const Home = ({ user }) => {
   };
 
   useEffect(() => {
+    setPage(1);
+  }, [search]);
+
+  useEffect(() => {
     if (searchRef.current) {
       clearTimeout(searchRef.current);
     }
@@ -58,27 +62,41 @@ const Home = ({ user }) => {
         } else {
           Promise.all(promesas).then((data) => {
             setSerie((prev) => [...prev, ...Filtro(data)]);
+            setIsFetchingMore(false);
           });
         }
       } else {
-        const response = await api.searchTvShow(search).then((res) => res);
+        const response = await api
+          .searchTvShow(search, page)
+          .then((res) => res);
 
         const promesas = response.results.map((serie) =>
           api.searchTvShowById(serie.id)
         );
-
-        Promise.all(promesas).then((data) => {
-          setSerie(Filtro(data));
-        });
+        setTotalPages(response.total_pages);
+        if (page == 1) {
+          Promise.all(promesas).then((data) => {
+            setSerie(Filtro(data));
+          });
+        } else {
+          Promise.all(promesas).then((data) => {
+            setSerie((prev) => [...prev, ...Filtro(data)]);
+            setIsFetchingMore(false);
+          });
+        }
       }
-
+      console.log(page);
+      console.log(totalPages);
+      if (page == totalPages) {
+        setIsFetchingMore(false);
+      }
       isUpdatingPage.current = false;
     }, 1000);
 
     if (!search) {
       navigate("/home");
     }
-  }, [search, navigate, page]);
+  }, [search, navigate, page, totalPages]);
 
   useEffect(() => {
     if (!serie) return;
@@ -108,12 +126,12 @@ const Home = ({ user }) => {
   }, [serie]);
 
   useEffect(() => {
-    console.log("aa");
-    if (isVisible && !isUpdatingPage.current) {
+    if (isVisible && !isUpdatingPage.current && page < totalPages) {
       setPage((prevPage) => (prevPage < totalPages ? prevPage + 1 : prevPage));
       isUpdatingPage.current = true;
+      setIsFetchingMore(true);
     }
-  }, [isVisible, totalPages, isUpdatingPage]);
+  }, [isVisible, totalPages, isUpdatingPage, page]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -163,7 +181,7 @@ const Home = ({ user }) => {
                     />
                   </div>
                 ))}
-                {isUpdatingPage ? (
+                {isFetchingMore ? (
                   <div className=" text-blanco text-3xl flex justify-center">
                     <Spinner />
                   </div>

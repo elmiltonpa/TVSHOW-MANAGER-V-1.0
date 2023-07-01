@@ -22,9 +22,9 @@ const searchTvShowById = async (id) => {
   return request.data;
 };
 
-const popularTvShow = async () => {
+const popularTvShow = async (page) => {
   const request = await axios.get(
-    `https://api.themoviedb.org/3/tv/top_rated?api_key=${API_KEY}&language=es`
+    `https://api.themoviedb.org/3/tv/top_rated?api_key=${API_KEY}&language=es&page=${page}`
   );
   return request.data;
 };

@@ -13,45 +13,20 @@ const useQuery = () => {
 
 const Home = ({ user }) => {
   const [isVisible, setIsVisible] = useState(false);
+
   const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1000);
   const [serie, setSerie] = useState(null);
   const [seriesAdded, setSeriesAdded] = useState([]);
   const [isLoadingToFavorite, setIsLoadingToFavorite] = useState(false);
 
   const searchRef = useRef();
-  const visor = useRef(null);
-  const navigate = useNavigate();
-
-  const handleScroll = (entries) => {
-    const [entry] = entries;
-    setIsVisible(entry.isIntersecting);
-  };
-
-  useEffect(() => {
-    const Visor = visor.current;
-    const options = {
-      root: null,
-      rootMargin: "0px",
-      threshold: 1.0,
-    };
-    const observer = new IntersectionObserver(handleScroll, options);
-    if (Visor) {
-      observer.observe(Visor);
-    }
-
-    return () => {
-      if (Visor) observer.unobserve(Visor);
-    };
-  }, []);
-
-  useEffect(() => {
-    if (isVisible) {
-      setPage((page) => page + 1);
-    }
-  }, [isVisible]);
+  const isUpdatingPage = useRef(false);
 
   const query = useQuery();
   const search = query.get("s");
+  const visor = useRef(null);
+  const navigate = useNavigate();
 
   const Filtro = (series) => {
     const newSeries = series.filter(
@@ -71,13 +46,20 @@ const Home = ({ user }) => {
 
     searchRef.current = setTimeout(async () => {
       if (search === null || search === "") {
-        const response = await api.popularTvShow().then((res) => res);
+        const response = await api.popularTvShow(page).then((res) => res);
+        setTotalPages(response.total_pages);
         const promesas = response.results.map((serie) =>
           api.searchTvShowById(serie.id)
         );
-        Promise.all(promesas).then((data) => {
-          setSerie(Filtro(data));
-        });
+        if (page == 1) {
+          Promise.all(promesas).then((data) => {
+            setSerie(Filtro(data));
+          });
+        } else {
+          Promise.all(promesas).then((data) => {
+            setSerie((prev) => [...prev, ...Filtro(data)]);
+          });
+        }
       } else {
         const response = await api.searchTvShow(search).then((res) => res);
 
@@ -89,12 +71,49 @@ const Home = ({ user }) => {
           setSerie(Filtro(data));
         });
       }
+
+      isUpdatingPage.current = false;
     }, 1000);
 
     if (!search) {
       navigate("/home");
     }
-  }, [search, navigate]);
+  }, [search, navigate, page]);
+
+  useEffect(() => {
+    if (!serie) return;
+    const Visor = visor.current;
+    const options = {
+      root: null,
+      rootMargin: "0px",
+      threshold: 1.0,
+    };
+    const refObserver = new IntersectionObserver((entries) => {
+      const [entry] = entries;
+      if (!entry.isIntersecting) {
+        setIsVisible(false);
+        return;
+      }
+      setIsVisible(true);
+    }, options);
+    if (Visor) {
+      refObserver.observe(Visor);
+    }
+
+    return () => {
+      if (Visor) {
+        refObserver.unobserve(Visor);
+      }
+    };
+  }, [serie]);
+
+  useEffect(() => {
+    console.log("aa");
+    if (isVisible && !isUpdatingPage.current) {
+      setPage((prevPage) => (prevPage < totalPages ? prevPage + 1 : prevPage));
+      isUpdatingPage.current = true;
+    }
+  }, [isVisible, totalPages, isUpdatingPage]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -129,26 +148,33 @@ const Home = ({ user }) => {
                 No se encontraron series :(
               </div>
             ) : (
-              serie.map((serieItem) => (
-                <div key={serieItem.id}>
-                  <SerieCard
-                    isLoadingToFavorite={isLoadingToFavorite}
-                    setIsLoadingToFavorite={setIsLoadingToFavorite}
-                    serie={serieItem}
-                    seriesAdded={seriesAdded}
-                    setSeriesAdded={setSeriesAdded}
-                  />
-                </div>
-              ))
+              <div>
+                {serie.map((serieItem, index) => (
+                  <div
+                    ref={index == serie.length - 1 ? visor : null}
+                    key={serieItem.id}
+                  >
+                    <SerieCard
+                      isLoadingToFavorite={isLoadingToFavorite}
+                      setIsLoadingToFavorite={setIsLoadingToFavorite}
+                      serie={serieItem}
+                      seriesAdded={seriesAdded}
+                      setSeriesAdded={setSeriesAdded}
+                    />
+                  </div>
+                ))}
+                {isUpdatingPage ? (
+                  <div className=" text-blanco text-3xl flex justify-center">
+                    <Spinner />
+                  </div>
+                ) : null}
+              </div>
             )
           ) : (
             <div className="h-screen text-blanco text-3xl flex justify-center">
               <Spinner />
             </div>
           )}
-          <div ref={visor} className="text-blancoblanco">
-            aa
-          </div>
         </div>
       </div>
     </div>

@@ -54,7 +54,7 @@ const MySeries = () => {
     <div className="h-[90vh] flex flex-col items-center bg-purpura">
       {user ? (
         <div className="bg-blancoblanco  overflow-y-auto w-[70%] h-full px-44">
-          <div className="py-5 h-[13%]">
+          <div className="py-5 h-[90px]">
             <h1 className="text-4xl text-center font-overview font-semibold">
               Mis series
             </h1>

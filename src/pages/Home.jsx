@@ -85,8 +85,6 @@ const Home = ({ user }) => {
           });
         }
       }
-      console.log(page);
-      console.log(totalPages);
       if (page == totalPages) {
         setIsFetchingMore(false);
       }
@@ -150,7 +148,7 @@ const Home = ({ user }) => {
   useEffect(() => {
     document.title = "Home - TvShowManager";
   }, []);
-
+  console.log(serie);
   return (
     <div
       className={`${

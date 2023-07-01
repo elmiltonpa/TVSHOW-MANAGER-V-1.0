@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import getUser from "../services/user";
 import seriesService from "../services/series";
 import { useEffect, useState } from "react";
@@ -62,7 +62,9 @@ const Profile = () => {
               username={username}
             />
           </div>
-          <div className="w-1/2 bg-purpura"></div>
+          <div className="w-1/2 bg-purpura">
+            <Link to="/myseries">Mis series</Link>
+          </div>
           <div className="w-[25%] bg-blancoblanco">
             <Watching seriesWatched={seriesWatched} />
           </div>

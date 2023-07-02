@@ -6,7 +6,7 @@ import serieService from "../services/series";
 import useSeries from "../utils/useSeries";
 import SeasonProfile from "./SeasonsProfile";
 import getUser from "../services/user";
-import Spinner from "../components/shared/Spinner";
+import Spinner from "../components/common/Spinner";
 
 const IMG = "https://image.tmdb.org/t/p/w500/";
 
@@ -56,9 +56,9 @@ const SerieDetail = () => {
   }
 
   return (
-    <div className=" bg-negro pb-10">
+    <div className=" bg-blancoblanco pb-10">
       <div className=" bg-neg flex justify-center pb-10 pt-10">
-        <div className="w-[75%] bg-blanco p-5 rounded-md gap-3">
+        <div className="w-[75%] shadow-home bg-blanco p-5 rounded-md gap-3">
           <div className="flex w-full gap-4">
             <div className="w-[25%] flex flex-col justify-center items-center h-full">
               <img

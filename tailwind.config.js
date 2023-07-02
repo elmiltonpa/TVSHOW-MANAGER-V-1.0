@@ -38,6 +38,7 @@ export default {
         login: "1px 1px 35px 10px rgba(128, 0, 128, 0.75)",
         input: "0px 0px 25px 4px",
         seriefav: "0px 2px 10px -7px rgba(0, 0, 0, 0.1)",
+        home: "0px 0px 13px 4px rgba(90,90,90,0.75)",
       },
     },
   },

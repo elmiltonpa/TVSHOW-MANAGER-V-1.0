@@ -19,7 +19,7 @@ const SeasonProfile = () => {
     };
     fetchData();
   }, [id]);
-  console.log("kkkk");
+
   return (
     <div className="flex flex-col gap-4 w-full">
       {seasons ? (

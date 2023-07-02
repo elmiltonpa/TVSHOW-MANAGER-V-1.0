@@ -4,7 +4,7 @@ import seriesService from "../services/series";
 import { useEffect, useState } from "react";
 import { FavSeries } from "../components/profile/FavSeries";
 import Watching from "../components/profile/Watching";
-import Spinner from "../components/shared/Spinner";
+import Spinner from "../components/common/Spinner";
 
 const Profile = () => {
   // const [userSeries, setUserSeries] = useState(null);
@@ -46,7 +46,7 @@ const Profile = () => {
 
   if (isLoading) {
     return (
-      <div className="h-screen flex justify-center bg-negro text-blancoblanco text-3xl py-16">
+      <div className="h-screen flex justify-center bg-blancoblanco text-negro text-3xl py-16">
         <Spinner />
       </div>
     );

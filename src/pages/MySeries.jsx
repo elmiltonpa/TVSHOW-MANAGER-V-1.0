@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import seriesService from "../services/series";
 import getUser from "../services/user";
 import { AiFillDelete } from "react-icons/ai";
-import Spinner from "../components/shared/Spinner";
+import Spinner from "../components/common/Spinner";
 import { Link } from "react-router-dom";
 
 const MySeries = () => {

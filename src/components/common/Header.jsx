@@ -1,6 +1,12 @@
 import { Link, useLocation } from "react-router-dom";
+import { useState } from "react";
+
 const Header = ({ user, setUser, setToken }) => {
   const location = useLocation().pathname;
+  const [theme, setTheme] = useState(true);
+  const handleTheme = () => {
+    setTheme(!theme);
+  };
 
   return (
     <div
@@ -16,6 +22,22 @@ const Header = ({ user, setUser, setToken }) => {
             </Link>
           </li>
         </ul>
+        <div className="">
+          <button
+            onClick={handleTheme}
+            className="bg-negro relative w-[100px] h-[40px] "
+          >
+            <div className="relative w-full">
+              <div
+                className={`${
+                  theme
+                    ? "bg-blanco transform translate-x-[110%] transition-transform duration-500 ease-out"
+                    : "bg-amarillo2 transition-transform duration-500 ease-out"
+                } absloute text-blanco h-[30px]  w-[30px] rounded-full left-[4px] z-10 top-[0px] `}
+              ></div>
+            </div>
+          </button>
+        </div>
         <ul className="flex mr-10 gap-5">
           {user ? (
             <>

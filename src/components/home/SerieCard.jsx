@@ -16,7 +16,7 @@ const SerieCard = ({
 
   return (
     <div className="flex my-3 w-full bg-blanco">
-      <div className="gap-x-2 w-[78%] border-r-4">
+      <div className="gap-x-2 w-[78%] border-r-4 border-grisoscuro ">
         <div className="h-full flex gap-x-2">
           <div className="flex justify-center items-center">
             <img

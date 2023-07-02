@@ -5,7 +5,7 @@ import SerieCard from "../components/home/SerieCard";
 import { useLocation, useNavigate } from "react-router-dom";
 import getUser from "../services/user";
 import serieService from "../services/series";
-import Spinner from "../components/shared/Spinner";
+import Spinner from "../components/common/Spinner";
 
 const useQuery = () => {
   return new URLSearchParams(useLocation().search);
@@ -153,14 +153,14 @@ const Home = ({ user }) => {
     <div
       className={`${
         serie && serie.length == 1 ? "h-screen" : ""
-      } bg-negro px-32 py-2`}
+      } bg-blancoblanco px-32 py-2`}
     >
       <div className="">
         <SearchBar setSerie={setSerie} />
         <div className="conteiner">
           {serie ? (
             serie.length == 0 ? (
-              <div className="h-screen text-blanco text-3xl flex justify-center">
+              <div className="h-screen text-negro text-3xl flex justify-center">
                 No se encontraron series :(
               </div>
             ) : (
@@ -169,6 +169,7 @@ const Home = ({ user }) => {
                   <div
                     ref={index == serie.length - 1 ? visor : null}
                     key={serieItem.id}
+                    className="shadow-home bg-blanco my-4"
                   >
                     <SerieCard
                       isLoadingToFavorite={isLoadingToFavorite}
@@ -180,14 +181,14 @@ const Home = ({ user }) => {
                   </div>
                 ))}
                 {isFetchingMore ? (
-                  <div className=" text-blanco text-3xl flex justify-center">
+                  <div className=" text-negro text-3xl flex justify-center">
                     <Spinner />
                   </div>
                 ) : null}
               </div>
             )
           ) : (
-            <div className="h-screen text-blanco text-3xl flex justify-center">
+            <div className="h-screen text-negro text-3xl flex justify-center">
               <Spinner />
             </div>
           )}

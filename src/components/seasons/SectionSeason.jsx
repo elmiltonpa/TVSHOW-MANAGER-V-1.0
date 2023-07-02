@@ -18,20 +18,20 @@ const SectionSeason = ({ season, episodes, serieId }) => {
 
   return (
     <div className="h-full w-full">
-      <div className="w-full flex justify-center items-center border-b-4 h-20">
+      <div className="w-full flex justify-center items-center  h-20">
         <button
-          className="text-3xl w-full hover:text-blancoblanco font-semibold"
+          className="text-3xl h-full w-full hover:text-blancoblanco font-semibold"
           onClick={toggleOpen}
         >
           Temporada {season}
         </button>
       </div>
       {IsOpen ? (
-        <div className="h-full w-full bg-negropurpura">
-          <div className="h-full w-full flex flex-col ">
+        <div className="h-full w-full bg-negro">
+          <div className="h-full py-1 w-full flex flex-col gap-1">
             {episodes.map((episode) => (
               <div
-                className="flex bg-blancoblanco border-b-[5px] border-negropurpura"
+                className="flex bg-blancoblanco border- border-"
                 key={episode.id}
               >
                 <div className="">

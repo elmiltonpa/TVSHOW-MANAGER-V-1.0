@@ -4,11 +4,13 @@ export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     colors: {
+      twitch:"#935ee6",
       azultwitter:"#1A8CD8",
       grisclaro: "#D3D3D3",
       grisoscuro: "#808080",
       azulclaro: "#ADD8E6",
       blanco: "#FDFFFC",
+      // #800080
       purpuraoscuro: "#800080",
       purpuraclaro: "#802392",
       rosaclaro: "#FFB6C1",

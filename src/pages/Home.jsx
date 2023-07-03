@@ -145,6 +145,7 @@ const Home = ({ user }) => {
   console.log("home");
   return (
     <div
+      style={{ msScrollbarBaseColor: "#202123" }}
       className={`${
         serie && serie.length == 1 ? "h-screen" : ""
       } bg-blancoblanco dark:bg-gris6 px-32 py-2`}

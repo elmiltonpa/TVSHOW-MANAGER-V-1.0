@@ -50,8 +50,8 @@ const SerieCard = ({
                   }
                   className={`${
                     isLoadingToFavorite
-                      ? "cursor-not-allowed bg-blancoblanco text-amarillo3"
-                      : " hover:bg-purpuraoscuro dark:text-azultwitter dark:hover:bg-blancoblanco hover:text-blanco text-amarillo3"
+                      ? "cursor-not-allowed text-amarillo3 dark:text-twitch"
+                      : " hover:bg-purpuraoscuro dark:text-twitch dark:hover:bg-blancoblanco hover:text-blanco text-amarillo3"
                   } text-lg  px-10 font-semibold `}
                 >
                   QUITAR DE FAVORITOS
@@ -70,7 +70,7 @@ const SerieCard = ({
                   }
                   className={`${
                     isLoadingToFavorite
-                      ? "cursor-not-allowed bg-blancoblanco text-purpuraoscuro"
+                      ? "cursor-not-allowed dark:text-amarillo text-purpuraoscuro"
                       : "hover:bg-purpuraoscuro dark:bg- dark:text-amarillo dark:hover:bg-blancoblanco dark:hover:text-purpuraoscuro hover:text-blanco text-purpuraoscuro"
                   } text-lg  px-10 font-semibold`}
                 >

@@ -4,6 +4,7 @@ export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     colors: {
+      azultwitter:"#1A8CD8",
       grisclaro: "#D3D3D3",
       grisoscuro: "#808080",
       azulclaro: "#ADD8E6",

@@ -16,7 +16,7 @@ const SerieCard = ({
 
   return (
     <div className="flex my-3 w-full bg-blanco dark:bg-gris5">
-      <div className="gap-x-2 w-[78%] border-r-4 border-grisoscuro dark:border-gris6">
+      <div className="gap-x-2 w-[78%] border-r-4 border-grisoscuro  dark:border-gris6">
         <div className="h-full flex gap-x-2">
           <div className="flex justify-center items-center">
             <img
@@ -35,7 +35,7 @@ const SerieCard = ({
                 {serie.overview}
               </p>
             </div>
-            <div className="items-center border-t-2 w-full flex justify-center">
+            <div className="items-center border-t-2 dark:border-gris6 w-full flex justify-center">
               {seriesAdded.includes(serie.id) ? (
                 <button
                   disabled={isLoadingToFavorite}
@@ -51,7 +51,7 @@ const SerieCard = ({
                   className={`${
                     isLoadingToFavorite
                       ? "cursor-not-allowed bg-blancoblanco text-amarillo3"
-                      : " hover:bg-purpuraoscuro hover:text-blanco text-amarillo3"
+                      : " hover:bg-purpuraoscuro dark:text-azultwitter dark:hover:bg-blancoblanco hover:text-blanco text-amarillo3"
                   } text-lg  px-10 font-semibold `}
                 >
                   QUITAR DE FAVORITOS
@@ -71,7 +71,7 @@ const SerieCard = ({
                   className={`${
                     isLoadingToFavorite
                       ? "cursor-not-allowed bg-blancoblanco text-purpuraoscuro"
-                      : "hover:bg-purpuraoscuro hover:text-blanco text-purpuraoscuro"
+                      : "hover:bg-purpuraoscuro dark:bg- dark:text-amarillo dark:hover:bg-blancoblanco dark:hover:text-purpuraoscuro hover:text-blanco text-purpuraoscuro"
                   } text-lg  px-10 font-semibold`}
                 >
                   AGREGAR A FAVORITOS

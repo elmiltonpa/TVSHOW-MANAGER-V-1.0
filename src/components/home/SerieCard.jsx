@@ -15,8 +15,8 @@ const SerieCard = ({
   const { handleSubmit } = useSeries();
 
   return (
-    <div className="flex my-3 w-full bg-blanco">
-      <div className="gap-x-2 w-[78%] border-r-4 border-grisoscuro ">
+    <div className="flex my-3 w-full bg-blanco dark:bg-gris5">
+      <div className="gap-x-2 w-[78%] border-r-4 border-grisoscuro dark:border-gris6">
         <div className="h-full flex gap-x-2">
           <div className="flex justify-center items-center">
             <img
@@ -28,10 +28,10 @@ const SerieCard = ({
           </div>
           <div className="h-[300px] w-[73%] flex flex-col flex-1 pr-5 pl-3 justify-between py-3 items-center">
             <div className="flex flex-col gap-y-2 items-center h-[80%]">
-              <h1 className="text-3xl font-black font-lato text-center">
+              <h1 className="text-3xl dark:text-textogris font-black font-lato text-center">
                 {serie.name}
               </h1>
-              <p className="text-base overflow-auto  font-overview text-center">
+              <p className="text-base overflow-auto dark:text-textogris font-overview text-center">
                 {serie.overview}
               </p>
             </div>

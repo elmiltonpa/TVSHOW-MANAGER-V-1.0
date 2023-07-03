@@ -147,7 +147,7 @@ const Home = ({ user }) => {
     <div
       className={`${
         serie && serie.length == 1 ? "h-screen" : ""
-      } bg-blancoblanco dark:bg-negro px-32 py-2`}
+      } bg-blancoblanco dark:bg-gris6 px-32 py-2`}
     >
       <div className="">
         <SearchBar setSerie={setSerie} />
@@ -163,7 +163,7 @@ const Home = ({ user }) => {
                   <div
                     ref={index == serie.length - 1 ? visor : null}
                     key={serieItem.id}
-                    className="shadow-home bg-blanco my-4"
+                    className="shadow-home dark:shadow-home dark:shadow-[#090909] bg-blanco my-4"
                   >
                     <SerieCard
                       isLoadingToFavorite={isLoadingToFavorite}
@@ -175,7 +175,7 @@ const Home = ({ user }) => {
                   </div>
                 ))}
                 {isFetchingMore ? (
-                  <div className=" text-negro text-3xl flex justify-center">
+                  <div className=" text-negro dark:text-blancoblanco text-3xl flex justify-center">
                     <Spinner />
                   </div>
                 ) : null}

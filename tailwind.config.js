@@ -28,7 +28,13 @@ export default {
       purpuraclaro2: "#FF00FF",
       purpura: "#BBADFF",
       amarillo3: "#B0A613",
-      morado:"#5C1B6C"
+      morado:"#5C1B6C",
+      gris5:"#303134",
+      gris6:"#202123",
+      purpura5:"#6B5C7D",
+      textogris:"#D1D5DB"
+      // #393d45
+      // #444654
     },
     extend: {
       fontFamily: {

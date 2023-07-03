@@ -99,13 +99,13 @@ const Header = ({ user, setUser, setToken }) => {
                 <button
                   onClick={handleTheme}
                   className={`${
-                    theme ? "bg-blanco" : "bg-negro"
+                    theme ? "bg-blanco" : "bg-gris6"
                   } rounded-3xl flex justify-between relative w-full h-full`}
                 >
                   <div
                     className={`${
                       theme
-                        ? "bg-negro transform translate-x-[25px] transition-transform duration-500 ease-out"
+                        ? "bg-gris6 transform translate-x-[25px] transition-transform duration-500 ease-out"
                         : "bg-blanco transition-transform duration-500 ease-out"
                     } absolute top-[3px] left-1 text-white h-7 w-7 rounded-full`}
                   ></div>
@@ -114,7 +114,7 @@ const Header = ({ user, setUser, setToken }) => {
                       theme ? "block" : "invisible"
                     } pt-[3px] pl-[1px]`}
                   >
-                    <MdDarkMode size={29} />
+                    <MdDarkMode className="dark:text-gris6" size={29} />
                   </div>
                   <div
                     className={`${theme ? "invisible" : "block"} pt-[5px] pr-1`}

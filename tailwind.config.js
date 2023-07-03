@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 export default {
+  darkMode: "class",
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     colors: {
@@ -27,6 +28,7 @@ export default {
       purpuraclaro2: "#FF00FF",
       purpura: "#BBADFF",
       amarillo3: "#B0A613",
+      morado:"#5C1B6C"
     },
     extend: {
       fontFamily: {

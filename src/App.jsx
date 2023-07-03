@@ -15,19 +15,16 @@ const App = () => {
   const [token, setToken] = useState(null);
 
   useEffect(() => {
-    const fetchUser = async () => {
-      const session = JSON.parse(window.localStorage.getItem("session"));
-      if (session && session.expirationDate > Date.now()) {
-        const token = session.token;
-        setToken(token);
-        setUser({ username: session.username });
-      } else {
-        setUser(null);
-        setToken(null);
-        window.localStorage.removeItem("session");
-      }
-    };
-    fetchUser();
+    const session = JSON.parse(window.localStorage.getItem("session"));
+    if (session && session.expirationDate > Date.now()) {
+      const token = session.token;
+      setToken(token);
+      setUser({ username: session.username });
+    } else {
+      setUser(null);
+      setToken(null);
+      window.localStorage.removeItem("session");
+    }
   }, []);
 
   return (

@@ -30,16 +30,14 @@ const Home = ({ user }) => {
 
   const Filtro = (series) => {
     const newSeries = series.filter(
-      (serie) =>
-        serie.overview.length < 650 &&
-        serie.overview !== "" &&
-        serie.poster_path !== null
+      (serie) => serie.overview !== "" && serie.poster_path !== null
     );
 
     return newSeries;
   };
 
   useEffect(() => {
+    document.title = "Home - TvShowManager";
     setPage(1);
   }, [search]);
 
@@ -144,16 +142,12 @@ const Home = ({ user }) => {
       fetchData();
     }
   }, [user]);
-
-  useEffect(() => {
-    document.title = "Home - TvShowManager";
-  }, []);
-  console.log(serie);
+  console.log("home");
   return (
     <div
       className={`${
         serie && serie.length == 1 ? "h-screen" : ""
-      } bg-blancoblanco px-32 py-2`}
+      } bg-blancoblanco dark:bg-negro px-32 py-2`}
     >
       <div className="">
         <SearchBar setSerie={setSerie} />

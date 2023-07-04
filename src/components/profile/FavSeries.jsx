@@ -44,7 +44,7 @@ export const FavSeries = ({ seriesFav, username, setSeriesFav }) => {
             </div>
           ))
         ) : (
-          <div className="text-2xl text-center">
+          <div className="text-2xl dark:text-grisclaro text-center">
             Aun no tienes series favoritas{}:(
           </div>
         )}

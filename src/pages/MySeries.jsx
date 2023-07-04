@@ -51,14 +51,14 @@ const MySeries = () => {
   }
 
   return (
-    <div className="h-[90vh] flex flex-col items-center bg-purpura">
+    <div className="h-[90vh] flex flex-col items-center dark:bg-twitch bg-purpura">
       {user ? (
-        <div className="bg-blancoblanco  overflow-y-auto w-[70%] h-full px-44">
+        <div className="bg-blancoblanco dark:bg-gris5 overflow-y-auto w-[70%] h-full px-44">
           <div className="py-5 h-[90px]">
-            <h1 className="text-4xl text-center font-overview font-semibold">
+            <h1 className="text-4xl dark:text-blancoblanco text-center font-overview font-semibold">
               Mis series
             </h1>
-            <h3 className="text-xl text-center text-rojo font-noto font-normal">
+            <h3 className="text-xl text-center dark:text-rosa text-rojo font-noto font-normal">
               Si eliminas la serie, eliminas todos los datos
             </h3>
           </div>
@@ -67,11 +67,11 @@ const MySeries = () => {
               series.map((serie, index) => (
                 <div
                   key={index}
-                  className="bg-blancoblanco shadow-seriefav shadow-negro flex w-[70%] h-16"
+                  className="bg-blancoblanco dark:bg-gris7 shadow-seriefav shadow-negro flex w-[70%] h-16"
                 >
                   <div className="w-[90%] pl-12 flex justify-center items-center">
                     <Link to={`/home/${serie.tv_id}`}>
-                      <h1 className="text-xl font-semibold">
+                      <h1 className="text-xl dark:text-grisclaro font-semibold">
                         {serie.tv_title}
                       </h1>
                     </Link>
@@ -86,7 +86,7 @@ const MySeries = () => {
                       onClick={(e) => handleDelete(e, serie.id, session.token)}
                       className={`${
                         isLoadingToDelete
-                          ? "cursor-not-allowed text-negro"
+                          ? "cursor-not-allowed dark:bg-gris7"
                           : "hover:text-blancoblanco"
                       } w-full h-full text-lg flex justify-center items-center`}
                     >
@@ -96,7 +96,7 @@ const MySeries = () => {
                 </div>
               ))
             ) : (
-              <div className="text-2xl font-semibold text-negro">
+              <div className="text-2xl dark:text-grisclaro font-semibold text-negro">
                 No hay datos
               </div>
             )}

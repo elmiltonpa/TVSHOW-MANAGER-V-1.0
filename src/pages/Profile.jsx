@@ -1,16 +1,15 @@
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import getUser from "../services/user";
 import seriesService from "../services/series";
 import { useEffect, useState } from "react";
 import { FavSeries } from "../components/profile/FavSeries";
-import Watching from "../components/profile/Watching";
+import Watched from "../components/profile/Watched";
 import Spinner from "../components/common/Spinner";
+import InfoProfile from "../components/profile/InfoProfile";
 
 const Profile = () => {
-  // const [userSeries, setUserSeries] = useState(null);
   const [seriesFav, setSeriesFav] = useState(null);
   const [seriesWatched, setSeriesWatched] = useState(null);
-
   const [isLoading, setIsLoading] = useState(true);
   const [user, setUser] = useState(null);
 
@@ -62,11 +61,11 @@ const Profile = () => {
               username={username}
             />
           </div>
-          <div className="w-1/2 dark:bg-twitch bg-purpura">
-            <Link to="/myseries">Mis series</Link>
+          <div className="w-1/2">
+            <InfoProfile username={username} />
           </div>
           <div className="w-[25%] bg-blancoblanco">
-            <Watching seriesWatched={seriesWatched} username={username} />
+            <Watched seriesWatched={seriesWatched} username={username} />
           </div>
         </div>
       ) : (

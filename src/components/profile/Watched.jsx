@@ -23,7 +23,7 @@ const Watching = ({ seriesWatched, username }) => {
             </div>
           ))
         ) : (
-          <div className="text-2xl text-center">
+          <div className="text-2xl dark:text-grisclaro text-center">
             Todavia no viste ninguna serie
           </div>
         )}

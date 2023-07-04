@@ -46,7 +46,7 @@ const Profile = () => {
 
   if (isLoading) {
     return (
-      <div className="h-screen flex justify-center bg-blancoblanco text-negro text-3xl py-16">
+      <div className="h-screen flex justify-center dark:bg-gris6 dark:text-blancoblanco bg-blancoblanco text-negro text-3xl py-16">
         <Spinner />
       </div>
     );
@@ -62,11 +62,11 @@ const Profile = () => {
               username={username}
             />
           </div>
-          <div className="w-1/2 bg-purpura">
+          <div className="w-1/2 dark:bg-twitch bg-purpura">
             <Link to="/myseries">Mis series</Link>
           </div>
           <div className="w-[25%] bg-blancoblanco">
-            <Watching seriesWatched={seriesWatched} />
+            <Watching seriesWatched={seriesWatched} username={username} />
           </div>
         </div>
       ) : (

@@ -31,7 +31,7 @@ const SerieCard = ({
               <h1 className="text-3xl dark:text-textogris font-black font-lato text-center">
                 {serie.name}
               </h1>
-              <p className="text-base overflow-auto dark:text-textogris font-overview text-center">
+              <p className="text-base overflo-auto line-clamp-[7] dark:text-textogris font-overview text-center">
                 {serie.overview}
               </p>
             </div>

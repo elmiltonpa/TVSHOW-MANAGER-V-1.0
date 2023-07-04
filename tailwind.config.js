@@ -34,8 +34,11 @@ export default {
       morado:"#5C1B6C",
       gris5:"#303134",
       gris6:"#202123",
+      gris7:"#4d4f54",
+      gris7hover:"#383a3d",
       purpura5:"#6B5C7D",
-      textogris:"#D1D5DB"
+      textogris:"#D1D5DB",
+      gristwitter:"#32343E"
       // #393d45
       // #444654
     },

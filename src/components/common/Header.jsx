@@ -40,7 +40,7 @@ const Header = ({ user, setUser, setToken }) => {
     <div
       className={`bg-purpuraoscuro ${
         location == "/login" || location == "/register" ? "hidden" : "block"
-      }  h-16 w-full drop-shadow-lg`}
+      }  h-14 w-full drop-shadow-lg`}
     >
       <div className="w-[92vw] pl-36 bg-purpuraoscuro h-full flex justify-between items-center">
         <ul className="flex gap-5">

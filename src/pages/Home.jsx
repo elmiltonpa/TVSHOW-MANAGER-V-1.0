@@ -183,7 +183,7 @@ const Home = ({ user }) => {
               </div>
             )
           ) : (
-            <div className="h-screen text-negro text-3xl flex justify-center">
+            <div className="h-screen text-negro dark:text-blancoblanco text-3xl flex justify-center">
               <Spinner />
             </div>
           )}

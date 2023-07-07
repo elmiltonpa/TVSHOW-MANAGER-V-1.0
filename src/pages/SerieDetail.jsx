@@ -45,14 +45,14 @@ const SerieDetail = () => {
 
   if (isLoading) {
     return (
-      <div className="h-screen flex justify-center items-center pb-56 bg-blancoblanco text-3xl font-bold">
+      <div className="h-screen flex justify-center dark:bg-gris6 dark:text-blancoblanco items-center pb-56 bg-blancoblanco text-3xl font-bold">
         <Spinner />
       </div>
     );
   }
 
   return (
-    <div className=" bg-blancoblanco pb-10">
+    <div className=" bg-blancoblanco dark:bg-gris6 pb-10">
       <CardDetail
         serie={serie}
         serieAdded={serieAdded}

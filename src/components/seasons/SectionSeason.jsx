@@ -31,7 +31,7 @@ const SectionSeason = ({ season, episodes, serieId }) => {
           <div className="h-full py-1 w-full flex flex-col gap-1">
             {episodes.map((episode) => (
               <div
-                className="flex bg-blancoblanco border- border-"
+                className="flex bg-blancoblanco dark:bg-gris7 border- border-"
                 key={episode.id}
               >
                 <div className="">
@@ -39,16 +39,16 @@ const SectionSeason = ({ season, episodes, serieId }) => {
                 </div>
                 <div className="flex-1 flex flex-col justify-between">
                   <div className="flex">
-                    <h1 className="flex-1 pt-2 underline text-xl font-semibold flex justify-center items-center">
+                    <h1 className="flex-1 pt-2 dark:text-grisclaro text-xl font-semibold flex justify-center items-center">
                       {episode.name}
                     </h1>
                   </div>
                   <div className="px-2 overflow-y-auto">
-                    <p className="text-center overflow-hidden text-ellipsis line-clamp-3 font-overview">
+                    <p className="text-center overflow-hidden dark:text-grisclaro text-ellipsis line-clamp-3 font-overview">
                       {episode.overview}
                     </p>
                   </div>
-                  <div className="w-full  flex justify-center items-center text-xl  font-black text-purpuraoscuro">
+                  <div className="w-full dark:text-azultwitter flex justify-center items-center text-xl  font-black text-purpuraoscuro">
                     <h1>
                       {season}x{episode.episode_number}
                     </h1>

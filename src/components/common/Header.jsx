@@ -33,9 +33,6 @@ const Header = ({ user, setUser, setToken }) => {
     setTheme(!theme);
   };
 
-  //TRUE ES DARKMODE
-  //FALSE ES LIGHTMODE
-
   return (
     <div
       className={`bg-purpuraoscuro ${

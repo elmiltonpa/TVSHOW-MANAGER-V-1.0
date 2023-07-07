@@ -4,6 +4,9 @@ export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     colors: {
+      rojocorazon:"#E80001",
+      negroclaro2:"#2d302d",
+      azulcuevana:"#1E2747",
       twitch:"#935ee6",
       azultwitter:"#1A8CD8",
       grisclaro: "#D3D3D3",

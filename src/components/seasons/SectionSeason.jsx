@@ -5,7 +5,7 @@ const IMG = "https://image.tmdb.org/t/p/w500";
 const SectionSeason = ({ season, episodes, serieId, seasonwatching }) => {
   const [IsOpen, setIsOpen] = useState(false);
   const [seasons2, setSeasons2] = useState(seasonwatching);
-  const { handleCapWatched } = useSeries();
+  const { handleCapWatched, handleSeasonWatched } = useSeries();
 
   useEffect(() => {}, [seasonwatching]);
 
@@ -24,8 +24,7 @@ const SectionSeason = ({ season, episodes, serieId, seasonwatching }) => {
 
   return (
     <div className="h-full w-full">
-      <div className="w-full flex justify-center items-center h-20">
-        {console.log(seassonIsFull)}
+      <div className="w-full relative flex justify-center items-center h-20">
         <button
           className="text-3xl h-full w-[95%] hover:text-blancoblanco font-semibold"
           onClick={toggleOpen}
@@ -35,9 +34,14 @@ const SectionSeason = ({ season, episodes, serieId, seasonwatching }) => {
         <div
           className={`${
             seassonIsFull ? "bg-rojocorazon" : "bg-twitch"
-          } w-[5%] h-full bg-`}
+          } w-[5%] h-full absolute left-[95%]`}
         >
-          <button className=""></button>
+          <button
+            onClick={(e) =>
+              handleSeasonWatched(e, season, serieId, seassonIsFull)
+            }
+            className="w-full h-full"
+          ></button>
         </div>
       </div>
       {IsOpen ? (

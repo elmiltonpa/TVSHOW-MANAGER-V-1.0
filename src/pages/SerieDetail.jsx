@@ -59,7 +59,7 @@ const SerieDetail = () => {
       </div>
     );
   }
-  console.log(seasons);
+
   return (
     <div className=" bg-blancoblanco dark:bg-gris6 pb-10">
       <CardDetail

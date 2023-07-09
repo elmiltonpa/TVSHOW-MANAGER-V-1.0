@@ -5,13 +5,40 @@ import serieService from "../services/series";
 const useSeries = () => {
   const navigate = useNavigate();
 
-  const handleCapWatched = async (e, serieId, season, episode,setEpisodes) => {
+  const handleSeasonWatched = async (e, season, serieId, seassonIsFull) => {
+    //MARCAR TEMPORADA COMO VISTA
+    e.preventDefault();
+    const session = JSON.parse(window.localStorage.getItem("session"));
+
+    try {
+      if (!session) {
+        navigate("/login");
+        return;
+      }
+      const { token, username } = session;
+      const User = await getUser(username);
+      const seriesUser = await serieService.getSeriesByUserId(User.id);
+      const serieUser = seriesUser.find((serie) => serie.tv_id == serieId);
+
+      const seasonWatched = seassonIsFull
+        ? serieUser.watching[season - 1].map(() => false)
+        : serieUser.watching[season - 1].map(() => true);
+
+      const update = {
+        $set: {
+          [`watching.${season - 1}`]: seasonWatched,
+        },
+      };
+      await serieService.updateSerie(serieUser.id, update, token);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleCapWatched = async (e, serieId, season, episode, setEpisodes) => {
     //PASAR EPISODE COMO episode.episode_number Y SEASON COMO season
 
-
-
     e.preventDefault();
-   
 
     const session = JSON.parse(window.localStorage.getItem("session"));
 
@@ -25,7 +52,6 @@ const useSeries = () => {
       const seriesUser = await serieService.getSeriesByUserId(User.id);
       const serieUser = seriesUser.find((serie) => serie.tv_id == serieId);
       const arrayWatched = serieUser.watching;
-      console.log(arrayWatched);
       const update = {
         $set: {
           [`watching.${season - 1}.${episode - 1}`]:
@@ -36,9 +62,8 @@ const useSeries = () => {
 
       setEpisodes((episodes) => {
         const newEpisodes = [...episodes];
-        newEpisodes[season - 1][episode - 1] = !newEpisodes[season - 1][
-          episode - 1
-        ];
+        newEpisodes[season - 1][episode - 1] =
+          !newEpisodes[season - 1][episode - 1];
         return newEpisodes;
       });
     } catch (error) {
@@ -230,6 +255,7 @@ const useSeries = () => {
     handleSubmitFromSerieDetail,
     handleWatched,
     handleCapWatched,
+    handleSeasonWatched,
   };
 };
 

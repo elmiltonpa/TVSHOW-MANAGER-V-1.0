@@ -1,30 +1,44 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import useSeries from "../../utils/useSeries";
 const IMG = "https://image.tmdb.org/t/p/w500";
 
-const SectionSeason = ({ season, episodes, serieId }) => {
+const SectionSeason = ({ season, episodes, serieId, seasonwatching }) => {
   const [IsOpen, setIsOpen] = useState(false);
+  const [seasons2, setSeasons2] = useState(seasonwatching);
   const { handleCapWatched } = useSeries();
 
-  console.log("b");
+  useEffect(() => {}, [seasonwatching]);
+
+  const session = JSON.parse(window.localStorage.getItem("session"));
+  let seasoninfo = null;
+  let seassonIsFull = null;
+
   const toggleOpen = () => {
-    console.log("a");
-    if (!IsOpen) {
-      setIsOpen(true);
-    } else {
-      setIsOpen(false);
-    }
+    setIsOpen(!IsOpen);
   };
+
+  if (session) {
+    seasoninfo = seasons2[season - 1];
+    seassonIsFull = seasons2[season - 1].every((episode) => episode === true);
+  }
 
   return (
     <div className="h-full w-full">
-      <div className="w-full flex justify-center items-center  h-20">
+      <div className="w-full flex justify-center items-center h-20">
+        {console.log(seassonIsFull)}
         <button
-          className="text-3xl h-full w-full hover:text-blancoblanco font-semibold"
+          className="text-3xl h-full w-[95%] hover:text-blancoblanco font-semibold"
           onClick={toggleOpen}
         >
           Temporada {season}
         </button>
+        <div
+          className={`${
+            seassonIsFull ? "bg-rojocorazon" : "bg-twitch"
+          } w-[5%] h-full bg-`}
+        >
+          <button className=""></button>
+        </div>
       </div>
       {IsOpen ? (
         <div className="h-full w-full bg-negro">
@@ -54,14 +68,23 @@ const SectionSeason = ({ season, episodes, serieId }) => {
                     </h1>
                   </div>
                 </div>
-                <div className="w-[10%] bg-purpuraoscuro">
+                <div
+                  className={`${
+                    seasoninfo
+                      ? seasoninfo[episode.episode_number - 1]
+                        ? "bg-azul4" //visto
+                        : "bg-textogris" //no visto
+                      : null
+                  } w-[10%] flex justify-center items-center bg-rojocorazo`}
+                >
                   <button
                     onClick={(e) =>
                       handleCapWatched(
                         e,
                         serieId,
                         season,
-                        episode.episode_number
+                        episode.episode_number,
+                        setSeasons2
                       )
                     }
                   >

@@ -13,6 +13,7 @@ const SerieDetail = () => {
   const [serieWatched, setSerieWatched] = useState(false);
   const [serieAdded, setSerieAdded] = useState(false);
   const [serie, setSerie] = useState(null);
+  const [seasons, setSeasons] = useState(null);
   const { id } = useParams();
 
   useEffect(() => {
@@ -23,6 +24,11 @@ const SerieDetail = () => {
         const { username } = session;
         const User = await getUser(username);
         const Series = await serieService.getSeriesByUserId(User.id);
+
+        const serieSeasons = Series.find(
+          (serie) => serie.tv_id == request.id
+        ).watching;
+
         const serieIsFavorite = Series.some(
           (serie) => serie.tv_id == request.id && serie.favorite == true
         );
@@ -34,6 +40,9 @@ const SerieDetail = () => {
         }
         if (serieIsWatched) {
           setSerieWatched(true);
+        }
+        if (serieSeasons) {
+          setSeasons(serieSeasons);
         }
       }
       setSerie(request);
@@ -50,7 +59,7 @@ const SerieDetail = () => {
       </div>
     );
   }
-
+  console.log(seasons);
   return (
     <div className=" bg-blancoblanco dark:bg-gris6 pb-10">
       <CardDetail
@@ -62,7 +71,7 @@ const SerieDetail = () => {
       />
       <div className="flex justify-center items-center w-full">
         <div className="w-[75%] ">
-          <SeasonProfile />
+          <SeasonProfile seasonwatching={seasons} />
         </div>
       </div>
     </div>

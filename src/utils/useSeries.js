@@ -5,9 +5,14 @@ import serieService from "../services/series";
 const useSeries = () => {
   const navigate = useNavigate();
 
-  const handleCapWatched = async (e, serieId, season, episode) => {
+  const handleCapWatched = async (e, serieId, season, episode,setEpisodes) => {
     //PASAR EPISODE COMO episode.episode_number Y SEASON COMO season
+
+
+
     e.preventDefault();
+   
+
     const session = JSON.parse(window.localStorage.getItem("session"));
 
     try {
@@ -27,8 +32,15 @@ const useSeries = () => {
             !arrayWatched[season - 1][episode - 1],
         },
       };
-      console.log(update);
       await serieService.updateSerie(serieUser.id, update, token);
+
+      setEpisodes((episodes) => {
+        const newEpisodes = [...episodes];
+        newEpisodes[season - 1][episode - 1] = !newEpisodes[season - 1][
+          episode - 1
+        ];
+        return newEpisodes;
+      });
     } catch (error) {
       console.log("Error al acutalizar serie", error);
     }

@@ -3,7 +3,7 @@ import SectionSeason from "../components/seasons/SectionSeason";
 import api from "../api/service";
 import { useEffect, useState } from "react";
 
-const SeasonProfile = () => {
+const SeasonProfile = ({ seasonwatching }) => {
   const { id } = useParams();
   const [seasons, setSeasons] = useState([]);
 
@@ -27,6 +27,7 @@ const SeasonProfile = () => {
           <div key={season.id} className="bg-red-300 flex flex-col">
             <div className="bg-purpuraoscuro h-full flex flex-col gap justify-center items-center">
               <SectionSeason
+                seasonwatching={seasonwatching}
                 season={season.season_number}
                 episodes={season.episodes}
                 serieId={id}

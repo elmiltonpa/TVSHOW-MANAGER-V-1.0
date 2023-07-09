@@ -142,7 +142,7 @@ const Home = ({ user }) => {
       fetchData();
     }
   }, [user]);
-  console.log("home");
+
   return (
     <div
       style={{ msScrollbarBaseColor: "#202123" }}

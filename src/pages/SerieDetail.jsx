@@ -13,6 +13,7 @@ const SerieDetail = () => {
   const [serieWatched, setSerieWatched] = useState(false);
   const [serieAdded, setSerieAdded] = useState(false);
   const [serie, setSerie] = useState(null);
+  // const [seasonWatched, setSeasonWatched] = useState(null);
   const [seasons, setSeasons] = useState(null);
   const { id } = useParams();
 
@@ -35,6 +36,7 @@ const SerieDetail = () => {
         const serieIsWatched = Series.some(
           (serie) => serie.tv_id == request.id && serie.watched == true
         );
+
         if (serieIsFavorite) {
           setSerieAdded(true);
         }

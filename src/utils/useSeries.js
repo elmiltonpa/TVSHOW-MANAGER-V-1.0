@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 import { useNavigate } from "react-router-dom";
 import getUser from "../services/user";
 import serieService from "../services/series";
@@ -5,7 +6,14 @@ import serieService from "../services/series";
 const useSeries = () => {
   const navigate = useNavigate();
 
-  const handleSeasonWatched = async (e, season, serieId, seassonIsFull) => {
+  const handleSeasonWatched = async (
+    e,
+    season,
+    serieId,
+    seassonIsFull,
+    setSeasonIsFull,
+    setSeasonInfo
+  ) => {
     //MARCAR TEMPORADA COMO VISTA
     e.preventDefault();
     const session = JSON.parse(window.localStorage.getItem("session"));
@@ -21,8 +29,10 @@ const useSeries = () => {
       const serieUser = seriesUser.find((serie) => serie.tv_id == serieId);
 
       const seasonWatched = seassonIsFull
-        ? serieUser.watching[season - 1].map(() => false)
-        : serieUser.watching[season - 1].map(() => true);
+        ? (setSeasonInfo((prev) => prev.map(() => false)),
+          serieUser.watching[season - 1].map(() => false))
+        : (setSeasonInfo((prev) => prev.map(() => true)),
+          serieUser.watching[season - 1].map(() => true));
 
       const update = {
         $set: {
@@ -30,6 +40,7 @@ const useSeries = () => {
         },
       };
       await serieService.updateSerie(serieUser.id, update, token);
+      setSeasonIsFull(!seassonIsFull);
     } catch (error) {
       console.log(error);
     }

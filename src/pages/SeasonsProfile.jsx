@@ -14,6 +14,7 @@ const SeasonProfile = ({ seasonwatching }) => {
         { length: Serie.number_of_seasons },
         (_, i) => api.searchTvSeasonById(id, i + 1)
       );
+
       const seasons = await Promise.all(fetchSeasons);
       setSeasons(seasons);
     };

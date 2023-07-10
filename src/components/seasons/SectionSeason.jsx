@@ -5,22 +5,25 @@ const IMG = "https://image.tmdb.org/t/p/w500";
 const SectionSeason = ({ season, episodes, serieId, seasonwatching }) => {
   const [IsOpen, setIsOpen] = useState(false);
   const [seasons2, setSeasons2] = useState(seasonwatching);
+  const [seasonInfo, setSeasonInfo] = useState(null);
+  const [seasonIsFull, setSeasonIsFull] = useState(false);
   const { handleCapWatched, handleSeasonWatched } = useSeries();
 
-  useEffect(() => {}, [seasonwatching]);
-
-  const session = JSON.parse(window.localStorage.getItem("session"));
-  let seasoninfo = null;
-  let seassonIsFull = null;
+  useEffect(() => {
+    if (seasons2) {
+      const seassonIsFull = seasons2[season - 1].every(
+        (episode) => episode === true
+      );
+      setSeasonIsFull(seassonIsFull);
+      setSeasonInfo(seasons2[season - 1]);
+      return;
+    }
+    setSeasonInfo(null);
+  }, [season, seasons2]);
 
   const toggleOpen = () => {
     setIsOpen(!IsOpen);
   };
-
-  if (session) {
-    seasoninfo = seasons2[season - 1];
-    seassonIsFull = seasons2[season - 1].every((episode) => episode === true);
-  }
 
   return (
     <div className="h-full w-full">
@@ -33,12 +36,19 @@ const SectionSeason = ({ season, episodes, serieId, seasonwatching }) => {
         </button>
         <div
           className={`${
-            seassonIsFull ? "bg-rojocorazon" : "bg-twitch"
+            seasonIsFull ? "bg-azul4" : "bg-grisclaro"
           } w-[5%] h-full absolute left-[95%]`}
         >
           <button
             onClick={(e) =>
-              handleSeasonWatched(e, season, serieId, seassonIsFull)
+              handleSeasonWatched(
+                e,
+                season,
+                serieId,
+                seasonIsFull,
+                setSeasonIsFull,
+                setSeasonInfo
+              )
             }
             className="w-full h-full"
           ></button>
@@ -74,11 +84,11 @@ const SectionSeason = ({ season, episodes, serieId, seasonwatching }) => {
                 </div>
                 <div
                   className={`${
-                    seasoninfo
-                      ? seasoninfo[episode.episode_number - 1]
+                    seasonInfo
+                      ? seasonInfo[episode.episode_number - 1]
                         ? "bg-azul4" //visto
                         : "bg-textogris" //no visto
-                      : null
+                      : "bg-textogris"
                   } w-[10%] flex justify-center items-center bg-rojocorazo`}
                 >
                   <button

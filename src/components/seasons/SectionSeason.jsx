@@ -11,9 +11,13 @@ const SectionSeason = ({
 }) => {
   const [IsOpen, setIsOpen] = useState(false);
   const [arrayWatching, setArrayWatching] = useState(seasonwatching); //ARRAY DE TEMPORADAS WATHCING
-  const [seasonInfo, setSeasonInfo] = useState(null);
-  const [seasonIsFull, setSeasonIsFull] = useState(false);
+  const [seasonInfo, setSeasonInfo] = useState(null); //ARRAY DE LA TEMPORADA ACTUAL  //SIRVE PARA SABER SI EL CAPITULO ESTA VISTO O NO
+  const [seasonIsFull, setSeasonIsFull] = useState(false); //SIRVE PARA SABER SI LA TEMPORADA ESTA VISTA O NO
   const { handleCapWatched, handleSeasonWatched } = useSeries();
+
+  console.log("arraywatching:", arrayWatching); //NULL SI NO ESTA LA SERIE EN LA BD
+  console.log("seasoninfo:", seasonInfo); //NULL SI NO ESTA LA SERIE EN LA BD
+  console.log("infoOfSeason:", infoOfSeason); //ARRAY DE LAS TEMPORADAS DE LA SERIE
 
   useEffect(() => {
     if (arrayWatching) {
@@ -24,8 +28,12 @@ const SectionSeason = ({
       setSeasonInfo(arrayWatching[season - 1]);
       return;
     }
-    setSeasonInfo(null);
-  }, [season, arrayWatching]);
+
+    const newSeasonInfo = Array(infoOfSeason[season - 1].episodes.length).fill(
+      false
+    );
+    setSeasonInfo(newSeasonInfo);
+  }, [season, arrayWatching, infoOfSeason]);
 
   const toggleOpen = () => {
     setIsOpen(!IsOpen);

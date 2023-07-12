@@ -74,7 +74,13 @@ const useSeries = () => {
     }
   };
 
-  const handleCapWatched = async (e, serieId, season, episode, setEpisodes) => {
+  const handleCapWatched = async (
+    e,
+    serieId,
+    season,
+    episode,
+    setArrayWatching
+  ) => {
     //PASAR EPISODE COMO episode.episode_number Y SEASON COMO season
 
     e.preventDefault();
@@ -91,18 +97,22 @@ const useSeries = () => {
       const seriesUser = await serieService.getSeriesByUserId(User.id);
       const serieUser = seriesUser.find((serie) => serie.tv_id == serieId);
       const arrayWatched = serieUser.watching;
+      console.log(arrayWatched, "arraywatched");
       const update = {
         $set: {
           [`watching.${season - 1}.${episode - 1}`]:
             !arrayWatched[season - 1][episode - 1],
         },
       };
+      console.log(update);
+
       await serieService.updateSerie(serieUser.id, update, token);
 
-      setEpisodes((episodes) => {
-        const newEpisodes = [...episodes];
+      setArrayWatching(() => {
+        const newEpisodes = arrayWatched;
         newEpisodes[season - 1][episode - 1] =
-          !newEpisodes[season - 1][episode - 1];
+          !arrayWatched[season - 1][episode - 1];
+
         return newEpisodes;
       });
     } catch (error) {

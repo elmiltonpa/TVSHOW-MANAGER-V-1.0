@@ -10,22 +10,22 @@ const SectionSeason = ({
   infoOfSeason,
 }) => {
   const [IsOpen, setIsOpen] = useState(false);
-  const [seasons2, setSeasons2] = useState(seasonwatching);
+  const [arrayWatching, setArrayWatching] = useState(seasonwatching); //ARRAY DE TEMPORADAS WATHCING
   const [seasonInfo, setSeasonInfo] = useState(null);
   const [seasonIsFull, setSeasonIsFull] = useState(false);
   const { handleCapWatched, handleSeasonWatched } = useSeries();
 
   useEffect(() => {
-    if (seasons2) {
-      const seassonIsFull = seasons2[season - 1].every(
+    if (arrayWatching) {
+      const seassonIsFull = arrayWatching[season - 1].every(
         (episode) => episode === true
       );
       setSeasonIsFull(seassonIsFull);
-      setSeasonInfo(seasons2[season - 1]);
+      setSeasonInfo(arrayWatching[season - 1]);
       return;
     }
     setSeasonInfo(null);
-  }, [season, seasons2]);
+  }, [season, arrayWatching]);
 
   const toggleOpen = () => {
     setIsOpen(!IsOpen);
@@ -106,7 +106,7 @@ const SectionSeason = ({
                         serieId,
                         season,
                         episode.episode_number,
-                        setSeasons2
+                        setArrayWatching
                       )
                     }
                   >

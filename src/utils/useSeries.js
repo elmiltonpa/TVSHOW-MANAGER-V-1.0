@@ -12,7 +12,8 @@ const useSeries = () => {
     serieId,
     seassonIsFull,
     setSeasonIsFull,
-    setSeasonInfo
+    setSeasonInfo,
+    infoOfSeasons
   ) => {
     //MARCAR TEMPORADA COMO VISTA
     e.preventDefault();
@@ -28,6 +29,29 @@ const useSeries = () => {
       const seriesUser = await serieService.getSeriesByUserId(User.id);
       const serieUser = seriesUser.find((serie) => serie.tv_id == serieId);
 
+      if (serieUser === undefined) {
+        const serieCreada = await serieService.createSerie(
+          { id: serieId },
+          token
+        );
+        console.log(infoOfSeasons);
+
+        const createArray = infoOfSeasons.map((season) => {
+          const cantidadEpisodios = season.episodes.length;
+          return Array(cantidadEpisodios).fill(true);
+        });
+        //CORREJIR ESTO
+        console.log(createArray);
+        const updateArray = {
+          $set: {
+            watching: createArray,
+          },
+        };
+
+        await serieService.updateSerie(serieCreada.data.id, updateArray, token);
+        return;
+      }
+
       const seasonWatched = seassonIsFull
         ? (setSeasonInfo((prev) => prev.map(() => false)),
           serieUser.watching[season - 1].map(() => false))
@@ -39,6 +63,7 @@ const useSeries = () => {
           [`watching.${season - 1}`]: seasonWatched,
         },
       };
+
       await serieService.updateSerie(serieUser.id, update, token);
       setSeasonIsFull(!seassonIsFull);
     } catch (error) {

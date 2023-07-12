@@ -3,7 +3,7 @@ import SectionSeason from "../components/seasons/SectionSeason";
 import api from "../api/service";
 import { useEffect, useState } from "react";
 
-const SeasonProfile = ({ seasonwatching }) => {
+const ProfileSerieDetail = ({ seasonwatching }) => {
   const { id } = useParams();
   const [seasons, setSeasons] = useState([]);
 
@@ -42,4 +42,4 @@ const SeasonProfile = ({ seasonwatching }) => {
     </div>
   );
 };
-export default SeasonProfile;
+export default ProfileSerieDetail;

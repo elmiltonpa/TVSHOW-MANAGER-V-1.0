@@ -1,6 +1,6 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Login from "./pages/Login";
-import SeasonProfile from "./pages/SeasonsProfile";
+import SeasonProfile from "./pages/ProfileSerieDetail";
 import SerieDetail from "./pages/SerieDetail";
 import Register from "./pages/Register";
 import Home from "./pages/Home";

@@ -1,7 +1,7 @@
 /* eslint-disable indent */
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import SeasonProfile from "./SeasonsProfile";
+import SectionSeason from "../components/seasons/SectionSeason";
 import Spinner from "../components/common/Spinner";
 import CardDetail from "../components/detail/CardDetail";
 import api from "../api/service";
@@ -13,22 +13,28 @@ const SerieDetail = () => {
   const [serieWatched, setSerieWatched] = useState(false);
   const [serieAdded, setSerieAdded] = useState(false);
   const [serie, setSerie] = useState(null);
-  // const [seasonWatched, setSeasonWatched] = useState(null);
   const [seasons, setSeasons] = useState(null);
+  const [seasonwatching, setSeasonsWatching] = useState(null);
   const { id } = useParams();
 
   useEffect(() => {
     const fetchData = async () => {
       const session = JSON.parse(window.localStorage.getItem("session"));
       const request = await api.searchTvShowById(id);
+      const fetchSeasons = Array.from(
+        { length: request.number_of_seasons },
+        (_, i) => api.searchTvSeasonById(id, i + 1)
+      );
+      const seasons = await Promise.all(fetchSeasons);
+      setSeasons(seasons);
       if (session) {
         const { username } = session;
         const User = await getUser(username);
         const Series = await serieService.getSeriesByUserId(User.id);
 
-        const serieSeasons = Series.find(
+        const serieSeasonsExist = Series.find(
           (serie) => serie.tv_id == request.id
-        ).watching;
+        ); //ARRAY DE TEMPORADAS WATHCING
 
         const serieIsFavorite = Series.some(
           (serie) => serie.tv_id == request.id && serie.favorite == true
@@ -43,8 +49,10 @@ const SerieDetail = () => {
         if (serieIsWatched) {
           setSerieWatched(true);
         }
-        if (serieSeasons) {
-          setSeasons(serieSeasons);
+        if (serieSeasonsExist) {
+          const arrayWatching = serieSeasonsExist.watching;
+
+          setSeasonsWatching(arrayWatching);
         }
       }
       setSerie(request);
@@ -73,7 +81,25 @@ const SerieDetail = () => {
       />
       <div className="flex justify-center items-center w-full">
         <div className="w-[75%] ">
-          <SeasonProfile seasonwatching={seasons} />
+          <div className="flex flex-col gap-4 w-full">
+            {seasons ? (
+              seasons.map((season) => (
+                <div key={season.id} className="bg-red-300 flex flex-col">
+                  <div className="bg-purpuraoscuro h-full flex flex-col gap justify-center items-center">
+                    <SectionSeason
+                      seasonwatching={seasonwatching}
+                      season={season.season_number}
+                      episodes={season.episodes}
+                      serieId={id}
+                      infoOfSeason={seasons}
+                    />
+                  </div>
+                </div>
+              ))
+            ) : (
+              <div>Loading...</div>
+            )}
+          </div>
         </div>
       </div>
     </div>

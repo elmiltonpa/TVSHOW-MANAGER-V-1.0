@@ -2,7 +2,13 @@ import { useState, useEffect } from "react";
 import useSeries from "../../utils/useSeries";
 const IMG = "https://image.tmdb.org/t/p/w500";
 
-const SectionSeason = ({ season, episodes, serieId, seasonwatching }) => {
+const SectionSeason = ({
+  season,
+  episodes,
+  serieId,
+  seasonwatching,
+  infoOfSeason,
+}) => {
   const [IsOpen, setIsOpen] = useState(false);
   const [seasons2, setSeasons2] = useState(seasonwatching);
   const [seasonInfo, setSeasonInfo] = useState(null);
@@ -32,6 +38,7 @@ const SectionSeason = ({ season, episodes, serieId, seasonwatching }) => {
           className="text-3xl h-full w-[95%] hover:text-blancoblanco font-semibold"
           onClick={toggleOpen}
         >
+          {console.log(infoOfSeason)}
           Temporada {season}
         </button>
         <div
@@ -47,7 +54,8 @@ const SectionSeason = ({ season, episodes, serieId, seasonwatching }) => {
                 serieId,
                 seasonIsFull,
                 setSeasonIsFull,
-                setSeasonInfo
+                setSeasonInfo,
+                infoOfSeason
               )
             }
             className="w-full h-full"

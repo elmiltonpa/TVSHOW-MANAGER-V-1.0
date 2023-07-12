@@ -18,7 +18,7 @@ const useSeries = () => {
     //MARCAR TEMPORADA COMO VISTA
     e.preventDefault();
     const session = JSON.parse(window.localStorage.getItem("session"));
-    console.log(session);
+
     try {
       const sessionExists = session !== null;
       if (!sessionExists) {
@@ -82,7 +82,7 @@ const useSeries = () => {
     setArrayWatching
   ) => {
     //PASAR EPISODE COMO episode.episode_number Y SEASON COMO season
-
+    console;
     e.preventDefault();
 
     const session = JSON.parse(window.localStorage.getItem("session"));
@@ -97,14 +97,13 @@ const useSeries = () => {
       const seriesUser = await serieService.getSeriesByUserId(User.id);
       const serieUser = seriesUser.find((serie) => serie.tv_id == serieId);
       const arrayWatched = serieUser.watching;
-      console.log(arrayWatched, "arraywatched");
+
       const update = {
         $set: {
           [`watching.${season - 1}.${episode - 1}`]:
             !arrayWatched[season - 1][episode - 1],
         },
       };
-      console.log(update);
 
       await serieService.updateSerie(serieUser.id, update, token);
 

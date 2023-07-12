@@ -18,9 +18,10 @@ const useSeries = () => {
     //MARCAR TEMPORADA COMO VISTA
     e.preventDefault();
     const session = JSON.parse(window.localStorage.getItem("session"));
-
+    console.log(session);
     try {
-      if (!session) {
+      const sessionExists = session !== null;
+      if (!sessionExists) {
         navigate("/login");
         return;
       }
@@ -34,14 +35,12 @@ const useSeries = () => {
           { id: serieId },
           token
         );
-        console.log(infoOfSeasons);
 
         const createArray = infoOfSeasons.map((season) => {
           const cantidadEpisodios = season.episodes.length;
-          return Array(cantidadEpisodios).fill(true);
+          return Array(cantidadEpisodios).fill(false);
         });
-        //CORREJIR ESTO
-        console.log(createArray);
+        createArray[season - 1] = createArray[season - 1].map(() => true);
         const updateArray = {
           $set: {
             watching: createArray,
@@ -49,6 +48,10 @@ const useSeries = () => {
         };
 
         await serieService.updateSerie(serieCreada.data.id, updateArray, token);
+
+        setSeasonInfo(createArray[season - 1]);
+        setSeasonIsFull(true);
+
         return;
       }
 

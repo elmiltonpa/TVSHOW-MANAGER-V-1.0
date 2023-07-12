@@ -38,8 +38,8 @@ const SectionSeason = ({
           className="text-3xl h-full w-[95%] hover:text-blancoblanco font-semibold"
           onClick={toggleOpen}
         >
-          {console.log(infoOfSeason)}
-          Temporada {season}
+          Temporada {season}{" "}
+          <span className="text-2xl">({episodes.length})</span>
         </button>
         <div
           className={`${

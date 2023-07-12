@@ -78,12 +78,18 @@ const Header = ({ user, setUser, setToken }) => {
             ) : (
               <>
                 <li>
-                  <Link className="text-blanco font-semibold" to="/login">
+                  <Link
+                    className="text-blanco font-semibold text-lg"
+                    to="/login"
+                  >
                     LOGIN
                   </Link>
                 </li>
                 <li>
-                  <Link className="text-blanco font-semibold" to="/register">
+                  <Link
+                    className="text-blanco font-semibold text-lg"
+                    to="/register"
+                  >
                     REGISTER
                   </Link>
                 </li>

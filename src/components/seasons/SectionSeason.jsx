@@ -15,9 +15,9 @@ const SectionSeason = ({
   const [seasonIsFull, setSeasonIsFull] = useState(false); //SIRVE PARA SABER SI LA TEMPORADA ESTA VISTA O NO
   const { handleCapWatched, handleSeasonWatched } = useSeries();
 
-  console.log("arraywatching:", arrayWatching); //NULL SI NO ESTA LA SERIE EN LA BD
-  console.log("seasoninfo:", seasonInfo); //NULL SI NO ESTA LA SERIE EN LA BD
-  console.log("infoOfSeason:", infoOfSeason); //ARRAY DE LAS TEMPORADAS DE LA SERIE
+  // console.log("arraywatching:", arrayWatching); //NULL SI NO ESTA LA SERIE EN LA BD
+  // console.log("seasoninfo:", seasonInfo); //NULL SI NO ESTA LA SERIE EN LA BD
+  // console.log("infoOfSeason:", infoOfSeason); //ARRAY DE LAS TEMPORADAS DE LA SERIE
 
   useEffect(() => {
     if (arrayWatching) {
@@ -55,7 +55,7 @@ const SectionSeason = ({
           } w-[5%] h-full absolute left-[95%]`}
         >
           <button
-            onClick={(e) =>
+            onClick={(e) => {
               handleSeasonWatched(
                 e,
                 season,
@@ -64,8 +64,8 @@ const SectionSeason = ({
                 setSeasonIsFull,
                 setSeasonInfo,
                 infoOfSeason
-              )
-            }
+              );
+            }}
             className="w-full h-full"
           ></button>
         </div>
@@ -108,15 +108,15 @@ const SectionSeason = ({
                   } w-[10%] flex justify-center items-center bg-rojocorazo`}
                 >
                   <button
-                    onClick={(e) =>
+                    onClick={(e) => {
                       handleCapWatched(
                         e,
                         serieId,
                         season,
                         episode.episode_number,
                         setArrayWatching
-                      )
-                    }
+                      );
+                    }}
                   >
                     VISTO
                   </button>

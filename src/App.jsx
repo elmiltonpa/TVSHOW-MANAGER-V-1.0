@@ -9,6 +9,7 @@ import Header from "./components/common/Header";
 import { useEffect, useState } from "react";
 import Footer from "./components/common/Footer";
 import MySeries from "./pages/MySeries";
+import SerieLinks from "./pages/SerieLinks";
 
 const App = () => {
   const [user, setUser] = useState(null);
@@ -51,6 +52,7 @@ const App = () => {
                 path="/:username/:id"
                 element={<SeasonProfile user={user} token={token} />}
               />
+              <Route path="/home/:id/links/:season/:episode" element={<SerieLinks /> } />
               <Route
                 path="/login"
                 element={<Login setUser={setUser} setToken={setToken} />}

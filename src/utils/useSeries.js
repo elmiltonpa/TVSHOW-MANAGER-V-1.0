@@ -79,23 +79,37 @@ const useSeries = () => {
     serieId,
     season,
     episode,
-    setArrayWatching
+    setArrayWatching,
+    codigo,
+    setIsLoadingVisto
   ) => {
     //PASAR EPISODE COMO episode.episode_number Y SEASON COMO season
-    console;
-    e.preventDefault();
-
-    const session = JSON.parse(window.localStorage.getItem("session"));
-
+    if (codigo === 1){
+      e.preventDefault();
+    }
+    setIsLoadingVisto(true);
+    
+    
     try {
+      const session = JSON.parse(window.localStorage.getItem("session"));
       if (!session) {
         navigate("/login");
         return;
+  
       }
       const { token, username } = session;
       const User = await getUser(username);
       const seriesUser = await serieService.getSeriesByUserId(User.id);
-      const serieUser = seriesUser.find((serie) => serie.tv_id == serieId);
+      let serieUser = seriesUser.find((serie) => serie.tv_id == serieId);
+      
+      if (serieUser === undefined) {
+        const serieCreada = await serieService.createSerie(
+          { id: serieId },
+          token
+        );
+        serieUser = serieCreada.data;
+      }
+
       const arrayWatched = serieUser.watching;
 
       const update = {
@@ -117,6 +131,11 @@ const useSeries = () => {
     } catch (error) {
       console.log("Error al acutalizar serie", error);
     }
+    setIsLoadingVisto(false);
+
+  // if (codigo === 0){
+  //   navigate(`links/${season}/${episode}`)
+  // }
   };
 
   //AGREGAR A SERIES VISTAS DESDE EL DETALLE DE SERIE -----------

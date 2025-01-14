@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import useSeries from "../../utils/useSeries";
 const IMG = "https://image.tmdb.org/t/p/w500";
 
@@ -14,6 +15,7 @@ const SectionSeason = ({
   const [seasonInfo, setSeasonInfo] = useState(null); //ARRAY DE LA TEMPORADA ACTUAL  //SIRVE PARA SABER SI EL CAPITULO ESTA VISTO O NO
   const [seasonIsFull, setSeasonIsFull] = useState(false); //SIRVE PARA SABER SI LA TEMPORADA ESTA VISTA O NO
   const { handleCapWatched, handleSeasonWatched } = useSeries();
+  const [isLoadingVisto, setIsLoadingVisto] = useState(false);
 
   // console.log("arraywatching:", arrayWatching); //NULL SI NO ESTA LA SERIE EN LA BD
   // console.log("seasoninfo:", seasonInfo); //NULL SI NO ESTA LA SERIE EN LA BD
@@ -83,9 +85,20 @@ const SectionSeason = ({
                 </div>
                 <div className="flex-1 flex flex-col justify-between">
                   <div className="flex">
-                    <h1 className="flex-1 pt-2 dark:text-grisclaro text-xl font-semibold flex justify-center items-center">
-                      {episode.name}
-                    </h1>
+                    <Link onClick={(e) => {
+                      handleCapWatched(
+                        e,
+                        serieId,
+                        season,
+                        episode.episode_number,
+                        setArrayWatching,
+                        0
+                      );
+                    }} target="_blank" className="flex-1 pt-2 dark:text-grisclaro text-xl font-semibold flex justify-center items-center" to={`links/${season}/${episode.episode_number}`}>
+                      <h1 className="hover:text-azultwitter">
+                        {episode.name}
+                      </h1>
+                    </Link>
                   </div>
                   <div className="px-2 overflow-y-auto">
                     <p className="text-center overflow-hidden dark:text-grisclaro text-ellipsis line-clamp-3 font-overview">
@@ -99,22 +112,30 @@ const SectionSeason = ({
                   </div>
                 </div>
                 <div
+                  // disabled={isLoadingVisto}
                   className={`${
                     seasonInfo
                       ? seasonInfo[episode.episode_number - 1]
                         ? "bg-azul4" //visto
                         : "bg-textogris" //no visto
                       : "bg-textogris"
-                  } w-[10%] flex justify-center items-center bg-rojocorazo`}
+                  } w-[10%] flex justify-center items-center`}
                 >
                   <button
+                    className={`${
+                      isLoadingVisto   
+                        ? "cursor-not-allowed" : 
+                        ""} w-full h-full`}
+                    disabled={isLoadingVisto}
                     onClick={(e) => {
                       handleCapWatched(
                         e,
                         serieId,
                         season,
                         episode.episode_number,
-                        setArrayWatching
+                        setArrayWatching,
+                        1,
+                        setIsLoadingVisto
                       );
                     }}
                   >

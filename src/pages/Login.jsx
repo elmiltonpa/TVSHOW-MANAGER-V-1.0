@@ -6,12 +6,17 @@ const Login = ({ setUser, setToken }) => {
   const [password, setPassword] = useState(null);
   const [username, setUsername] = useState(null);
   const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const navigate = useNavigate();
 
   useEffect(() => {
     document.title = "Login - TvShowManager";
-  }, []);
+    const session = JSON.parse(localStorage.getItem("session"));
+    if (session && session.expirationDate > Date.now()) {
+      navigate("/home");
+    }
+  }, [navigate]);
 
   const setSessionInLocalStorage = (user) => {
     const sessionDurationInSeconds = 950400;
@@ -28,6 +33,7 @@ const Login = ({ setUser, setToken }) => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
 
     try {
       const user = await login({ username, password }).then((res) => res);
@@ -39,7 +45,10 @@ const Login = ({ setUser, setToken }) => {
       }
     } catch (error) {
       setError(error);
+    } finally {
+      setIsLoading(false);
     }
+
   };
 
   return (
@@ -69,8 +78,14 @@ const Login = ({ setUser, setToken }) => {
                 />
               </div>
             </div>
-            <div className="flex pt-2 h-[27.5px] text-rojo font-sans flex-col text-[13px] font-semibold items-center">
-              {error ? error.response.data.message : " "}
+            <div className="flex pt-5 h-[27.5px] text-rojo font-sans flex-col text-[14px] font-semibold items-center">
+              {isLoading ? (
+                "Loading..."
+              ) : error ? (
+                error.response?.data?.message || "Error desconocido"
+              ) : (
+                " "
+              )}
             </div>
             <div className="items-center mt-10 flex flex-col justify-center">
               <button className="bg-gris hover:bg-purpuraoscuro hover:text-lavanda text-negropurpura w-full py-[5px] text-xl font-bold border-2 border-purpuraoscuro">

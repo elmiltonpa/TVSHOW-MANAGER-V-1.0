@@ -1,7 +1,7 @@
 import axios from "axios";
 
 
-const APIURL = "http://localhost:3002/api/scraper";
+const APIURL = "https://backend-tvshowmanager.vercel.app/api/scraper";
 
 // credentrials = {token, url, id}
 

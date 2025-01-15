@@ -23,6 +23,7 @@ const SerieDetail = () => {
   const [url, setUrl] = useState(""); // Estado para el URL ingresado
   const [linksLoading,setLinksLoading] = useState(false);
   const [thereLinks,setThereLinks] = useState(false);
+  const [linksLoaded,setLinksLoaded] = useState(false);
 
   const handleOpenModal = () => setModal(true);
   const handleCloseModal = () => setModal(false);
@@ -38,14 +39,10 @@ const SerieDetail = () => {
               // Asegúrate de que `links` tiene una estructura válida
         if (links && links.status === 200) {
           console.log("Links guardados", links);
+          setLinksLoaded(true);
         } else {
           console.log("Error al guardar los links", links);
         }
-        
-        
-        
-
-
     } catch (error) {
       console.log("Error al guardar los links", error);
     
@@ -105,7 +102,7 @@ const SerieDetail = () => {
     };
 
     fetchData();
-  }, [id]);
+  }, [id,linksLoaded]);
 
   if (isLoading) {
     return (
@@ -146,7 +143,7 @@ const SerieDetail = () => {
             )}
           </div>
           <div className="flex w-full pt-5 justify-center items-center">
-            {thereLinks ? (<div className="dark:bg-gris7 hover:bg-gris6 text-blancoblanco hover:text-blancoblanco dark:hover:bg-gris7hover bg-gris7 text-3x1 font-semibold dark:text-blancoblanco px-4 py-2 rounded ml-4">YA HAY LINKS CARGADOS</div>) :
+            {(thereLinks || linksLoaded )? (<div className="dark:bg-gris7 hover:bg-gris6 text-blancoblanco hover:text-blancoblanco dark:hover:bg-gris7hover bg-gris7 text-3x1 font-semibold dark:text-blancoblanco px-4 py-2 rounded ml-4">YA HAY LINKS CARGADOS</div>) :
             ( <button
               onClick={handleOpenModal}
               className="dark:bg-gris7 hover:bg-gris6 text-blancoblanco hover:text-blancoblanco dark:hover:bg-gris7hover bg-gris7 text-3x1 font-semibold dark:text-blancoblanco px-4 py-2 rounded ml-4"

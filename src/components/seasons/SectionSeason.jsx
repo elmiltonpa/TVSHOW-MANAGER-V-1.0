@@ -92,7 +92,9 @@ const SectionSeason = ({
                         season,
                         episode.episode_number,
                         setArrayWatching,
-                        0
+                        0,
+                        setIsLoadingVisto
+
                       );
                     }} target="_blank" className="flex-1 pt-2 dark:text-grisclaro text-xl font-semibold flex justify-center items-center" to={`links/${season}/${episode.episode_number}`}>
                       <h1 className="hover:text-azultwitter">

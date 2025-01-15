@@ -1,9 +1,7 @@
 import axios from "axios";
 
 
-// const APIURL = "https://backend-tvshowmanager.vercel.app/api/scraper";
-const APIURL = "http://localhost:3002/api/scraper";
-// credentrials = {token, url, id}
+const APIURL = "https://backend-tvshowmanager.vercel.app/api/scraper";
 
 const scraper = async (credentials) => {
   const request = await axios.post(`${APIURL}/save`, credentials);

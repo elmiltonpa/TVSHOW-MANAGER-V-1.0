@@ -113,7 +113,7 @@ const SerieDetail = () => {
   }
 
   return (
-    <div className=" bg-blancoblanco dark:bg-gris6 pb-10">
+    <div className="bg-blancoblanco dark:bg-gris6 pb-10">
       <CardDetail
         serie={serie}
         serieAdded={serieAdded}
@@ -121,8 +121,8 @@ const SerieDetail = () => {
         serieWatched={serieWatched}
         setSerieWatched={setSerieWatched}
       />
-      <div className="flex justify-center items-center w-full">
-        <div className="w-[75%] ">
+      <div className="flex justify-center items-center w-full px-3 sm:px-0">
+        <div className="w-full sm:w-[90%] lg:w-[75%]">
           <div className="flex flex-col gap-4 w-full">
             {seasons ? (
               seasons.map((season) => (
@@ -143,15 +143,18 @@ const SerieDetail = () => {
             )}
           </div>
           <div className="flex w-full pt-5 justify-center items-center">
-            {(thereLinks || linksLoaded )? (<div className="dark:bg-gris7 hover:bg-gris6 text-blancoblanco hover:text-blancoblanco dark:hover:bg-gris7hover bg-gris7 text-3x1 font-semibold dark:text-blancoblanco px-4 py-2 rounded ml-4">YA HAY LINKS CARGADOS</div>) :
-            ( <button
-              onClick={handleOpenModal}
-              className="dark:bg-gris7 hover:bg-gris6 text-blancoblanco hover:text-blancoblanco dark:hover:bg-gris7hover bg-gris7 text-3x1 font-semibold dark:text-blancoblanco px-4 py-2 rounded ml-4"
-            >
-              CARGAR LINKS
-            </button>
-          )}
-           
+            {(thereLinks || linksLoaded) ? (
+              <div className="dark:bg-gris7 hover:bg-gris6 text-blancoblanco hover:text-blancoblanco dark:hover:bg-gris7hover bg-gris7 text-sm sm:text-base md:text-lg font-semibold dark:text-blancoblanco px-3 sm:px-4 py-2 rounded text-center">
+                YA HAY LINKS CARGADOS
+              </div>
+            ) : (
+              <button
+                onClick={handleOpenModal}
+                className="dark:bg-gris7 hover:bg-gris6 text-blancoblanco hover:text-blancoblanco dark:hover:bg-gris7hover bg-gris7 text-sm sm:text-base md:text-lg font-semibold dark:text-blancoblanco px-3 sm:px-4 py-2 rounded"
+              >
+                CARGAR LINKS
+              </button>
+            )}
           </div>
         </div>
       </div>
@@ -166,7 +169,8 @@ const SerieDetail = () => {
             right: "auto",
             bottom: "auto",
             transform: "translate(-50%, -50%)",
-            width: "400px",
+            width: "90%",
+            maxWidth: "400px",
             padding: "20px",
             borderRadius: "10px",
           },
@@ -181,29 +185,30 @@ const SerieDetail = () => {
           </div>
         ) : (
           <div>
-          <h2 className="">Ingresar URL</h2>
-        <input
-          type="url"
-          value={url}
-          onChange={(e) => setUrl(e.target.value)}
-          placeholder="Ingrese el URL"
-          className="w-full p-2 border rounded mt-2"
-        />
-        <div className="flex justify-end mt-4 gap-2">
-          <button
-            onClick={handleCloseModal}
-            className="bg-red-500 text-white px-4 py-2 rounded"
-          >
-            Cancelar
-          </button>
-          <button
-            onClick={handleSubmit}
-            className="bg-green-500 text-white px-4 py-2 rounded"
-          >
-            Confirmar
-          </button>
-        </div>
-        </div>) }
+            <h2 className="text-base sm:text-lg">Ingresar URL</h2>
+            <input
+              type="url"
+              value={url}
+              onChange={(e) => setUrl(e.target.value)}
+              placeholder="Ingrese el URL"
+              className="w-full p-2 border rounded mt-2 text-sm sm:text-base"
+            />
+            <div className="flex justify-end mt-4 gap-2">
+              <button
+                onClick={handleCloseModal}
+                className="bg-red-500 text-white px-3 sm:px-4 py-2 rounded text-sm sm:text-base"
+              >
+                Cancelar
+              </button>
+              <button
+                onClick={handleSubmit}
+                className="bg-green-500 text-white px-3 sm:px-4 py-2 rounded text-sm sm:text-base"
+              >
+                Confirmar
+              </button>
+            </div>
+          </div>
+        )}
       </ReactModal>
     </div>
   );

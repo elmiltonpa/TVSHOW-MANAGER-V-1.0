@@ -6,23 +6,75 @@
 @tailwind components;
 @tailwind utilities;
 
-::-webkit-scrollbar {
-    width: 11px;
-}
-  
+/* Scrollbar para desktop */
+@media (min-width: 768px) {
+  ::-webkit-scrollbar {
+      width: 11px;
+  }
 
-::-webkit-scrollbar-track {
-    background: #f1f1f1;
-}
-  
+  ::-webkit-scrollbar-track {
+      background: #f1f1f1;
+  }
 
-::-webkit-scrollbar-thumb {
-    background: #888;
-   
-}
-  
+  ::-webkit-scrollbar-thumb {
+      background: #888;
+      border-radius: 5px;
+  }
 
-::-webkit-scrollbar-thumb:hover {
-    background: #555;
+  ::-webkit-scrollbar-thumb:hover {
+      background: #555;
+  }
+}
+
+/* Scrollbar más delgado para móviles */
+@media (max-width: 767px) {
+  ::-webkit-scrollbar {
+      width: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+      background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+      background: rgba(136, 136, 136, 0.5);
+      border-radius: 3px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+      background: rgba(85, 85, 85, 0.7);
+  }
+}
+
+/* Mejoras para dark mode scrollbar */
+.dark ::-webkit-scrollbar-track {
+    background: #1a1a1a;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+    background: #4a4a4a;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+    background: #6a6a6a;
+}
+
+/* Prevenir zoom en inputs en iOS */
+@supports (-webkit-touch-callout: none) {
+  input,
+  select,
+  textarea {
+    font-size: 16px;
+  }
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Prevenir scroll horizontal */
+body {
+  overflow-x: hidden;
 }
 

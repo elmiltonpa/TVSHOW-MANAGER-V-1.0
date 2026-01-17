@@ -51,14 +51,14 @@ const MySeries = () => {
   }
 
   return (
-    <div className="h-[90vh] flex flex-col items-center dark:bg-twitch bg-purpura">
+    <div className="min-h-[90vh] flex flex-col items-center dark:bg-twitch bg-purpura px-3 sm:px-6">
       {user ? (
-        <div className="bg-blancoblanco dark:bg-gris5 overflow-y-auto w-[70%] h-full px-44">
-          <div className="py-5 h-[90px]">
-            <h1 className="text-4xl dark:text-blancoblanco text-center font-overview font-semibold">
+        <div className="bg-blancoblanco dark:bg-gris5 overflow-y-auto w-full sm:w-[90%] md:w-[80%] lg:w-[70%] h-full py-5 px-3 sm:px-6 md:px-12 lg:px-44">
+          <div className="py-5 min-h-[90px]">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl dark:text-blancoblanco text-center font-overview font-semibold">
               Mis series
             </h1>
-            <h3 className="text-xl text-center dark:text-rosa text-rojo font-noto font-normal">
+            <h3 className="text-base sm:text-lg md:text-xl text-center dark:text-rosa text-rojo font-noto font-normal px-2">
               Si eliminas la serie, eliminas todos los datos
             </h3>
           </div>
@@ -67,11 +67,11 @@ const MySeries = () => {
               series.map((serie, index) => (
                 <div
                   key={index}
-                  className="bg-blancoblanco dark:bg-gris7 shadow-seriefav shadow-negro flex w-[70%] h-16"
+                  className="bg-blancoblanco dark:bg-gris7 shadow-seriefav shadow-negro flex w-full sm:w-[90%] md:w-[80%] lg:w-[70%] h-14 sm:h-16"
                 >
-                  <div className="w-[90%] pl-12 flex justify-center items-center">
+                  <div className="w-[85%] sm:w-[90%] flex justify-center items-center px-2">
                     <Link to={`/home/${serie.tv_id}`}>
-                      <h1 className="text-xl dark:text-grisclaro font-semibold">
+                      <h1 className="text-base sm:text-lg md:text-xl dark:text-grisclaro font-semibold text-center">
                         {serie.tv_title}
                       </h1>
                     </Link>
@@ -79,7 +79,7 @@ const MySeries = () => {
                   <div
                     className={`${
                       isLoadingToDelete ? "bg-blancoblanco" : "hover:bg-negro"
-                    } w-[10%] `}
+                    } w-[15%] sm:w-[10%]`}
                   >
                     <button
                       disabled={isLoadingToDelete}
@@ -87,8 +87,8 @@ const MySeries = () => {
                       className={`${
                         isLoadingToDelete
                           ? "cursor-not-allowed dark:bg-gris7"
-                          : "hover:text-blancoblanco"
-                      } w-full h-full text-lg flex justify-center items-center`}
+                          : "hover:text-blancoblanco dark:text-grisclaro"
+                      } w-full h-full text-base sm:text-lg flex justify-center items-center`}
                     >
                       <AiFillDelete />
                     </button>
@@ -96,14 +96,14 @@ const MySeries = () => {
                 </div>
               ))
             ) : (
-              <div className="text-2xl dark:text-grisclaro font-semibold text-negro">
+              <div className="text-xl sm:text-2xl dark:text-grisclaro font-semibold text-negro text-center">
                 No hay datos
               </div>
             )}
           </div>
         </div>
       ) : (
-        <div className="h-screen w-[70%] bg-blancoblanco text-center text-3xl pt-10">
+        <div className="h-screen w-full sm:w-[90%] md:w-[70%] bg-blancoblanco dark:bg-gris6 dark:text-grisclaro text-center text-xl sm:text-2xl md:text-3xl pt-10 flex justify-center items-start">
           No has iniciado sesion
         </div>
       )}

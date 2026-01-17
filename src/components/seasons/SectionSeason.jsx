@@ -43,18 +43,18 @@ const SectionSeason = ({
 
   return (
     <div className="h-full w-full">
-      <div className="w-full relative flex justify-center items-center h-20">
+      <div className="w-full relative flex justify-center items-center h-16 sm:h-20">
         <button
-          className="text-3xl h-full w-[95%] hover:text-blancoblanco font-semibold"
+          className="text-xl sm:text-2xl md:text-3xl h-full w-[90%] sm:w-[95%] hover:text-blancoblanco font-semibold"
           onClick={toggleOpen}
         >
           Temporada {season}{" "}
-          <span className="text-2xl">({episodes.length})</span>
+          <span className="text-lg sm:text-xl md:text-2xl">({episodes.length})</span>
         </button>
         <div
           className={`${
             seasonIsFull ? "bg-azul4" : "bg-grisclaro"
-          } w-[5%] h-full absolute left-[95%]`}
+          } w-[10%] sm:w-[5%] h-full absolute right-0`}
         >
           <button
             onClick={(e) => {
@@ -77,57 +77,64 @@ const SectionSeason = ({
           <div className="h-full py-1 w-full flex flex-col gap-1">
             {episodes.map((episode) => (
               <div
-                className="flex bg-blancoblanco dark:bg-gris7 border- border-"
+                className="flex flex-col sm:flex-row bg-blancoblanco dark:bg-gris7 border- border-"
                 key={episode.id}
               >
-                <div className="">
-                  <img width={250} src={IMG + episode.still_path} />
+                <div className="w-full sm:w-auto flex justify-center">
+                  <img 
+                    className="w-full sm:w-[200px] md:w-[250px] h-auto object-cover" 
+                    src={IMG + episode.still_path}
+                    alt={episode.name}
+                  />
                 </div>
-                <div className="flex-1 flex flex-col justify-between">
+                <div className="flex-1 flex flex-col justify-between p-2 sm:p-0">
                   <div className="flex">
-                    <Link onClick={(e) => {
-                      handleCapWatched(
-                        e,
-                        serieId,
-                        season,
-                        episode.episode_number,
-                        setArrayWatching,
-                        0,
-                        setIsLoadingVisto
-
-                      );
-                    }} target="_blank" className="flex-1 pt-2 dark:text-grisclaro text-xl font-semibold flex justify-center items-center" to={`links/${season}/${episode.episode_number}`}>
-                      <h1 className="hover:text-azultwitter">
+                    <Link 
+                      onClick={(e) => {
+                        handleCapWatched(
+                          e,
+                          serieId,
+                          season,
+                          episode.episode_number,
+                          setArrayWatching,
+                          0,
+                          setIsLoadingVisto
+                        );
+                      }} 
+                      target="_blank" 
+                      className="flex-1 pt-2 dark:text-grisclaro text-lg sm:text-xl font-semibold flex justify-center items-center" 
+                      to={`links/${season}/${episode.episode_number}`}
+                    >
+                      <h1 className="hover:text-azultwitter text-center px-2">
                         {episode.name}
                       </h1>
                     </Link>
                   </div>
                   <div className="px-2 overflow-y-auto">
-                    <p className="text-center overflow-hidden dark:text-grisclaro text-ellipsis line-clamp-3 font-overview">
+                    <p className="text-center text-sm sm:text-base overflow-hidden dark:text-grisclaro text-ellipsis line-clamp-3 font-overview">
                       {episode.overview}
                     </p>
                   </div>
-                  <div className="w-full dark:text-azultwitter flex justify-center items-center text-xl  font-black text-purpuraoscuro">
+                  <div className="w-full dark:text-azultwitter flex justify-center items-center text-lg sm:text-xl font-black text-purpuraoscuro pb-2 sm:pb-0">
                     <h1>
                       {season}x{episode.episode_number}
                     </h1>
                   </div>
                 </div>
                 <div
-                  // disabled={isLoadingVisto}
                   className={`${
                     seasonInfo
                       ? seasonInfo[episode.episode_number - 1]
                         ? "bg-azul4" //visto
                         : "bg-textogris" //no visto
                       : "bg-textogris"
-                  } w-[10%] flex justify-center items-center`}
+                  } w-full sm:w-[15%] md:w-[10%] flex justify-center items-center min-h-[40px]`}
                 >
                   <button
                     className={`${
                       isLoadingVisto   
                         ? "cursor-not-allowed" : 
-                        ""} w-full h-full`}
+                        ""} w-full h-full text-sm sm:text-base font-semibold`}
                     disabled={isLoadingVisto}
                     onClick={(e) => {
                       handleCapWatched(

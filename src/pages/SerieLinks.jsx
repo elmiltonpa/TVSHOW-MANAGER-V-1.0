@@ -54,23 +54,32 @@ const SerieLinks = () => {
     } , [id, season, episode, navigate])
 
     if (isLoading) {
-        return <div>Cargando links...</div>
+        return (
+          <div className="h-screen flex justify-center items-center dark:bg-gris6 dark:text-grisclaro">
+            <div className="text-lg sm:text-xl">Cargando links...</div>
+          </div>
+        )
     }
 
     return (
-        <div>
+        <div className="px-3 sm:px-6 md:px-12">
            
           {(links.ingles.length > 0 || links.latino.length > 0) ? (
-            <div className="text-center min-h-screen flex flex-col items-center">
-              <h1>{serie.name}</h1>
-              <h2>Temporada {season} - Episodio {episode}</h2>
+            <div className="text-center min-h-screen flex flex-col items-center py-6 dark:bg-gris6 dark:text-grisclaro">
+              <h1 className="text-xl sm:text-2xl md:text-3xl font-bold">{serie.name}</h1>
+              <h2 className="text-lg sm:text-xl md:text-2xl py-2">Temporada {season} - Episodio {episode}</h2>
               {["ingles", "latino"].map((idioma, idiomaIndex) => (
-                <div key={idiomaIndex}>
-                  <h3>{idioma === "ingles" ? "Inglés" : "Latino"}</h3>
-                  <ul>
+                <div key={idiomaIndex} className="w-full max-w-4xl py-4">
+                  <h3 className="text-lg sm:text-xl font-semibold pb-3">{idioma === "ingles" ? "Inglés" : "Latino"}</h3>
+                  <ul className="flex flex-col gap-2">
                     {links[idioma].map((link, index) => (
-                      <li key={index}>
-                        <a href={link} target="_blank" rel="noreferrer">
+                      <li key={index} className="break-all">
+                        <a 
+                          href={link} 
+                          target="_blank" 
+                          rel="noreferrer"
+                          className="text-sm sm:text-base text-blue-600 dark:text-azultwitter hover:underline"
+                        >
                           {link}
                         </a>
                       </li>
@@ -80,10 +89,10 @@ const SerieLinks = () => {
                 ))}
             </div>
           ) : (
-            <div className="text-center min-h-screen flex flex-col items-center">
-              <h1>{serie.name}</h1>
-              <h2>Temporada {season} - Episodio {episode}</h2>
-              <p>No se encontraron links</p>
+            <div className="text-center min-h-screen flex flex-col items-center justify-center dark:bg-gris6 dark:text-grisclaro">
+              <h1 className="text-xl sm:text-2xl md:text-3xl font-bold">{serie.name}</h1>
+              <h2 className="text-lg sm:text-xl md:text-2xl py-2">Temporada {season} - Episodio {episode}</h2>
+              <p className="text-base sm:text-lg">No se encontraron links</p>
             </div>
           )}
         </div>

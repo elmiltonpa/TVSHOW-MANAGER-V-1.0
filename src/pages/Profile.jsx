@@ -53,24 +53,24 @@ const Profile = () => {
   return (
     <div className="">
       {user ? (
-        <div className="h-screen flex">
-          <div className="w-[25%]">
+        <div className="min-h-screen flex flex-col lg:flex-row">
+          <div className="w-full lg:w-[25%] order-2 lg:order-1">
             <FavSeries
               seriesFav={seriesFav}
               setSeriesFav={setSeriesFav}
               username={username}
             />
           </div>
-          <div className="w-1/2">
+          <div className="w-full lg:w-1/2 order-1 lg:order-2">
             <InfoProfile username={username} />
           </div>
-          <div className="w-[25%] bg-blancoblanco">
+          <div className="w-full lg:w-[25%] bg-blancoblanco order-3">
             <Watched seriesWatched={seriesWatched} username={username} />
           </div>
         </div>
       ) : (
-        <div>
-          <h1>NO ESTAS LOGUEADO</h1>
+        <div className="h-screen flex justify-center items-center dark:bg-gris6 bg-blancoblanco">
+          <h1 className="text-2xl dark:text-grisclaro text-negro">NO ESTAS LOGUEADO</h1>
         </div>
       )}
     </div>

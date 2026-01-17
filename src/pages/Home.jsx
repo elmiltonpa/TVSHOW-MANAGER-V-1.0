@@ -148,14 +148,14 @@ const Home = ({ user }) => {
       style={{ msScrollbarBaseColor: "#202123" }}
       className={`${
         serie && serie.length == 1 ? "h-screen" : ""
-      } bg-blancoblanco dark:bg-gris6 px-32 py-2`}
+      } bg-blancoblanco dark:bg-gris6 px-3 sm:px-6 md:px-12 lg:px-24 xl:px-32 py-2`}
     >
       <div className="">
         <SearchBar setSerie={setSerie} />
         <div className="conteiner">
           {serie ? (
             serie.length == 0 ? (
-              <div className="h-screen text-negro text-3xl flex justify-center">
+              <div className="h-screen text-negro dark:text-blancoblanco text-xl sm:text-2xl md:text-3xl flex justify-center items-start pt-10">
                 No se encontraron series :(
               </div>
             ) : (
@@ -176,7 +176,7 @@ const Home = ({ user }) => {
                   </div>
                 ))}
                 {isFetchingMore ? (
-                  <div className=" text-negro dark:text-blancoblanco text-3xl flex justify-center">
+                  <div className="text-negro dark:text-blancoblanco text-3xl flex justify-center pb-6">
                     <Spinner />
                   </div>
                 ) : null}

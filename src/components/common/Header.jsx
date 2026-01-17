@@ -37,24 +37,24 @@ const Header = ({ user, setUser, setToken }) => {
     <div
       className={`bg-purpuraoscuro ${
         location == "/login" || location == "/register" ? "hidden" : "block"
-      }  h-14 w-full drop-shadow-lg`}
+      }  h-14 sm:h-16 w-full drop-shadow-lg`}
     >
-      <div className="w-[92vw] pl-36 bg-purpuraoscuro h-full flex justify-between items-center">
-        <ul className="flex gap-5">
+      <div className="w-full px-3 sm:px-6 lg:px-36 bg-purpuraoscuro h-full flex justify-between items-center">
+        <ul className="flex gap-2 sm:gap-5">
           <li className="">
-            <Link className="text-blanco font-bold" to="/home">
+            <Link className="text-blanco font-bold text-sm sm:text-base md:text-lg" to="/home">
               TVSHOW MANAGER
             </Link>
           </li>
         </ul>
 
-        <ul className="flex justify-between">
-          <div className="flex mr-10 gap-5">
+        <ul className="flex justify-between items-center">
+          <div className="flex mr-2 sm:mr-4 md:mr-10 gap-2 sm:gap-3 md:gap-5">
             {user ? (
               <>
                 <li>
                   <Link
-                    className="text-blanco font-semibold text-lg"
+                    className="text-blanco font-semibold text-xs sm:text-sm md:text-base lg:text-lg"
                     to={`/${user.username}`}
                   >
                     Mi Perfil
@@ -63,14 +63,15 @@ const Header = ({ user, setUser, setToken }) => {
                 <li>
                   <Link to="/">
                     <button
-                      className="text-blanco font-semibold text-lg"
+                      className="text-blanco font-semibold text-xs sm:text-sm md:text-base lg:text-lg"
                       onClick={() => {
                         setToken(null);
                         setUser(null);
                         window.localStorage.removeItem("session");
                       }}
                     >
-                      Cerrar Sesión
+                      <span className="hidden sm:inline">Cerrar Sesión</span>
+                      <span className="sm:hidden">Salir</span>
                     </button>
                   </Link>
                 </li>
@@ -79,7 +80,7 @@ const Header = ({ user, setUser, setToken }) => {
               <>
                 <li>
                   <Link
-                    className="text-blanco font-semibold text-lg"
+                    className="text-blanco font-semibold text-xs sm:text-sm md:text-base lg:text-lg"
                     to="/login"
                   >
                     LOGIN
@@ -87,7 +88,7 @@ const Header = ({ user, setUser, setToken }) => {
                 </li>
                 <li>
                   <Link
-                    className="text-blanco font-semibold text-lg"
+                    className="text-blanco font-semibold text-xs sm:text-sm md:text-base lg:text-lg"
                     to="/register"
                   >
                     REGISTER
@@ -98,7 +99,7 @@ const Header = ({ user, setUser, setToken }) => {
           </div>
           <div>
             <li className="">
-              <div className="w-[60px] h-[34px] ">
+              <div className="w-[50px] h-[28px] sm:w-[60px] sm:h-[34px]">
                 <button
                   onClick={handleTheme}
                   className={`${
@@ -108,21 +109,21 @@ const Header = ({ user, setUser, setToken }) => {
                   <div
                     className={`${
                       theme
-                        ? "bg-gris6 transform translate-x-[25px] transition-transform duration-500 ease-out"
+                        ? "bg-gris6 transform translate-x-[21px] sm:translate-x-[25px] transition-transform duration-500 ease-out"
                         : "bg-blanco transition-transform duration-500 ease-out"
-                    } absolute top-[3px] left-1 text-white h-7 w-7 rounded-full`}
+                    } absolute top-[2px] sm:top-[3px] left-1 text-white h-6 w-6 sm:h-7 sm:w-7 rounded-full`}
                   ></div>
                   <div
                     className={`${
                       theme ? "block" : "invisible"
-                    } pt-[3px] pl-[1px]`}
+                    } pt-[2px] sm:pt-[3px] pl-[1px]`}
                   >
-                    <MdDarkMode className="dark:text-gris6" size={29} />
+                    <MdDarkMode className="dark:text-gris6" size={24} />
                   </div>
                   <div
-                    className={`${theme ? "invisible" : "block"} pt-[5px] pr-1`}
+                    className={`${theme ? "invisible" : "block"} pt-[3px] sm:pt-[5px] pr-1`}
                   >
-                    <MdOutlineLightMode size={24} color="white" />
+                    <MdOutlineLightMode size={20} color="white" />
                   </div>
                 </button>
               </div>

@@ -18,42 +18,42 @@ const CardDetail = ({
 
   const { handleSubmitFromSerieDetail, handleWatched } = useSeries();
   return (
-    <div className=" flex justify-center pb-10 pt-10">
-      <div className="w-[75%] shadow-home dark:bg-gris7 dark:shadow-[#090909] bg-blanco p-5 rounded-md gap-3">
-        <div className="flex w-full gap-4">
-          <div className="w-[25%] flex flex-col justify-center items-center h-full">
+    <div className="flex justify-center pb-10 pt-6 sm:pt-10 px-3 sm:px-0">
+      <div className="w-full sm:w-[90%] lg:w-[75%] shadow-home dark:bg-gris7 dark:shadow-[#090909] bg-blanco p-3 sm:p-5 rounded-md gap-3">
+        <div className="flex flex-col md:flex-row w-full gap-4">
+          <div className="w-full md:w-[25%] flex flex-col justify-center items-center">
             <img
-              className="h-full rounded-lg"
+              className="w-full max-w-[300px] md:w-full h-auto rounded-lg"
               src={IMG + serie.poster_path}
-              alt=""
+              alt={serie.name}
             />
             <div className="flex flex-col justify-center py-4 items-center">
-              <h1 className="text-xl font-semibold dark:text-azultwitter text-purpuraoscuro">
+              <h1 className="text-lg sm:text-xl font-semibold dark:text-azultwitter text-purpuraoscuro">
                 TEMPORADAS: {serie.number_of_seasons}
               </h1>
-              <h1 className="text-xl font-semibold dark:text-azultwitter text-purpuraoscuro">
+              <h1 className="text-lg sm:text-xl font-semibold dark:text-azultwitter text-purpuraoscuro">
                 EPISODIOS: {serie.number_of_episodes}
               </h1>
             </div>
           </div>
-          <div className="flex w-[75%] flex-col justify-between">
+          <div className="flex w-full md:w-[75%] flex-col justify-between">
             <div className="">
-              <div className="flex justify-between pr-20">
-                <div className="s">
-                  <div className="flex gap-1 ">
-                    <h1 className="text-negro dark:text-grisclaro text-4xl pb-3 font-bold">
+              <div className="flex flex-col sm:flex-row justify-between gap-3">
+                <div className="flex-1">
+                  <div className="flex gap-1">
+                    <h1 className="text-negro dark:text-grisclaro text-2xl sm:text-3xl md:text-4xl pb-3 font-bold">
                       {serie.name}
                     </h1>
                   </div>
-                  <h1 className="pt-1 dark:text-grisclaro  font-mono">
+                  <h1 className="pt-1 dark:text-grisclaro text-sm sm:text-base font-mono">
                     {serie.tagline ? `"${serie.tagline}"` : null}
                   </h1>
-                  <div className="flex py-2">
-                    <h3 className="text-purpuraoscuro dark:text-azultwitter text-xl font-black font-lato">
+                  <div className="flex py-2 flex-wrap items-center">
+                    <h3 className="text-purpuraoscuro dark:text-azultwitter text-lg sm:text-xl font-black font-lato">
                       {serie.first_air_date.slice(0, 4)}
                     </h3>
                     <span
-                      className={`px-5  font-bold ${
+                      className={`px-3 sm:px-5 font-bold text-sm sm:text-base ${
                         serie.status == "Ended"
                           ? "text-rojo"
                           : `${
@@ -71,42 +71,42 @@ const CardDetail = ({
                     </span>
                   </div>
                 </div>
-                <div className="cora pt-5">
+                <div className="flex justify-center sm:justify-end items-start pt-2 sm:pt-5">
                   <button
                     title={`${
                       serieAdded ? "Quitar de favoritos" : "Añadir a favoritos"
                     }`}
                     className={`${
-                      serieAdded ? "text-rojocorazon" : "text-negro"
+                      serieAdded ? "text-rojocorazon" : "text-negro dark:text-grisclaro"
                     }`}
                     onClick={(e) =>
                       handleSubmitFromSerieDetail(e, serie.id, setSerieAdded)
                     }
                   >
-                    <IoIosHeart size={60} color="" />
+                    <IoIosHeart size={50} className="sm:w-[60px] sm:h-[60px]" />
                   </button>
                 </div>
               </div>
-              <p className="py-2 border-t-2 dark:text-grisclaro  font-overview font-medium text-lg">
+              <p className="py-2 border-t-2 dark:text-grisclaro font-overview font-medium text-sm sm:text-base md:text-lg">
                 {serie.overview}
               </p>
             </div>
-            <div className="flex justify-evenly gap-16 pl-[5%] py-4">
-              <div className="items-center pl-4 flex flex-col justify-center">
-                <h1 className="text-lg dark:text-grisclaro  text-center font-normal">
+            <div className="flex flex-col sm:flex-row justify-evenly gap-4 sm:gap-8 md:gap-16 py-4">
+              <div className="items-center flex flex-col justify-center">
+                <h1 className="text-base sm:text-lg dark:text-grisclaro text-center font-normal">
                   {serie.created_by.length > 0
                     ? `Created by: ${serie.created_by[0].name}`
                     : null}
                 </h1>
-                <h1 className="text-base dark:text-grisclaro  font-medium">
+                <h1 className="text-sm sm:text-base dark:text-grisclaro font-medium text-center">
                   {serie.genres.map((genre) => genre.name).join(", ")}
                 </h1>
               </div>
               <div className="flex flex-col justify-center items-center">
-                <h2 className="text-purpuraoscuro dark:text-azultwitter text-2xl font-black">
+                <h2 className="text-purpuraoscuro dark:text-azultwitter text-xl sm:text-2xl font-black">
                   {parseFloat(serie.vote_average.toFixed(1))}/10
                 </h2>
-                <span className="font-medium dark:text-grisclaro ">
+                <span className="font-medium dark:text-grisclaro text-sm sm:text-base">
                   {serie.vote_count} votos de usuarios
                 </span>
               </div>
@@ -119,6 +119,7 @@ const CardDetail = ({
             <button
               title={`${serieWatched ? "Quitar de vistos" : "Añadir a vistos"}`}
               onClick={(e) => handleWatched(e, serie.id, setSerieWatched)}
+              className="dark:text-grisclaro"
             >
               {serieWatched ? (
                 <AiFillEyeInvisible size={40} />

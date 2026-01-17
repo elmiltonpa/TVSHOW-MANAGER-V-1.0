@@ -24,10 +24,10 @@ const SearchBar = () => {
   };
 
   return (
-    <div className="w-full h-16 flex justify-center items-center">
-      <div className="relative w-[30%]">
+    <div className="w-full h-16 flex justify-center items-center px-3">
+      <div className="relative w-full sm:w-[80%] md:w-[60%] lg:w-[50%] xl:w-[30%]">
         <input
-          className=" placeholder-negro border-2  border-purpuraclaro w-full px-3 h-10 text-negro text-xl"
+          className="placeholder-negro border-2 border-purpuraclaro w-full px-3 h-10 text-negro text-base sm:text-lg md:text-xl"
           value={text}
           type="text"
           placeholder="Buscar algo para ver..."

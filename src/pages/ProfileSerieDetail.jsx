@@ -97,25 +97,25 @@ const ProfileSerieDetail = () => {
     );
   }
   return (
-    <div className="flex flex-col gap-4 w-full dark:bg-gris6 items-center">
-      <div className="h-[50vh] flex flex-col justify-">
-        <h1 className="flex items-center dark:text-grisclaro justify-center text-3xl font-semibold py-2">
+    <div className="flex flex-col gap-4 w-full dark:bg-gris6 items-center px-3 sm:px-0 pb-10">
+      <div className="min-h-[30vh] sm:h-[50vh] flex flex-col justify-center items-center py-6">
+        <h1 className="flex items-center dark:text-grisclaro justify-center text-2xl sm:text-3xl font-semibold py-2 text-center px-4">
           {serie.name}
         </h1>
-        <div className="text-3xl flex dark:text-grisclaro justify-center items-center">
+        <div className="text-2xl sm:text-3xl flex dark:text-grisclaro justify-center items-center">
           {porcentajeSerie.toFixed(2)}%
         </div>
         {lastEpisode ? (
-          <div className="text-xl dark:text-grisclaro">
-            Ulitmo capitulo {lastEpisode.season}X{lastEpisode.capAux}
+          <div className="text-lg sm:text-xl dark:text-grisclaro text-center">
+            Ultimo capitulo {lastEpisode.season}X{lastEpisode.capAux}
           </div>
         ) : (
-          <div className="text-xl dark:text-grisclaro">
+          <div className="text-lg sm:text-xl dark:text-grisclaro text-center">
             No has visto ningun capitulo
           </div>
         )}
       </div>
-      <div className="flex flex-col w-[70%] gap-2 justify-center items-center">
+      <div className="flex flex-col w-full sm:w-[90%] md:w-[80%] lg:w-[70%] gap-2 justify-center items-center">
         {seasons ? (
           seasons.map((season) => (
             <div key={season.id} className="bg-red-300 w-full flex flex-col">
@@ -131,7 +131,7 @@ const ProfileSerieDetail = () => {
             </div>
           ))
         ) : (
-          <div>Loading...</div>
+          <div className="dark:text-grisclaro">Loading...</div>
         )}
       </div>
     </div>

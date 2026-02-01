@@ -22,9 +22,7 @@ const SerieCard = ({
   const navigate = useNavigate();
   const { handleSubmit } = useSeries();
 
-  // El ID de TMDB puede venir como 'id' (API directa) o 'tv_id' (nuestra BD)
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const tmdbId = (serie as any).id || serie.tv_id;
+  const tmdbId = serie.id ? Number(serie.id) : serie.tv_id;
 
   return (
     <div className="flex flex-col md:flex-row my-3 w-full bg-blanco dark:bg-gris5">
@@ -57,7 +55,7 @@ const SerieCard = ({
                       tmdbId,
                       setSeriesAdded,
                       seriesAdded,
-                      setIsLoadingToFavorite
+                      setIsLoadingToFavorite,
                     )
                   }
                   className={`${
@@ -77,7 +75,7 @@ const SerieCard = ({
                       tmdbId,
                       setSeriesAdded,
                       seriesAdded,
-                      setIsLoadingToFavorite
+                      setIsLoadingToFavorite,
                     )
                   }
                   className={`${

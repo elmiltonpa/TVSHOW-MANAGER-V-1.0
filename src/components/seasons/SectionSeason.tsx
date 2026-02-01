@@ -99,9 +99,9 @@ const SectionSeason = ({
                 className="flex flex-col sm:flex-row bg-blancoblanco dark:bg-gris7 border- border-"
                 key={episode.id}
               >
-                <div className="w-full sm:w-auto flex justify-center">
+                <div className="w-full sm:w-auto flex justify-center overflow-hidden">
                   <img
-                    className="w-full sm:w-[200px] md:w-[250px] h-auto object-cover"
+                    className="w-full sm:w-[200px] md:w-[250px] max-h-[150px] sm:max-h-[180px] md:max-h-[200px] object-cover"
                     src={IMG + episode.still_path}
                     alt={episode.name}
                   />

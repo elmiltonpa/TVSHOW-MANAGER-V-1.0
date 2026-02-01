@@ -141,7 +141,8 @@ const Home = () => {
     const fetchData = async () => {
       if (user) {
         const User = await getUser(user.username);
-        const series = await serieService.getSeriesByUserId(User.id!);
+        const seriesData = await serieService.getSeriesByUserId(User.id!);
+        const series = Array.isArray(seriesData) ? seriesData : [];
         const ids = series
           .filter((serie) => serie.favorite == true)
           .map((serie) => Number(serie.tv_id));

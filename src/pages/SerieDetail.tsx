@@ -35,32 +35,39 @@ const SerieDetail = () => {
       setSeasons(seasonsData);
 
       if (user) {
-        const User = await getUser(user.username);
-        const Series = await serieService.getSeriesByUserId(User.id!);
+        try {
+          const User = await getUser(user.username);
+          if (User && User.id) {
+            const seriesResponse = await serieService.getSeriesByUserId(User.id);
+            const Series = Array.isArray(seriesResponse) ? seriesResponse : [];
 
-        const serieSeasonsExist = Series.find(
-          (serie) => serie.tv_id == Number(request.tv_id || request.id),
-        );
+            const serieSeasonsExist = Series.find(
+              (serie) => serie.tv_id == Number(request.tv_id || request.id),
+            );
 
-        const serieIsFavorite = Series.some(
-          (serie) =>
-            serie.tv_id == Number(request.tv_id || request.id) &&
-            serie.favorite == true,
-        );
-        const serieIsWatched = Series.some(
-          (serie) =>
-            serie.tv_id == Number(request.tv_id || request.id) &&
-            serie.watched == true,
-        );
+            const serieIsFavorite = Series.some(
+              (serie) =>
+                serie.tv_id == Number(request.tv_id || request.id) &&
+                serie.favorite == true,
+            );
+            const serieIsWatched = Series.some(
+              (serie) =>
+                serie.tv_id == Number(request.tv_id || request.id) &&
+                serie.watched == true,
+            );
 
-        if (serieIsFavorite) {
-          setSerieAdded(true);
-        }
-        if (serieIsWatched) {
-          setSerieWatched(true);
-        }
-        if (serieSeasonsExist && Array.isArray(serieSeasonsExist.watching)) {
-          setSeasonsWatching(serieSeasonsExist.watching);
+            if (serieIsFavorite) {
+              setSerieAdded(true);
+            }
+            if (serieIsWatched) {
+              setSerieWatched(true);
+            }
+            if (serieSeasonsExist && Array.isArray(serieSeasonsExist.watching)) {
+              setSeasonsWatching(serieSeasonsExist.watching);
+            }
+          }
+        } catch (error) {
+          console.error("Error fetching user series details:", error);
         }
       }
       setSerie(request);

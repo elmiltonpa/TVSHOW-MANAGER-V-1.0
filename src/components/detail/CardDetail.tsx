@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 import useSeries from "../../utils/useSeries";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 import { IoIosHeart } from "react-icons/io";
@@ -20,12 +21,9 @@ const CardDetail = ({
   serieWatched,
   setSerieWatched,
 }: CardDetailProps) => {
-
   const { handleSubmitFromSerieDetail, handleWatched } = useSeries();
 
-  // Obtener el ID de forma segura (soporta objeto TMDB puro o nuestro objeto de BD)
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const tmdbId = (serie as any).id || serie.tv_id;
+  const tmdbId = serie.id || serie.tv_id;
 
   return (
     <div className="flex justify-center pb-10 pt-6 sm:pt-10 px-3 sm:px-0">
@@ -69,14 +67,14 @@ const CardDetail = ({
                         serie.status == "Ended"
                           ? "text-rojo"
                           : `${
-                            serie.status == "Returning Series"
-                              ? "text-verde"
-                              : `${
-                                serie.status == "Canceled"
-                                  ? "text-negro"
-                                  : null
-                              }`
-                          }`
+                              serie.status == "Returning Series"
+                                ? "text-verde"
+                                : `${
+                                    serie.status == "Canceled"
+                                      ? "text-negro"
+                                      : null
+                                  }`
+                            }`
                       }`}
                     >
                       {serie.status}
@@ -89,10 +87,16 @@ const CardDetail = ({
                       serieAdded ? "Quitar de favoritos" : "Añadir a favoritos"
                     }`}
                     className={`${
-                      serieAdded ? "text-rojocorazon" : "text-negro dark:text-grisclaro"
+                      serieAdded
+                        ? "text-rojocorazon"
+                        : "text-negro dark:text-grisclaro"
                     }`}
                     onClick={(e) =>
-                      handleSubmitFromSerieDetail(e, tmdbId, setSerieAdded)
+                      handleSubmitFromSerieDetail(
+                        e,
+                        Number(tmdbId),
+                        setSerieAdded,
+                      )
                     }
                   >
                     <IoIosHeart size={50} className="sm:w-[60px] sm:h-[60px]" />
@@ -130,7 +134,7 @@ const CardDetail = ({
           <div>
             <button
               title={`${serieWatched ? "Quitar de vistos" : "Añadir a vistos"}`}
-              onClick={(e) => handleWatched(e, tmdbId, setSerieWatched)}
+              onClick={(e) => handleWatched(e, Number(tmdbId), setSerieWatched)}
               className="dark:text-grisclaro"
             >
               {serieWatched ? (

@@ -6,6 +6,7 @@ import Spinner from "../components/common/Spinner";
 import { Link } from "react-router-dom";
 import { Serie } from "../types";
 import { useAuth } from "../context/AuthContext";
+import toast from "react-hot-toast";
 
 const MySeries = () => {
   const [series, setSeries] = useState<Serie[]>([]);
@@ -20,8 +21,10 @@ const MySeries = () => {
     try {
       await seriesService.deleteSerie(id);
       setSeries(series.filter((serie) => serie.id != id));
+      toast.success("Serie eliminada correctamente");
     } catch (error) {
       console.error(error);
+      toast.error("Error al eliminar la serie");
     }
     setIsLoadingToDelete(false);
   };

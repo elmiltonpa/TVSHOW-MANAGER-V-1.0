@@ -20,8 +20,11 @@ const SerieCard = ({
   setIsLoadingToFavorite,
 }: SerieCardProps) => {
   const navigate = useNavigate();
-
   const { handleSubmit } = useSeries();
+
+  // El ID de TMDB puede venir como 'id' (API directa) o 'tv_id' (nuestra BD)
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const tmdbId = (serie as any).id || serie.tv_id;
 
   return (
     <div className="flex flex-col md:flex-row my-3 w-full bg-blanco dark:bg-gris5">
@@ -45,13 +48,13 @@ const SerieCard = ({
               </p>
             </div>
             <div className="items-center border-t-2 dark:border-gris6 w-full flex justify-center mt-3 pt-2">
-              {seriesAdded.includes(serie.tv_id) ? (
+              {seriesAdded.includes(tmdbId) ? (
                 <button
                   disabled={isLoadingToFavorite}
                   onClick={(e) =>
                     handleSubmit(
                       e,
-                      serie.tv_id,
+                      tmdbId,
                       setSeriesAdded,
                       seriesAdded,
                       setIsLoadingToFavorite
@@ -71,7 +74,7 @@ const SerieCard = ({
                   onClick={(e) =>
                     handleSubmit(
                       e,
-                      serie.tv_id,
+                      tmdbId,
                       setSeriesAdded,
                       seriesAdded,
                       setIsLoadingToFavorite
@@ -121,7 +124,7 @@ const SerieCard = ({
           </div>
           <div className="">
             <button
-              onClick={() => navigate(`/home/${serie.id}`)}
+              onClick={() => navigate(`/home/${tmdbId}`)}
               className="text-sm sm:text-base md:text-lg hover:bg-blanco hover:text-purpuraoscuro px-4 sm:px-6 md:px-10 py-2 text-blanco font-semibold whitespace-nowrap"
             >
               VER DETALLES

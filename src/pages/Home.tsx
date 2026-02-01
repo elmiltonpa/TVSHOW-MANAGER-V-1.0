@@ -144,8 +144,7 @@ const Home = () => {
         const series = await serieService.getSeriesByUserId(User.id!);
         const ids = series
           .filter((serie) => serie.favorite == true)
-          .map((serie) => serie.tv_id);
-        setSeriesAdded(ids);
+                      .map((serie) => Number(serie.tv_id));        setSeriesAdded(ids);
       }
     };
     if (user) {

@@ -22,6 +22,11 @@ const CardDetail = ({
 }: CardDetailProps) => {
 
   const { handleSubmitFromSerieDetail, handleWatched } = useSeries();
+
+  // Obtener el ID de forma segura (soporta objeto TMDB puro o nuestro objeto de BD)
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const tmdbId = (serie as any).id || serie.tv_id;
+
   return (
     <div className="flex justify-center pb-10 pt-6 sm:pt-10 px-3 sm:px-0">
       <div className="w-full sm:w-[90%] lg:w-[75%] shadow-home dark:bg-gris7 dark:shadow-[#090909] bg-blanco p-3 sm:p-5 rounded-md gap-3">
@@ -87,7 +92,7 @@ const CardDetail = ({
                       serieAdded ? "text-rojocorazon" : "text-negro dark:text-grisclaro"
                     }`}
                     onClick={(e) =>
-                      handleSubmitFromSerieDetail(e, serie.tv_id, setSerieAdded)
+                      handleSubmitFromSerieDetail(e, tmdbId, setSerieAdded)
                     }
                   >
                     <IoIosHeart size={50} className="sm:w-[60px] sm:h-[60px]" />
@@ -125,7 +130,7 @@ const CardDetail = ({
           <div>
             <button
               title={`${serieWatched ? "Quitar de vistos" : "Añadir a vistos"}`}
-              onClick={(e) => handleWatched(e, serie.tv_id, setSerieWatched)}
+              onClick={(e) => handleWatched(e, tmdbId, setSerieWatched)}
               className="dark:text-grisclaro"
             >
               {serieWatched ? (

@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { InternalAxiosRequestConfig } from "axios";
 
 const axiosClient = axios.create({
   baseURL: import.meta.env.VITE_BACKEND_URL,
@@ -8,12 +8,19 @@ const axiosClient = axios.create({
 });
 
 axiosClient.interceptors.request.use(
-  (config) => {
+  (config: InternalAxiosRequestConfig) => {
     const sessionStr = window.localStorage.getItem("session");
     if (sessionStr) {
-      const session = JSON.parse(sessionStr);
-      if (session && session.token) {
-        config.headers.Authorization = `Bearer ${session.token}`;
+      try {
+        const session = JSON.parse(sessionStr);
+        if (session && session.token) {
+          if (!config.headers) {
+            config.headers = new axios.AxiosHeaders();
+          }
+          config.headers.set("Authorization", `Bearer ${session.token}`);
+        }
+      } catch (e) {
+        console.error("Error parsing session", e);
       }
     }
     return config;

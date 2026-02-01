@@ -13,8 +13,6 @@ import PublicRoute from "./components/common/PublicRoute";
 import { Toaster } from "react-hot-toast";
 
 const App = () => {
-  // ¡Adiós estado, adiós useEffect! Todo eso vive en AuthContext ahora.
-
   return (
     <>
       <Toaster
@@ -22,8 +20,8 @@ const App = () => {
         toastOptions={{
           style: {
             background: "#333",
-            color: "#fff"
-          }
+            color: "#fff",
+          },
         }}
       />
       <BrowserRouter

@@ -139,9 +139,6 @@ const useSeries = () => {
         newEpisodes[season - 1][episode - 1] = !arrayWatched[season - 1][episode - 1];
         return newEpisodes;
       });
-      
-      // Feedback opcional para caps individuales (puede ser ruidoso si marcan muchos rapido)
-      // toast.success("Progreso guardado"); 
 
     } catch (error) {
       console.error("Error al actualizar episodio", error);

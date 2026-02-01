@@ -29,7 +29,11 @@ const SectionSeason = ({
   const [isLoadingVisto, setIsLoadingVisto] = useState(false);
 
   useEffect(() => {
-    if (arrayWatching) {
+    setArrayWatching(seasonwatching);
+  }, [seasonwatching]);
+
+  useEffect(() => {
+    if (arrayWatching && arrayWatching[season - 1]) {
       const seassonIsFull = arrayWatching[season - 1].every(
         (episode) => episode === true,
       );

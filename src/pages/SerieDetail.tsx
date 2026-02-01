@@ -11,6 +11,7 @@ import { useAuth } from "../context/AuthContext";
 
 const SerieDetail = () => {
   const [isLoading, setIsLoading] = useState(true);
+  const [isLoadingUserData, setIsLoadingUserData] = useState(false);
   const [serieWatched, setSerieWatched] = useState(false);
   const [serieAdded, setSerieAdded] = useState(false);
   const [serie, setSerie] = useState<Serie | null>(null);
@@ -26,58 +27,65 @@ const SerieDetail = () => {
     const fetchData = async () => {
       if (!id) return;
 
-      const request = await api.searchTvShowById(id);
-      const fetchSeasons = Array.from(
-        { length: request.number_of_seasons || 0 },
-        (_, i) => api.searchTvSeasonById(id, i + 1),
-      );
-      const seasonsData = await Promise.all(fetchSeasons);
-      setSeasons(seasonsData);
+      try {
+        const request = await api.searchTvShowById(id);
+        const fetchSeasons = Array.from(
+          { length: request.number_of_seasons || 0 },
+          (_, i) => api.searchTvSeasonById(id, i + 1),
+        );
+        const seasonsData = await Promise.all(fetchSeasons);
 
-      if (user) {
-        try {
-          const User = await getUser(user.username);
-          if (User && User.id) {
-            const seriesResponse = await serieService.getSeriesByUserId(User.id);
-            const Series = Array.isArray(seriesResponse) ? seriesResponse : [];
+        setSerie(request);
+        setSeasons(seasonsData);
 
-            const serieSeasonsExist = Series.find(
-              (serie) => serie.tv_id == Number(request.tv_id || request.id),
-            );
+        if (user) {
+          setIsLoadingUserData(true);
+          try {
+            const User = await getUser(user.username);
+            if (User && User.id) {
+              const seriesResponse = await serieService.getSeriesByUserId(User.id);
+              const Series = Array.isArray(seriesResponse) ? seriesResponse : [];
 
-            const serieIsFavorite = Series.some(
-              (serie) =>
-                serie.tv_id == Number(request.tv_id || request.id) &&
-                serie.favorite == true,
-            );
-            const serieIsWatched = Series.some(
-              (serie) =>
-                serie.tv_id == Number(request.tv_id || request.id) &&
-                serie.watched == true,
-            );
+              const serieSeasonsExist = Series.find(
+                (serie) => serie.tv_id == Number(request.tv_id || request.id),
+              );
 
-            if (serieIsFavorite) {
-              setSerieAdded(true);
+              const isFavorite = Series.some(
+                (serie) =>
+                  serie.tv_id == Number(request.tv_id || request.id) &&
+                  serie.favorite == true,
+              );
+              const isWatched = Series.some(
+                (serie) =>
+                  serie.tv_id == Number(request.tv_id || request.id) &&
+                  serie.watched == true,
+              );
+
+              let watchingData: boolean[][] | null = null;
+              if (serieSeasonsExist && Array.isArray(serieSeasonsExist.watching)) {
+                watchingData = serieSeasonsExist.watching;
+              }
+
+              setSerieAdded(isFavorite);
+              setSerieWatched(isWatched);
+              setSeasonsWatching(watchingData);
             }
-            if (serieIsWatched) {
-              setSerieWatched(true);
-            }
-            if (serieSeasonsExist && Array.isArray(serieSeasonsExist.watching)) {
-              setSeasonsWatching(serieSeasonsExist.watching);
-            }
+          } catch (error) {
+            console.error("Error fetching user series details:", error);
           }
-        } catch (error) {
-          console.error("Error fetching user series details:", error);
+          setIsLoadingUserData(false);
         }
+        setIsLoading(false);
+      } catch (error) {
+        console.error("Error fetching serie details:", error);
+        setIsLoading(false);
       }
-      setSerie(request);
-      setIsLoading(false);
     };
 
     fetchData();
   }, [id, user]);
 
-  if (isLoading) {
+  if (isLoading || isLoadingUserData) {
     return (
       <div className="h-screen flex justify-center dark:bg-gris6 dark:text-blancoblanco items-center pb-56 bg-blancoblanco text-3xl font-bold">
         <Spinner />

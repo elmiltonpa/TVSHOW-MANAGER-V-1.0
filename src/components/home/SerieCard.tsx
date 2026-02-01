@@ -122,10 +122,10 @@ const SerieCard = ({
               {parseFloat(serie.vote_average.toFixed(2))}
             </h2>
           </div>
-          <div className="">
+          <div className="flex-1 sm:flex-initial min-w-0">
             <button
               onClick={() => navigate(`/home/${tmdbId}`)}
-              className="text-sm sm:text-base md:text-lg hover:bg-blanco hover:text-purpuraoscuro px-4 sm:px-6 md:px-10 py-2 text-blanco font-semibold whitespace-nowrap"
+              className="w-full text-xs sm:text-sm md:text-base lg:text-lg hover:bg-blanco hover:text-purpuraoscuro px-2 sm:px-4 md:px-6 lg:px-8 py-2 text-blanco font-semibold truncate"
             >
               VER DETALLES
             </button>

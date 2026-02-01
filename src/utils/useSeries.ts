@@ -7,7 +7,6 @@ import { AxiosResponse } from "axios";
 import { useAuth } from "../context/AuthContext";
 import toast from "react-hot-toast";
 
-// Tipos auxiliares
 type SetState<T> = React.Dispatch<React.SetStateAction<T>>;
 
 const useSeries = () => {
@@ -21,7 +20,7 @@ const useSeries = () => {
     seassonIsFull: boolean,
     setSeasonIsFull: SetState<boolean>,
     setSeasonInfo: SetState<boolean[] | null>,
-    infoOfSeasons: Season[]
+    infoOfSeasons: Season[],
   ) => {
     e.preventDefault();
 
@@ -31,14 +30,15 @@ const useSeries = () => {
         toast.error("Debes iniciar sesión");
         return;
       }
-      
+
       const User = await getUser(user.username);
       const seriesUser = await serieService.getSeriesByUserId(User.id!);
       const serieUser = seriesUser.find((serie) => serie.tv_id == serieId);
 
       if (serieUser === undefined) {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        const serieCreada: any = await serieService.createSerie({ tv_id: serieId } as Partial<Serie>);
+        const serieCreada = await serieService.createSerie({
+          tv_id: serieId,
+        } as Partial<Serie>);
 
         const createArray = infoOfSeasons.map((season) => {
           const cantidadEpisodios = season.episodes.length;
@@ -50,9 +50,7 @@ const useSeries = () => {
             watching: createArray,
           },
         };
-
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        await serieService.updateSerie(serieCreada.data.id, updateArray as any);
+        await serieService.updateSerie(serieCreada.data.id, updateArray);
 
         setSeasonInfo(createArray[season - 1]);
         setSeasonIsFull(true);
@@ -63,9 +61,9 @@ const useSeries = () => {
       const watching = serieUser.watching as boolean[][];
 
       const seasonWatched = seassonIsFull
-        ? (setSeasonInfo((prev) => prev ? prev.map(() => false) : null),
+        ? (setSeasonInfo((prev) => (prev ? prev.map(() => false) : null)),
           watching[season - 1].map(() => false))
-        : (setSeasonInfo((prev) => prev ? prev.map(() => true) : null),
+        : (setSeasonInfo((prev) => (prev ? prev.map(() => true) : null)),
           watching[season - 1].map(() => true));
 
       const update = {
@@ -74,16 +72,14 @@ const useSeries = () => {
         },
       };
 
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      await serieService.updateSerie(serieUser.id!, update as any);
+      await serieService.updateSerie(serieUser.id!, update);
       setSeasonIsFull(!seassonIsFull);
-      
+
       if (!seassonIsFull) {
         toast.success(`Temporada ${season} marcada como vista`);
       } else {
         toast.success(`Temporada ${season} desmarcada`);
       }
-
     } catch (error) {
       console.error(error);
       toast.error("Error al actualizar la temporada");
@@ -97,13 +93,13 @@ const useSeries = () => {
     episode: number,
     setArrayWatching: SetState<boolean[][] | null>,
     codigo: number,
-    setIsLoadingVisto: SetState<boolean>
+    setIsLoadingVisto: SetState<boolean>,
   ) => {
     if (codigo === 1 && e) {
       e.preventDefault();
     }
     setIsLoadingVisto(true);
-    
+
     try {
       if (!user) {
         navigate("/login");
@@ -113,13 +109,14 @@ const useSeries = () => {
       const User = await getUser(user.username);
       const seriesUser = await serieService.getSeriesByUserId(User.id!);
       let serieUser = seriesUser.find((serie) => serie.tv_id == serieId);
-      
+
       if (serieUser === undefined) {
-         // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        const serieCreada: any = await serieService.createSerie({ tv_id: serieId } as Partial<Serie>);
+        const serieCreada = await serieService.createSerie({
+          tv_id: serieId,
+        } as Partial<Serie>);
         serieUser = serieCreada.data;
       }
-      
+
       if (!serieUser) return;
 
       const arrayWatched = serieUser.watching as boolean[][];
@@ -131,15 +128,14 @@ const useSeries = () => {
         },
       };
 
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      await serieService.updateSerie(serieUser.id!, update as any);
+      await serieService.updateSerie(serieUser.id!, update);
 
       setArrayWatching(() => {
         const newEpisodes = JSON.parse(JSON.stringify(arrayWatched));
-        newEpisodes[season - 1][episode - 1] = !arrayWatched[season - 1][episode - 1];
+        newEpisodes[season - 1][episode - 1] =
+          !arrayWatched[season - 1][episode - 1];
         return newEpisodes;
       });
-
     } catch (error) {
       console.error("Error al actualizar episodio", error);
       toast.error("No se pudo marcar el episodio");
@@ -147,7 +143,11 @@ const useSeries = () => {
     setIsLoadingVisto(false);
   };
 
-  const handleWatched = async (e: React.MouseEvent, serieId: number, setSerieWatched: SetState<boolean>) => {
+  const handleWatched = async (
+    e: React.MouseEvent,
+    serieId: number,
+    setSerieWatched: SetState<boolean>,
+  ) => {
     e.preventDefault();
 
     if (!user) {
@@ -162,20 +162,20 @@ const useSeries = () => {
       const serieWatched = seriesUser.find((serie) => serie.tv_id == serieId);
 
       if (serieWatched != undefined) {
-        await serieService.updateSerie(
-          serieWatched.id!,
-          { watched: !serieWatched.watched } as Partial<Serie>
-        );
+        await serieService.updateSerie(serieWatched.id!, {
+          watched: !serieWatched.watched,
+        } as Partial<Serie>);
         setSerieWatched(!serieWatched.watched!);
         if (!serieWatched.watched) toast.success("Serie marcada como vista");
         else toast.success("Serie desmarcada de vistas");
       } else {
-        const serieCreada = await serieService.createSerie({ tv_id: serieId } as Partial<Serie>) as AxiosResponse<Serie>;
+        const serieCreada = (await serieService.createSerie({
+          tv_id: serieId,
+        } as Partial<Serie>)) as AxiosResponse<Serie>;
 
-        await serieService.updateSerie(
-          serieCreada.data.id!,
-          { watched: true } as Partial<Serie>
-        );
+        await serieService.updateSerie(serieCreada.data.id!, {
+          watched: true,
+        } as Partial<Serie>);
         setSerieWatched(true);
         toast.success("Serie marcada como vista");
       }
@@ -190,7 +190,7 @@ const useSeries = () => {
     serieId: number,
     setSeriesAdded: SetState<number[]>,
     seriesAdded: number[],
-    setIsLoadingToFavorite: SetState<boolean>
+    setIsLoadingToFavorite: SetState<boolean>,
   ) => {
     e.preventDefault();
     setIsLoadingToFavorite(true);
@@ -206,14 +206,13 @@ const useSeries = () => {
       const userSeries = await serieService.getSeriesByUserId(User.id!);
 
       const serieAlreadyAdded = userSeries.find(
-        (serie) => serie.tv_id == serieId
+        (serie) => serie.tv_id == serieId,
       );
 
       if (serieAlreadyAdded != undefined) {
-        await serieService.updateSerie(
-          serieAlreadyAdded.id!,
-          { favorite: !serieAlreadyAdded.favorite } as Partial<Serie>
-        );
+        await serieService.updateSerie(serieAlreadyAdded.id!, {
+          favorite: !serieAlreadyAdded.favorite,
+        } as Partial<Serie>);
         if (serieAlreadyAdded.favorite) {
           setSeriesAdded(seriesAdded.filter((serie) => serie !== serieId));
           toast.success("Eliminada de favoritos");
@@ -222,11 +221,12 @@ const useSeries = () => {
           toast.success("Añadida a favoritos");
         }
       } else {
-        const serieCreada = await serieService.createSerie({ tv_id: serieId } as Partial<Serie>) as AxiosResponse<Serie>;
-        await serieService.updateSerie(
-          serieCreada.data.id!,
-          { favorite: true } as Partial<Serie>
-        );
+        const serieCreada = (await serieService.createSerie({
+          tv_id: serieId,
+        } as Partial<Serie>)) as AxiosResponse<Serie>;
+        await serieService.updateSerie(serieCreada.data.id!, {
+          favorite: true,
+        } as Partial<Serie>);
         setSeriesAdded([...seriesAdded, serieId]);
         toast.success("Añadida a favoritos");
       }
@@ -236,7 +236,11 @@ const useSeries = () => {
     setIsLoadingToFavorite(false);
   };
 
-  const handleSubmitFromSerieDetail = async (e: React.MouseEvent, serieId: number, setSeriesAdded: SetState<boolean>) => {
+  const handleSubmitFromSerieDetail = async (
+    e: React.MouseEvent,
+    serieId: number,
+    setSeriesAdded: SetState<boolean>,
+  ) => {
     e.preventDefault();
 
     try {
@@ -248,13 +252,12 @@ const useSeries = () => {
       const User = await getUser(user.username);
       const userSeries = await serieService.getSeriesByUserId(User.id!);
       const serieAlreadyAdded = userSeries.find(
-        (serie) => serie.tv_id == serieId
+        (serie) => serie.tv_id == serieId,
       );
       if (serieAlreadyAdded != undefined) {
-        await serieService.updateSerie(
-          serieAlreadyAdded.id!,
-          { favorite: !serieAlreadyAdded.favorite } as Partial<Serie>
-        );
+        await serieService.updateSerie(serieAlreadyAdded.id!, {
+          favorite: !serieAlreadyAdded.favorite,
+        } as Partial<Serie>);
         if (serieAlreadyAdded.favorite) {
           setSeriesAdded(false);
           toast.success("Eliminada de favoritos");
@@ -263,11 +266,12 @@ const useSeries = () => {
           toast.success("Añadida a favoritos");
         }
       } else {
-        const serieCreada = await serieService.createSerie({ tv_id: serieId } as Partial<Serie>) as AxiosResponse<Serie>;
-        await serieService.updateSerie(
-          serieCreada.data.id!,
-          { favorite: true } as Partial<Serie>
-        );
+        const serieCreada = (await serieService.createSerie({
+          tv_id: serieId,
+        } as Partial<Serie>)) as AxiosResponse<Serie>;
+        await serieService.updateSerie(serieCreada.data.id!, {
+          favorite: true,
+        } as Partial<Serie>);
         setSeriesAdded(true);
         toast.success("Añadida a favoritos");
       }
@@ -280,7 +284,7 @@ const useSeries = () => {
     e: React.MouseEvent,
     serieId: number,
     seriesUserFav: Serie[],
-    setSeriesFav: SetState<Serie[] | null>
+    setSeriesFav: SetState<Serie[] | null>,
   ) => {
     e.preventDefault();
 
@@ -293,16 +297,17 @@ const useSeries = () => {
       const User = await getUser(user.username);
       const seriesUser = await serieService.getSeriesByUserId(User.id!);
       const serieToDelete = seriesUser.find((serie) => serie.tv_id == serieId);
-      
+
       if (serieToDelete) {
-          await serieService.updateSerie(
-            serieToDelete.id!,
-            { favorite: false } as Partial<Serie>
+        await serieService.updateSerie(serieToDelete.id!, {
+          favorite: false,
+        } as Partial<Serie>);
+        if (seriesUserFav) {
+          setSeriesFav(
+            seriesUserFav.filter((serie) => serie.tv_id !== serieId),
           );
-          if (seriesUserFav) {
-             setSeriesFav(seriesUserFav.filter((serie) => serie.tv_id !== serieId));
-          }
-          toast.success("Eliminada de favoritos");
+        }
+        toast.success("Eliminada de favoritos");
       }
     } catch (error) {
       console.error("Error al eliminar", error);

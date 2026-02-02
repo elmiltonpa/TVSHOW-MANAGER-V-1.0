@@ -8,8 +8,6 @@ const axiosClient = axios.create({
   },
 });
 
-console.log("--- AXIOS BASE URL:", import.meta.env.VITE_BACKEND_URL);
-
 axiosClient.interceptors.request.use(
   (config: InternalAxiosRequestConfig) => {
     const sessionStr = window.localStorage.getItem("session");

@@ -5,13 +5,9 @@ const stringConnect = config.MONGODB_URI;
 
 mongoose
   .connect(stringConnect)
-  .then(() => {
-    console.error("--- MONGODB CONNECTED SUCCESSFULLY ---");
-  })
+  .then(() => {})
   .catch((err) => {
-    console.error("--- MONGODB CONNECTION ERROR ---");
-    console.error(err);
-    // No throw, let process continue logging
+    console.error("MongoDB connection error:", err);
   });
 
 export default mongoose;

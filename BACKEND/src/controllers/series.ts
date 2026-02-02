@@ -13,11 +13,7 @@ seriesRouter.get(
 
     try {
       const series = await Serie.find({ user: id });
-      if (series && series.length > 0) {
-        response.json(series);
-      } else {
-        response.status(404).json({ error: "tv show not found" });
-      }
+      response.json(series);
     } catch (error) {
       next(error);
     }
@@ -37,7 +33,7 @@ seriesRouter.post(
         return response.status(404).json({ error: "user not found" });
       }
 
-      const serieApi = await getSerie(serie.id);
+      const serieApi = await getSerie(serie.tv_id);
       const episodes = serieApi.seasons
         .map((season) => {
           if (season.season_number !== 0) {

@@ -9,7 +9,11 @@ interface FavSeriesProps {
   setSeriesFav: React.Dispatch<React.SetStateAction<Serie[] | null>>;
 }
 
-export const FavSeries = ({ seriesFav, username, setSeriesFav }: FavSeriesProps) => {
+export const FavSeries = ({
+  seriesFav,
+  username,
+  setSeriesFav,
+}: FavSeriesProps) => {
   const { handleUnfavoriteFromProfile } = useSeries();
 
   return (
@@ -40,7 +44,7 @@ export const FavSeries = ({ seriesFav, username, setSeriesFav }: FavSeriesProps)
                       e,
                       serie.tv_id,
                       seriesFav,
-                      setSeriesFav
+                      setSeriesFav,
                     )
                   }
                   className="h-full hover:text-blancoblanco dark:text-grisclaro w-full flex justify-center items-center"
@@ -52,7 +56,7 @@ export const FavSeries = ({ seriesFav, username, setSeriesFav }: FavSeriesProps)
           ))
         ) : (
           <div className="text-lg sm:text-xl md:text-2xl dark:text-grisclaro text-center px-2">
-            Aun no tienes series favoritas :(
+            Aun no tienes series favoritas
           </div>
         )}
       </div>

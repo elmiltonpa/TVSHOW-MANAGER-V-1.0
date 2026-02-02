@@ -40,7 +40,7 @@ const authLimiter = rateLimit({
 //   optionsSuccessStatus: 200,
 // };
 
-app.use(helmet());
+// app.use(helmet());
 app.use(cors());
 app.use(express.json());
 app.use(limiter);
@@ -54,4 +54,16 @@ app.use(unknownEndpoint);
 app.use(errorHandler);
 
 const PORT = config.PORT;
-app.listen(PORT, () => {});
+
+console.log("--- BACKEND STARTING ---");
+console.log("Allowed Origins Config:", corsOptions.origin);
+
+app.use((req, res, next) => {
+  console.log(`[REQUEST] ${req.method} ${req.path}`);
+  console.log(`[REQUEST] Origin: ${req.get("origin")}`);
+  next();
+});
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});

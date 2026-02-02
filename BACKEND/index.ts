@@ -55,14 +55,14 @@ app.use(errorHandler);
 
 const PORT = config.PORT;
 
-console.log("--- BACKEND STARTING ---");
+console.error("--- BACKEND STARTING ---");
 
-app.use((req, res, next) => {
-  console.log(`[REQUEST] ${req.method} ${req.path}`);
-  console.log(`[REQUEST] Origin: ${req.get("origin")}`);
+app.use((req, _res, next) => {
+  console.error(`[REQUEST] ${req.method} ${req.path}`);
+  console.error(`[REQUEST] Origin: ${req.get("origin")}`);
   next();
 });
 
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+  console.error(`Server running on port ${PORT}`);
 });

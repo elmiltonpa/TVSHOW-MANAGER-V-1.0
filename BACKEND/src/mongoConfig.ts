@@ -6,7 +6,7 @@ const stringConnect = config.MONGODB_URI;
 mongoose
   .connect(stringConnect)
   .then(() => {
-    console.log("--- MONGODB CONNECTED SUCCESSFULLY ---");
+    console.error("--- MONGODB CONNECTED SUCCESSFULLY ---");
   })
   .catch((err) => {
     console.error("--- MONGODB CONNECTION ERROR ---");

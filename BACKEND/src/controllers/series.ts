@@ -59,7 +59,8 @@ seriesRouter.post(
       });
 
       const savedSerie = await newSerie.save();
-      user.series = user.series.concat(savedSerie._id as any);
+
+      user.series = user.series.concat(savedSerie._id);
       await user.save();
       response.status(201).json(savedSerie);
     } catch (error) {
@@ -100,13 +101,13 @@ seriesRouter.delete(
       if (!user) {
         return response.status(404).json({ error: "user not found" });
       }
-      const serieIndex = user.series.indexOf(id as any);
+      const serieIndex = user.series.findIndex((s) => s.toString() === id);
 
       if (serieIndex !== -1) {
         user.series.splice(serieIndex, 1);
         await user.save();
 
-        await Serie.findByIdAndRemove(id);
+        await Serie.findByIdAndDelete(id);
 
         return response.status(204).end();
       } else {

@@ -1,4 +1,5 @@
 import { Request, Response, NextFunction } from "express";
+import mongoose from "mongoose";
 
 const errorHandler = (error: Error, _request: Request, response: Response, next: NextFunction) => {
   console.error(error.name, error.message);
@@ -13,7 +14,7 @@ const errorHandler = (error: Error, _request: Request, response: Response, next:
     return response.status(401).json({ error: "token expired" });
   } else if (error.name === "TooManyRequestsError") {
     return response.status(429).json({ error: "too many requests, please try again later" });
-  } else if (error.name === "MongoServerError" && (error as any).code === 11000) {
+  } else if (error instanceof mongoose.mongo.MongoServerError && error.code === 11000) {
     return response.status(400).json({ error: "username must be unique" });
   }
 

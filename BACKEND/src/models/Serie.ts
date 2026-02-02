@@ -48,9 +48,14 @@ const serieSchema = new Schema<ISerie>({
 
 serieSchema.set("toJSON", {
   transform: (_document, returnedObject) => {
-    returnedObject.id = returnedObject._id;
-    delete returnedObject._id;
-    delete returnedObject.__v;
+    const ret = returnedObject as {
+      id?: string;
+      _id?: Types.ObjectId;
+      __v?: number;
+    };
+    ret.id = ret._id?.toString();
+    delete ret._id;
+    delete ret.__v;
   },
 });
 

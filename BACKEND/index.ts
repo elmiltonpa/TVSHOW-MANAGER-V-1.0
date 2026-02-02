@@ -30,18 +30,18 @@ const authLimiter = rateLimit({
   message: { error: "too many login attempts, please try again later" },
 });
 
-const corsOptions = {
-  origin: [
-    "http://localhost:3000",
-    "http://localhost:5173",
-    config.ALLOWED_ORIGIN,
-  ].filter((origin) => origin !== undefined) as string[],
-  credentials: true,
-  optionsSuccessStatus: 200,
-};
+// const corsOptions = {
+//   origin: [
+//     "http://localhost:3000",
+//     "http://localhost:5173",
+//     config.ALLOWED_ORIGIN,
+//   ].filter((origin) => origin !== undefined) as string[],
+//   credentials: true,
+//   optionsSuccessStatus: 200,
+// };
 
 app.use(helmet());
-app.use(cors(corsOptions));
+app.use(cors());
 app.use(express.json());
 app.use(limiter);
 

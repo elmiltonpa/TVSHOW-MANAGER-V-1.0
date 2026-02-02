@@ -1,4 +1,5 @@
 import axios, { InternalAxiosRequestConfig } from "axios";
+import { toast } from "react-hot-toast";
 
 const axiosClient = axios.create({
   baseURL: import.meta.env.VITE_BACKEND_URL,
@@ -26,6 +27,20 @@ axiosClient.interceptors.request.use(
     return config;
   },
   (error) => {
+    return Promise.reject(error);
+  },
+);
+
+axiosClient.interceptors.response.use(
+  (response) => {
+    return response;
+  },
+  (error) => {
+    if (error.response && error.response.status === 401) {
+      window.localStorage.removeItem("session");
+      toast.error("Session expired, please login again");
+      window.location.href = "/";
+    }
     return Promise.reject(error);
   },
 );

@@ -31,10 +31,11 @@ const authLimiter = rateLimit({
 });
 
 const corsOptions = {
-  origin:
-    process.env.NODE_ENV === "production"
-      ? ["https://tvshow-manager-v-1-0.vercel.app"]
-      : ["http://localhost:3000", "http://localhost:5173"],
+  origin: [
+    "http://localhost:3000",
+    "http://localhost:5173",
+    config.ALLOWED_ORIGIN,
+  ].filter((origin) => origin !== undefined) as string[],
   credentials: true,
   optionsSuccessStatus: 200,
 };

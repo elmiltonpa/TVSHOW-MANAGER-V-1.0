@@ -6,6 +6,8 @@ import {
   ReactNode,
 } from "react";
 import { User } from "../types";
+import { jwtDecode } from "jwt-decode";
+import { toast } from "react-hot-toast";
 
 interface AuthContextType {
   user: Pick<User, "username"> | null;
@@ -13,6 +15,11 @@ interface AuthContextType {
   isLoading: boolean;
   login: (token: string, username: string) => void;
   logout: () => void;
+}
+
+interface DecodedToken {
+  exp: number;
+  [key: string]: any;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -27,13 +34,23 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       if (sessionStr) {
         try {
           const session = JSON.parse(sessionStr);
-          if (session && session.expirationDate > Date.now()) {
-            setUser({ username: session.username });
+          if (session && session.token) {
+            const decoded = jwtDecode<DecodedToken>(session.token);
+            // exp is in seconds, Date.now() in milliseconds
+            if (decoded.exp * 1000 > Date.now()) {
+              setUser({ username: session.username });
+            } else {
+              // Token expired
+              window.localStorage.removeItem("session");
+              toast.error("Session expired, please login again");
+              setUser(null);
+            }
           } else {
             window.localStorage.removeItem("session");
             setUser(null);
           }
-        } catch {
+        } catch (e) {
+          console.error("Invalid token or session", e);
           window.localStorage.removeItem("session");
           setUser(null);
         }
@@ -45,13 +62,9 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   }, []);
 
   const login = (token: string, username: string) => {
-    const sessionDurationInSeconds = 950400;
-    const expirationDate = Date.now() + sessionDurationInSeconds * 1000;
-
     const session = {
       token,
       username,
-      expirationDate,
     };
 
     window.localStorage.setItem("session", JSON.stringify(session));

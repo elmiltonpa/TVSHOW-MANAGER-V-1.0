@@ -2,7 +2,7 @@
 
 A modern Full-Stack application for tracking TV series, managing favorites, and monitoring episode progress. Built with a robust **MERN Stack** (MongoDB, Express, React, Node.js) and fully typed with **TypeScript**.
 
-**Live Demo:** [https://tvshow-manager-front.vercel.app](https://tvshow-manager-front.vercel.app)
+**Live Demo:** [https://tvshow-manager.vercel.app/home](https://tvshow-manager.vercel.app/home)
 
 ---
 
@@ -86,6 +86,3 @@ You need to configure environment variables for both applications.
 - **Favorites System:** Save your favorite shows.
 - **Real-time Search:** Integrated with TMDB API.
 - **Responsive UI:** Dark mode enabled and mobile-friendly interface.
-
-## 📄 License
-This project is open source and available under the [MIT License](LICENSE).

@@ -61,6 +61,10 @@ app.use((req, _res, next) => {
   next();
 });
 
-app.listen(PORT, () => {
-  console.error(`Server running on port ${PORT}`);
-});
+if (!process.env.VERCEL) {
+  app.listen(PORT, () => {
+    console.error(`Server running on port ${PORT}`);
+  });
+}
+
+export default app;

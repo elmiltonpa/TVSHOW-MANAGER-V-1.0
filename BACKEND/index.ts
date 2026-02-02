@@ -5,7 +5,7 @@ import usersRouter from "./src/controllers/users.js";
 import loginRouter from "./src/controllers/login.js";
 import seriesRouter from "./src/controllers/series.js";
 import cors from "cors";
-import helmet from "helmet";
+// import helmet from "helmet";
 import { rateLimit } from "express-rate-limit";
 import unknownEndpoint from "./src/middleware/unknownEndpoint.js";
 import errorHandler from "./src/middleware/errorHandler.js";
@@ -56,7 +56,6 @@ app.use(errorHandler);
 const PORT = config.PORT;
 
 console.log("--- BACKEND STARTING ---");
-console.log("Allowed Origins Config:", corsOptions.origin);
 
 app.use((req, res, next) => {
   console.log(`[REQUEST] ${req.method} ${req.path}`);

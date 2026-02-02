@@ -7,8 +7,8 @@ import seriesRouter from "./src/controllers/series.js";
 import cors from "cors";
 // import helmet from "helmet";
 import { rateLimit } from "express-rate-limit";
-import unknownEndpoint from "./src/middleware/unknownEndpoint.js";
-import errorHandler from "./src/middleware/errorHandler.js";
+// import unknownEndpoint from "./src/middleware/unknownEndpoint.js";
+// import errorHandler from "./src/middleware/errorHandler.js";
 
 import express from "express";
 
@@ -50,12 +50,10 @@ app.use("/api/register", authLimiter, registerRouter);
 app.use("/api/users", usersRouter);
 app.use("/api/series", seriesRouter);
 
-app.use(unknownEndpoint);
-app.use(errorHandler);
+// app.use(unknownEndpoint);
+// app.use(errorHandler);
 
 const PORT = config.PORT;
-
-console.error("--- BACKEND STARTING ---");
 
 app.use((req, _res, next) => {
   console.error(`[REQUEST] ${req.method} ${req.path}`);

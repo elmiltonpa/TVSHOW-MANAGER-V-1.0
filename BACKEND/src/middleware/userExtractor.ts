@@ -6,8 +6,12 @@ export interface CustomRequest extends Request {
   userId?: string;
 }
 
-const userExtractor = (request: CustomRequest, _response: Response, next: NextFunction) => {
-  const authorization = request.get("authorization");
+const userExtractor = (
+  request: CustomRequest,
+  _response: Response,
+  next: NextFunction
+): void => {
+  const authorization = request.headers.authorization;
   let token = "";
 
   if (authorization && authorization.toLowerCase().startsWith("bearer ")) {
@@ -18,11 +22,11 @@ const userExtractor = (request: CustomRequest, _response: Response, next: NextFu
     const decodedToken = jwt.verify(token, config.JWT_SECRET) as { id: string };
 
     if (!token || !decodedToken.id) {
-      return next(new jwt.JsonWebTokenError("token missing or invalid"));
+      next(new jwt.JsonWebTokenError("token missing or invalid"));
+      return;
     }
 
     request.userId = decodedToken.id;
-
     next();
   } catch (error) {
     next(error);

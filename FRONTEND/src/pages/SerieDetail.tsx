@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import SectionSeason from "../components/seasons/SectionSeason";
 import Spinner from "../components/common/Spinner";
 import CardDetail from "../components/detail/CardDetail";
+import NotFound from "./NotFound";
 import api from "../api/tmdb";
 import serieService from "../services/series";
 import getUser from "../services/user";
@@ -19,6 +20,7 @@ const SerieDetail = () => {
   const [seasonwatching, setSeasonsWatching] = useState<boolean[][] | null>(
     null,
   );
+  const [hasError, setHasError] = useState(false);
 
   const { id } = useParams<{ id: string }>();
   const { user } = useAuth();
@@ -85,6 +87,7 @@ const SerieDetail = () => {
         setIsLoading(false);
       } catch (error) {
         console.error("Error fetching serie details:", error);
+        setHasError(true);
         setIsLoading(false);
       }
     };
@@ -98,6 +101,10 @@ const SerieDetail = () => {
         <Spinner />
       </div>
     );
+  }
+
+  if (hasError) {
+    return <NotFound />;
   }
 
   if (!serie) return null;

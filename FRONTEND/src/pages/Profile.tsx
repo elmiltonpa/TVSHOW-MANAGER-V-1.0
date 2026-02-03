@@ -6,6 +6,7 @@ import { FavSeries } from "../components/profile/FavSeries";
 import Watched from "../components/profile/Watched";
 import Spinner from "../components/common/Spinner";
 import InfoProfile from "../components/profile/InfoProfile";
+import NotFound from "./NotFound";
 import { Serie } from "../types";
 import { useAuth } from "../context/AuthContext";
 
@@ -13,6 +14,7 @@ const Profile = () => {
   const [seriesFav, setSeriesFav] = useState<Serie[] | null>(null);
   const [seriesWatched, setSeriesWatched] = useState<Serie[] | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [hasError, setHasError] = useState(false);
 
   const { username } = useParams<{ username: string }>();
 
@@ -27,6 +29,12 @@ const Profile = () => {
       try {
         if (!username) return;
         const User = await getUser(username);
+        
+        if (!User || !User.id) {
+            setHasError(true);
+            return;
+        }
+
         const Series = await seriesService.getSeriesByUserId(User.id!);
 
         const FavSeries = Series.filter((serie) => serie.favorite == true);
@@ -36,6 +44,7 @@ const Profile = () => {
         setSeriesWatched(WatchedSeries);
       } catch (error) {
         console.error("Error cargando perfil", error);
+        setHasError(true);
       } finally {
         setIsLoading(false);
       }
@@ -56,16 +65,16 @@ const Profile = () => {
     );
   }
 
+  if (hasError) {
+    return <NotFound />;
+  }
+
   return (
     <div className="">
       <div className="min-h-screen flex flex-col lg:flex-row">
         <div className="w-full lg:w-[25%] order-2 lg:order-1">
           {seriesFav && username && (
-            <FavSeries
-              seriesFav={seriesFav}
-              setSeriesFav={setSeriesFav}
-              username={username}
-            />
+            <FavSeries seriesFav={seriesFav} setSeriesFav={setSeriesFav} />
           )}
         </div>
         <div className="w-full lg:w-1/2 order-1 lg:order-2">
@@ -73,7 +82,7 @@ const Profile = () => {
         </div>
         <div className="w-full lg:w-[25%] bg-white order-3">
           {seriesWatched && username && (
-            <Watched seriesWatched={seriesWatched} username={username} />
+            <Watched seriesWatched={seriesWatched} />
           )}
         </div>
       </div>

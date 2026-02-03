@@ -1,6 +1,5 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Login from "./pages/Login";
-import SeasonProfile from "./pages/ProfileSerieDetail";
 import SerieDetail from "./pages/SerieDetail";
 import Register from "./pages/Register";
 import Home from "./pages/Home";
@@ -10,6 +9,7 @@ import Footer from "./components/common/Footer";
 import MySeries from "./pages/MySeries";
 import ProtectedRoute from "./components/common/ProtectedRoute";
 import PublicRoute from "./components/common/PublicRoute";
+import NotFound from "./pages/NotFound";
 import { Toaster } from "react-hot-toast";
 import { SeriesProvider } from "./utils/useSeries";
 
@@ -41,13 +41,11 @@ const App = () => {
                   <Route path="/myseries" element={<MySeries />} />
                   <Route path="/:username" element={<Profile />} />
                 </Route>
-
-                <Route path="/:username/:id" element={<SeasonProfile />} />
-
                 <Route element={<PublicRoute />}>
                   <Route path="/login" element={<Login />} />
                   <Route path="/register" element={<Register />} />
                 </Route>
+                <Route path="*" element={<NotFound />} />
               </Routes>
             </div>
             <footer>

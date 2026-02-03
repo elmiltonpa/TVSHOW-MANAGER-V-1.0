@@ -5,19 +5,14 @@ import { Serie } from "../../types";
 
 interface FavSeriesProps {
   seriesFav: Serie[];
-  username: string;
   setSeriesFav: React.Dispatch<React.SetStateAction<Serie[] | null>>;
 }
 
-export const FavSeries = ({
-  seriesFav,
-  username,
-  setSeriesFav,
-}: FavSeriesProps) => {
+export const FavSeries = ({ seriesFav, setSeriesFav }: FavSeriesProps) => {
   const { handleUnfavoriteFromProfile } = useSeries();
 
   return (
-    <div className="min-h-[300px] lg:h-full dark:bg-background-dark flex pb-5 flex-col overflow-y-auto bg-white gap-4">
+    <div className="min-h-75 lg:h-full dark:bg-background-dark flex pb-5 flex-col overflow-y-auto bg-white gap-4">
       <h1 className="text-xl sm:text-2xl dark:text-gray-light text-center pt-2 font-bold text-primary">
         Series favoritas
       </h1>
@@ -30,7 +25,7 @@ export const FavSeries = ({
               className="dark:bg-surface-medium dark:shadow-seriefav dark:hover:bg-surface-hover flex shadow-seriefav h-14 sm:h-16 rounded-lg shadow-foreground"
             >
               <div className="w-[83%] pl-[5%] sm:pl-[9%] p-2">
-                <Link to={`/${username}/${serie.tv_id}`} className="h-full">
+                <Link to={`/home/${serie.tv_id}`} className="h-full">
                   <h1 className="dark:text-white flex h-full text-sm sm:text-base md:text-lg text-center font-medium flex-col justify-center items-center">
                     {serie.tv_title}
                   </h1>

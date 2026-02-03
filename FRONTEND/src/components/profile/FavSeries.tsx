@@ -17,8 +17,8 @@ export const FavSeries = ({
   const { handleUnfavoriteFromProfile } = useSeries();
 
   return (
-    <div className="min-h-[300px] lg:h-full dark:bg-gris6 flex pb-5 flex-col overflow-y-auto bg-blancoblanco gap-4">
-      <h1 className="text-xl sm:text-2xl dark:text-grisclaro text-center pt-2 font-bold text-purpuraoscuro">
+    <div className="min-h-[300px] lg:h-full dark:bg-background-dark flex pb-5 flex-col overflow-y-auto bg-white gap-4">
+      <h1 className="text-xl sm:text-2xl dark:text-gray-light text-center pt-2 font-bold text-primary">
         Series favoritas
       </h1>
       <div className="flex flex-col px-3 sm:px-5 gap-3 w-full">
@@ -27,16 +27,16 @@ export const FavSeries = ({
           seriesFav.map((serie) => (
             <div
               key={serie.id}
-              className="dark:bg-gris7 dark:shadow-seriefav dark:hover:bg-gris7hover flex shadow-seriefav h-14 sm:h-16 rounded-lg shadow-negro"
+              className="dark:bg-surface-medium dark:shadow-seriefav dark:hover:bg-surface-hover flex shadow-seriefav h-14 sm:h-16 rounded-lg shadow-foreground"
             >
               <div className="w-[83%] pl-[5%] sm:pl-[9%] p-2">
                 <Link to={`/${username}/${serie.tv_id}`} className="h-full">
-                  <h1 className="dark:text-blancoblanco flex h-full text-sm sm:text-base md:text-lg text-center font-medium flex-col justify-center items-center">
+                  <h1 className="dark:text-white flex h-full text-sm sm:text-base md:text-lg text-center font-medium flex-col justify-center items-center">
                     {serie.tv_title}
                   </h1>
                 </Link>
               </div>
-              <div className="w-[17%] flex hover:bg-negro justify-center items-center">
+              <div className="w-[17%] flex hover:bg-foreground justify-center items-center">
                 <button
                   title="Eliminar de favoritos"
                   onClick={(e) =>
@@ -47,7 +47,7 @@ export const FavSeries = ({
                       setSeriesFav,
                     )
                   }
-                  className="h-full hover:text-blancoblanco dark:text-grisclaro w-full flex justify-center items-center"
+                  className="h-full hover:text-white dark:text-gray-light w-full flex justify-center items-center"
                 >
                   <AiFillDelete size={18} />
                 </button>
@@ -55,7 +55,7 @@ export const FavSeries = ({
             </div>
           ))
         ) : (
-          <div className="text-lg sm:text-xl md:text-2xl dark:text-grisclaro text-center px-2">
+          <div className="text-lg sm:text-xl md:text-2xl dark:text-gray-light text-center px-2">
             Aun no tienes series favoritas
           </div>
         )}

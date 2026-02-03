@@ -1,49 +1,100 @@
-@import url('https://fonts.googleapis.com/css2?family=Lato:wght@700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@1,500&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@1,500&display=swap");
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-/* Scrollbar para desktop */
+@theme {
+    /* Colors - Semantic naming convention */
+
+    /* Primary palette (purple tones - brand colors) */
+    --color-primary: #800080;
+    --color-primary-light: #802392;
+    --color-primary-dark: #23001e;
+    --color-primary-pale: #e6e6fa;
+
+    /* Accent colors */
+    --color-accent-purple: #935ee6;
+    --color-accent-light: #bbadff;
+
+    /* Status colors */
+    --color-success: #0cca4a;
+    --color-warning: #fde12d;
+    --color-warning-muted: #b0a613;
+    --color-error: #ba1200;
+    --color-danger: #e80001;
+    --color-info: #1a8cd8;
+    --color-info-dark: #146da8;
+
+    /* Neutral colors */
+    --color-white: #ffffff;
+    --color-background: #fdfffc;
+    --color-foreground: #04080f;
+    --color-gray-light: #d3d3d3;
+    --color-gray-medium: #808080;
+
+    /* Dark mode surfaces */
+    --color-background-dark: #202123;
+    --color-surface-dark: #303134;
+    --color-surface-medium: #4d4f54;
+    --color-surface-hover: #383a3d;
+    --color-text-muted: #d1d5db;
+
+    /* Special colors */
+    --color-pink: #ff1493;
+
+    /* 2. FUENTES (fontFamily) */
+    --font-overview: "Roboto", sans-serif;
+    --font-lato: "Lato", sans-serif;
+    --font-noto: "Noto Sans", sans-serif;
+
+    /* 3. SOMBRAS (boxShadow) */
+    --shadow-login: 1px 1px 35px 10px rgba(128, 0, 128, 0.75);
+    --shadow-input: 0px 0px 25px 4px;
+    --shadow-seriefav: 0px 2px 10px -7px rgba(0, 0, 0, 0.1);
+    --shadow-home: 0px 0px 13px 4px rgba(90, 90, 90, 0.75);
+}
+
+/* 4. DARK MODE (Basado en clase) */
+@custom-variant dark (&:where(.dark, .dark *));
+
 @media (min-width: 768px) {
-  ::-webkit-scrollbar {
-      width: 11px;
-  }
+    ::-webkit-scrollbar {
+        width: 11px;
+    }
 
-  ::-webkit-scrollbar-track {
-      background: #f1f1f1;
-  }
+    ::-webkit-scrollbar-track {
+        background: #f1f1f1;
+    }
 
-  ::-webkit-scrollbar-thumb {
-      background: #888;
-      border-radius: 5px;
-  }
+    ::-webkit-scrollbar-thumb {
+        background: #888;
+        border-radius: 5px;
+    }
 
-  ::-webkit-scrollbar-thumb:hover {
-      background: #555;
-  }
+    ::-webkit-scrollbar-thumb:hover {
+        background: #555;
+    }
 }
 
 /* Scrollbar más delgado para móviles */
 @media (max-width: 767px) {
-  ::-webkit-scrollbar {
-      width: 6px;
-  }
+    ::-webkit-scrollbar {
+        width: 6px;
+    }
 
-  ::-webkit-scrollbar-track {
-      background: transparent;
-  }
+    ::-webkit-scrollbar-track {
+        background: transparent;
+    }
 
-  ::-webkit-scrollbar-thumb {
-      background: rgba(136, 136, 136, 0.5);
-      border-radius: 3px;
-  }
+    ::-webkit-scrollbar-thumb {
+        background: rgba(136, 136, 136, 0.5);
+        border-radius: 3px;
+    }
 
-  ::-webkit-scrollbar-thumb:hover {
-      background: rgba(85, 85, 85, 0.7);
-  }
+    ::-webkit-scrollbar-thumb:hover {
+        background: rgba(85, 85, 85, 0.7);
+    }
 }
 
 /* Mejoras para dark mode scrollbar */
@@ -61,20 +112,19 @@
 
 /* Prevenir zoom en inputs en iOS */
 @supports (-webkit-touch-callout: none) {
-  input,
-  select,
-  textarea {
-    font-size: 16px;
-  }
+    input,
+    select,
+    textarea {
+        font-size: 16px;
+    }
 }
 
 /* Smooth scrolling */
 html {
-  scroll-behavior: smooth;
+    scroll-behavior: smooth;
 }
 
 /* Prevenir scroll horizontal */
 body {
-  overflow-x: hidden;
+    overflow-x: hidden;
 }
-

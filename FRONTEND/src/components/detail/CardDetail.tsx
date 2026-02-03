@@ -27,7 +27,7 @@ const CardDetail = ({
 
   return (
     <div className="flex justify-center pb-10 pt-6 sm:pt-10 px-3 sm:px-0">
-      <div className="w-full sm:w-[90%] lg:w-[75%] shadow-home dark:bg-gris7 dark:shadow-[#090909] bg-blanco p-3 sm:p-5 rounded-md gap-3">
+        <div className="w-full sm:w-[90%] lg:w-[75%] shadow-home dark:bg-surface-medium dark:shadow-[#090909] bg-background p-3 sm:p-5 rounded-md gap-3">
         <div className="flex flex-col md:flex-row w-full gap-4">
           <div className="w-full md:w-[25%] flex flex-col justify-center items-center">
             {serie.poster_path && (
@@ -38,10 +38,10 @@ const CardDetail = ({
               />
             )}
             <div className="flex flex-col justify-center py-4 items-center">
-              <h1 className="text-lg sm:text-xl font-semibold dark:text-azultwitter text-purpuraoscuro">
+              <h1 className="text-lg sm:text-xl font-semibold dark:text-info text-primary">
                 TEMPORADAS: {serie.number_of_seasons}
               </h1>
-              <h1 className="text-lg sm:text-xl font-semibold dark:text-azultwitter text-purpuraoscuro">
+              <h1 className="text-lg sm:text-xl font-semibold dark:text-info text-primary">
                 EPISODIOS: {serie.number_of_episodes}
               </h1>
             </div>
@@ -51,27 +51,27 @@ const CardDetail = ({
               <div className="flex flex-col sm:flex-row justify-between gap-3">
                 <div className="flex-1">
                   <div className="flex gap-1">
-                    <h1 className="text-negro dark:text-grisclaro text-2xl sm:text-3xl md:text-4xl pb-3 font-bold">
+                    <h1 className="text-foreground dark:text-gray-light text-2xl sm:text-3xl md:text-4xl pb-3 font-bold">
                       {serie.name}
                     </h1>
                   </div>
-                  <h1 className="pt-1 dark:text-grisclaro text-sm sm:text-base font-mono">
+                  <h1 className="pt-1 dark:text-gray-light text-sm sm:text-base font-mono">
                     {serie.tagline ? `"${serie.tagline}"` : null}
                   </h1>
                   <div className="flex py-2 flex-wrap items-center">
-                    <h3 className="text-purpuraoscuro dark:text-azultwitter text-lg sm:text-xl font-black font-lato">
+                    <h3 className="text-primary dark:text-info text-lg sm:text-xl font-black font-lato">
                       {serie.first_air_date?.slice(0, 4)}
                     </h3>
                     <span
                       className={`px-3 sm:px-5 font-bold text-sm sm:text-base ${
                         serie.status == "Ended"
-                          ? "text-rojo"
+                          ? "text-error"
                           : `${
                               serie.status == "Returning Series"
-                                ? "text-verde"
+                                ? "text-success"
                                 : `${
                                     serie.status == "Canceled"
-                                      ? "text-negro"
+                                      ? "text-foreground"
                                       : null
                                   }`
                             }`
@@ -88,8 +88,8 @@ const CardDetail = ({
                     }`}
                     className={`${
                       serieAdded
-                        ? "text-rojocorazon"
-                        : "text-negro dark:text-grisclaro"
+                        ? "text-danger"
+                        : "text-foreground dark:text-gray-light"
                     }`}
                     onClick={(e) =>
                       handleSubmitFromSerieDetail(
@@ -103,26 +103,26 @@ const CardDetail = ({
                   </button>
                 </div>
               </div>
-              <p className="py-2 border-t-2 dark:text-grisclaro font-overview font-medium text-sm sm:text-base md:text-lg">
+              <p className="py-2 border-t-2 dark:text-gray-light font-overview font-medium text-sm sm:text-base md:text-lg">
                 {serie.overview}
               </p>
             </div>
             <div className="flex flex-col sm:flex-row justify-evenly gap-4 sm:gap-8 md:gap-16 py-4">
               <div className="items-center flex flex-col justify-center">
-                <h1 className="text-base sm:text-lg dark:text-grisclaro text-center font-normal">
+                <h1 className="text-base sm:text-lg dark:text-gray-light text-center font-normal">
                   {serie.created_by && serie.created_by.length > 0
                     ? `Created by: ${serie.created_by[0].name}`
                     : null}
                 </h1>
-                <h1 className="text-sm sm:text-base dark:text-grisclaro font-medium text-center">
+                <h1 className="text-sm sm:text-base dark:text-gray-light font-medium text-center">
                   {serie.genres?.map((genre) => genre.name).join(", ")}
                 </h1>
               </div>
               <div className="flex flex-col justify-center items-center">
-                <h2 className="text-purpuraoscuro dark:text-azultwitter text-xl sm:text-2xl font-black">
+                <h2 className="text-primary dark:text-info text-xl sm:text-2xl font-black">
                   {parseFloat(serie.vote_average.toFixed(1))}/10
                 </h2>
-                <span className="font-medium dark:text-grisclaro text-sm sm:text-base">
+                <span className="font-medium dark:text-gray-light text-sm sm:text-base">
                   {serie.vote_count} votos de usuarios
                 </span>
               </div>
@@ -135,7 +135,7 @@ const CardDetail = ({
             <button
               title={`${serieWatched ? "Quitar de vistos" : "Añadir a vistos"}`}
               onClick={(e) => handleWatched(e, Number(tmdbId), setSerieWatched)}
-              className="dark:text-grisclaro"
+              className="dark:text-gray-light"
             >
               {serieWatched ? (
                 <AiFillEyeInvisible size={40} />

@@ -11,7 +11,7 @@ const ProtectedRoute = ({ redirectPath = "/login" }: ProtectedRouteProps) => {
 
   if (isLoading) {
     return (
-      <div className="h-screen flex justify-center items-center bg-negro">
+      <div className="h-screen flex justify-center items-center bg-foreground">
         <Spinner />
       </div>
     );

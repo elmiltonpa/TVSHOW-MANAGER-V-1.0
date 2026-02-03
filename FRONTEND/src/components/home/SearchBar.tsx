@@ -32,7 +32,7 @@ const SearchBar = ({ setSerie: _setSerie }: SearchBarProps) => {
     <div className="w-full h-16 flex justify-center items-center px-3">
       <div className="relative w-full sm:w-[80%] md:w-[60%] lg:w-[50%] xl:w-[30%]">
         <input
-          className="placeholder-negro border-2 border-purpuraclaro w-full px-3 h-10 text-negro text-base sm:text-lg md:text-xl"
+          className="placeholder-foreground border-2 border-primary-light w-full px-3 h-10 text-foreground text-base sm:text-lg md:text-xl bg-white"
           value={text}
           type="text"
           placeholder="Buscar algo para ver..."
@@ -44,7 +44,7 @@ const SearchBar = ({ setSerie: _setSerie }: SearchBarProps) => {
 
         {text && (
           <button
-            className="absolute right-2 text-2xl text-rojo font-bold top-1/2 transform -translate-y-1/2"
+            className="absolute right-2 text-2xl text-error font-bold top-1/2 transform -translate-y-1/2"
             onClick={clearInput}
           >
             <TiDelete size={30} />

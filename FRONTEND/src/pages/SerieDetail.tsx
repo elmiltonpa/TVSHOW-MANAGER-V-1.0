@@ -43,8 +43,12 @@ const SerieDetail = () => {
           try {
             const User = await getUser(user.username);
             if (User && User.id) {
-              const seriesResponse = await serieService.getSeriesByUserId(User.id);
-              const Series = Array.isArray(seriesResponse) ? seriesResponse : [];
+              const seriesResponse = await serieService.getSeriesByUserId(
+                User.id,
+              );
+              const Series = Array.isArray(seriesResponse)
+                ? seriesResponse
+                : [];
 
               const serieSeasonsExist = Series.find(
                 (serie) => serie.tv_id == Number(request.tv_id || request.id),
@@ -62,7 +66,10 @@ const SerieDetail = () => {
               );
 
               let watchingData: boolean[][] | null = null;
-              if (serieSeasonsExist && Array.isArray(serieSeasonsExist.watching)) {
+              if (
+                serieSeasonsExist &&
+                Array.isArray(serieSeasonsExist.watching)
+              ) {
                 watchingData = serieSeasonsExist.watching;
               }
 
@@ -87,7 +94,7 @@ const SerieDetail = () => {
 
   if (isLoading || isLoadingUserData) {
     return (
-      <div className="h-screen flex justify-center dark:bg-gris6 dark:text-blancoblanco items-center pb-56 bg-blancoblanco text-3xl font-bold">
+      <div className="h-screen flex justify-center dark:bg-background-dark dark:text-white items-center pb-56 bg-white text-3xl font-bold">
         <Spinner />
       </div>
     );
@@ -96,7 +103,7 @@ const SerieDetail = () => {
   if (!serie) return null;
 
   return (
-    <div className="bg-blancoblanco dark:bg-gris6 pb-10">
+    <div className="bg-white dark:bg-background-dark pb-10">
       <CardDetail
         serie={serie}
         serieAdded={serieAdded}
@@ -110,7 +117,7 @@ const SerieDetail = () => {
             {seasons ? (
               seasons.map((season) => (
                 <div key={season.id} className="bg-red-300 flex flex-col">
-                  <div className="bg-purpuraoscuro h-full flex flex-col gap justify-center items-center">
+                  <div className="bg-primary h-full flex flex-col gap justify-center items-center">
                     <SectionSeason
                       seasonwatching={seasonwatching}
                       season={season.season_number}

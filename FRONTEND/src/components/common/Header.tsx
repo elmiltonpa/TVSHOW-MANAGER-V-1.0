@@ -38,15 +38,15 @@ const Header = () => {
 
   return (
     <div
-      className={`bg-purpuraoscuro ${
+      className={`bg-primary ${
         location == "/login" || location == "/register" ? "hidden" : "block"
       }  h-14 sm:h-16 w-full drop-shadow-lg`}
     >
-      <div className="w-full px-3 sm:px-6 lg:px-36 bg-purpuraoscuro h-full flex justify-between items-center">
+      <div className="w-full px-3 sm:px-6 lg:px-36 bg-primary h-full flex justify-between items-center">
         <ul className="flex gap-2 sm:gap-5">
           <li className="">
             <Link
-              className="text-blanco font-bold text-sm sm:text-base md:text-lg"
+              className="text-background font-bold text-sm sm:text-base md:text-lg"
               to="/home"
             >
               TVSHOW MANAGER
@@ -60,7 +60,7 @@ const Header = () => {
               <>
                 <li>
                   <Link
-                    className="text-blanco font-semibold text-xs sm:text-sm md:text-base lg:text-lg"
+                    className="text-background font-semibold text-xs sm:text-sm md:text-base lg:text-lg"
                     to={`/${user.username}`}
                   >
                     Mi Perfil
@@ -69,7 +69,7 @@ const Header = () => {
                 <li>
                   <Link to="/">
                     <button
-                      className="text-blanco font-semibold text-xs sm:text-sm md:text-base lg:text-lg"
+                      className="text-background font-semibold text-xs sm:text-sm md:text-base lg:text-lg"
                       onClick={logout}
                     >
                       <span className="hidden sm:inline">Cerrar Sesión</span>
@@ -82,7 +82,7 @@ const Header = () => {
               <>
                 <li>
                   <Link
-                    className="text-blanco font-semibold text-xs sm:text-sm md:text-base lg:text-lg"
+                    className="text-background font-semibold text-xs sm:text-sm md:text-base lg:text-lg"
                     to="/login"
                   >
                     LOGIN
@@ -90,7 +90,7 @@ const Header = () => {
                 </li>
                 <li>
                   <Link
-                    className="text-blanco font-semibold text-xs sm:text-sm md:text-base lg:text-lg"
+                    className="text-background font-semibold text-xs sm:text-sm md:text-base lg:text-lg"
                     to="/register"
                   >
                     REGISTER
@@ -101,18 +101,18 @@ const Header = () => {
           </div>
           <div>
             <li className="">
-              <div className="w-[50px] h-[28px] sm:w-[60px] sm:h-[34px]">
+              <div className="w-12.5 h-7 sm:w-15 sm:h-8.5">
                 <button
                   onClick={handleTheme}
                   className={`${
-                    theme ? "bg-blanco" : "bg-gris6"
+                    theme ? "bg-background" : "bg-background-dark"
                   } rounded-3xl flex justify-between relative w-full h-full`}
                 >
                   <div
                     className={`${
                       theme
-                        ? "bg-gris6 transform translate-x-[21px] sm:translate-x-[25px] transition-transform duration-500 ease-out"
-                        : "bg-blanco transition-transform duration-500 ease-out"
+                        ? "bg-background-dark transform translate-x-5.25 sm:translate-x-6.25 transition-transform duration-500 ease-out"
+                        : "bg-background transition-transform duration-500 ease-out"
                     } absolute top-[2px] sm:top-[3px] left-1 text-white h-6 w-6 sm:h-7 sm:w-7 rounded-full`}
                   ></div>
                   <div
@@ -120,7 +120,10 @@ const Header = () => {
                       theme ? "block" : "invisible"
                     } pt-[2px] sm:pt-[3px] pl-[1px]`}
                   >
-                    <MdDarkMode className="dark:text-gris6" size={24} />
+                    <MdDarkMode
+                      className="dark:text-background-dark"
+                      size={24}
+                    />
                   </div>
                   <div
                     className={`${theme ? "invisible" : "block"} pt-[3px] sm:pt-[5px] pr-1`}

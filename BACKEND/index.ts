@@ -43,10 +43,12 @@ const corsOptions = {
 app.use(helmet());
 app.use(cors(corsOptions));
 app.use(express.json());
-app.use(limiter);
+// app.use(limiter);
 
-app.use("/api/login", authLimiter, loginRouter);
-app.use("/api/register", authLimiter, registerRouter);
+// app.use("/api/login", authLimiter, loginRouter);
+// app.use("/api/register", authLimiter, registerRouter);
+app.use("/api/login", loginRouter);
+app.use("/api/register", registerRouter);
 app.use("/api/users", usersRouter);
 app.use("/api/series", seriesRouter);
 

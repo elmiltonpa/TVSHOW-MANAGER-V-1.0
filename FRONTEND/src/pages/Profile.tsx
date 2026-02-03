@@ -50,7 +50,7 @@ const Profile = () => {
 
   if (isLoading) {
     return (
-      <div className="h-screen flex justify-center dark:bg-gris6 dark:text-blancoblanco bg-blancoblanco text-negro text-3xl py-16">
+      <div className="h-screen flex justify-center dark:bg-background-dark dark:text-white bg-white text-foreground text-3xl py-16">
         <Spinner />
       </div>
     );
@@ -71,7 +71,7 @@ const Profile = () => {
         <div className="w-full lg:w-1/2 order-1 lg:order-2">
           {username && <InfoProfile username={username} />}
         </div>
-        <div className="w-full lg:w-[25%] bg-blancoblanco order-3">
+        <div className="w-full lg:w-[25%] bg-white order-3">
           {seriesWatched && username && (
             <Watched seriesWatched={seriesWatched} username={username} />
           )}

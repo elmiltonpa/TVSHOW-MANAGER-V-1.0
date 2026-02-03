@@ -97,7 +97,7 @@ const ProfileSerieDetail = () => {
 
   if (isLoading) {
     return (
-      <div className="h-screen flex justify-center dark:bg-gris6 dark:text-blancoblanco items-center pb-56 bg-blancoblanco text-3xl font-bold">
+      <div className="h-screen flex justify-center dark:bg-background-dark dark:text-white items-center pb-56 bg-white text-3xl font-bold">
         <Spinner />
       </div>
     );
@@ -105,26 +105,26 @@ const ProfileSerieDetail = () => {
 
   if (!serie) {
     return (
-      <div className="h-screen flex justify-center dark:bg-gris6 dark:text-blancoblanco items-center pb-56 bg-blancoblanco text-3xl font-bold">
+      <div className="h-screen flex justify-center dark:bg-background-dark dark:text-white items-center pb-56 bg-white text-3xl font-bold">
         <div>No has visto esta serie</div>
       </div>
     );
   }
   return (
-    <div className="flex flex-col gap-4 w-full dark:bg-gris6 items-center px-3 sm:px-0 pb-10">
+    <div className="flex flex-col gap-4 w-full dark:bg-background-dark items-center px-3 sm:px-0 pb-10">
       <div className="min-h-[30vh] sm:h-[50vh] flex flex-col justify-center items-center py-6">
-        <h1 className="flex items-center dark:text-grisclaro justify-center text-2xl sm:text-3xl font-semibold py-2 text-center px-4">
+        <h1 className="flex items-center dark:text-gray-light justify-center text-2xl sm:text-3xl font-semibold py-2 text-center px-4">
           {serie.name}
         </h1>
-        <div className="text-2xl sm:text-3xl flex dark:text-grisclaro justify-center items-center">
+        <div className="text-2xl sm:text-3xl flex dark:text-gray-light justify-center items-center">
           {porcentajeSerie.toFixed(2)}%
         </div>
         {lastEpisode ? (
-          <div className="text-lg sm:text-xl dark:text-grisclaro text-center">
+          <div className="text-lg sm:text-xl dark:text-gray-light text-center">
             Ultimo capitulo {lastEpisode.season}X{lastEpisode.capAux}
           </div>
         ) : (
-          <div className="text-lg sm:text-xl dark:text-grisclaro text-center">
+          <div className="text-lg sm:text-xl dark:text-gray-light text-center">
             No has visto ningun capitulo
           </div>
         )}
@@ -133,7 +133,7 @@ const ProfileSerieDetail = () => {
         {seasons ? (
           seasons.map((season) => (
             <div key={season.id} className="bg-red-300 w-full flex flex-col">
-              <div className="bg-purpuraoscuro h-full flex flex-col gap justify-center items-center">
+              <div className="bg-primary h-full flex flex-col gap justify-center items-center">
                 <SectionSeason
                   seasonwatching={seasonwatching}
                   season={season.season_number}
@@ -145,7 +145,7 @@ const ProfileSerieDetail = () => {
             </div>
           ))
         ) : (
-          <div className="dark:text-grisclaro">Loading...</div>
+          <div className="dark:text-gray-light">Loading...</div>
         )}
       </div>
     </div>

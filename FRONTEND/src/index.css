@@ -128,3 +128,9 @@ html {
 body {
     overflow-x: hidden;
 }
+
+/* Cursor pointer para elementos interactivos */
+button,
+[role="button"] {
+    cursor: pointer;
+}

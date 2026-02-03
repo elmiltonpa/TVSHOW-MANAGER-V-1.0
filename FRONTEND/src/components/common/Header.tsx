@@ -7,7 +7,7 @@ const Header = () => {
   const location = useLocation().pathname;
   const [theme, setTheme] = useState(false);
 
-  const { user, logout } = useAuth();
+  const { user } = useAuth();
 
   useEffect(() => {
     const themeInLocalStorage = window.localStorage.getItem("theme");
@@ -57,27 +57,14 @@ const Header = () => {
         <ul className="flex justify-between items-center">
           <div className="flex mr-2 sm:mr-4 md:mr-10 gap-2 sm:gap-3 md:gap-5">
             {user ? (
-              <>
-                <li>
-                  <Link
-                    className="text-background font-semibold text-xs sm:text-sm md:text-base lg:text-lg"
-                    to={`/${user.username}`}
-                  >
-                    Mi Perfil
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/">
-                    <button
-                      className="text-background font-semibold text-xs sm:text-sm md:text-base lg:text-lg"
-                      onClick={logout}
-                    >
-                      <span className="hidden sm:inline">Cerrar Sesión</span>
-                      <span className="sm:hidden">Salir</span>
-                    </button>
-                  </Link>
-                </li>
-              </>
+              <li>
+                <Link
+                  className="text-background font-semibold text-xs sm:text-sm md:text-base lg:text-lg"
+                  to={`/${user.username}`}
+                >
+                  MI PERFIL
+                </Link>
+              </li>
             ) : (
               <>
                 <li>

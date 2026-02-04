@@ -29,7 +29,7 @@ const Footer = () => {
           <h3 className="text-lg font-semibold text-warning">Conecta</h3>
           <div className="flex space-x-6">
             <a 
-              href="https://github.com/miltondw/tvshow-manager" 
+              href="https://github.com/elmiltonpa/TVSHOW-MANAGER" 
               target="_blank" 
               rel="noopener noreferrer"
               className="text-2xl hover:text-warning transition-transform hover:scale-110"
@@ -38,7 +38,7 @@ const Footer = () => {
               <FaCode />
             </a>
             <a 
-              href="https://github.com/miltondw" 
+              href="https://github.com/elmiltonpa" 
               target="_blank" 
               rel="noopener noreferrer"
               className="text-2xl hover:text-warning transition-transform hover:scale-110"

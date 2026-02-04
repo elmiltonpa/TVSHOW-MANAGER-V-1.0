@@ -57,7 +57,7 @@ const Header = () => {
               Let's keep them visible but subtle. */}
           <li className="hidden sm:block ml-4">
              <a 
-              href="https://github.com/miltondw/tvshow-manager" 
+              href="https://github.com/elmiltonpa/TVSHOW-MANAGER" 
               target="_blank" 
               rel="noopener noreferrer"
               className="text-background hover:text-warning transition-colors"
@@ -68,7 +68,7 @@ const Header = () => {
           </li>
           <li className="hidden sm:block">
              <a 
-              href="https://github.com/miltondw" 
+              href="https://github.com/elmiltonpa" 
               target="_blank" 
               rel="noopener noreferrer"
               className="text-background hover:text-warning transition-colors"

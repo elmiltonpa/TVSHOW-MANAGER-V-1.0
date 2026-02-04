@@ -14,19 +14,24 @@ import express from "express";
 
 const app = express();
 
+// Required for Vercel/proxies to correctly identify client IP
+app.set("trust proxy", 1);
+
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000,
   limit: 100,
   standardHeaders: "draft-7",
   legacyHeaders: false,
+  validate: { xForwardedForHeader: false }, // Fix for Vercel logs
   message: { error: "too many requests, please try again later" },
 });
 
 const authLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
-  limit: 5,
+  limit: 20, // Increased slightly for usability
   standardHeaders: "draft-7",
   legacyHeaders: false,
+  validate: { xForwardedForHeader: false }, // Fix for Vercel logs
   message: { error: "too many login attempts, please try again later" },
 });
 

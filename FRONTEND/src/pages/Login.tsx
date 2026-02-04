@@ -3,6 +3,7 @@ import loginService from "../services/login";
 import { Link } from "react-router-dom";
 import { AxiosError } from "axios";
 import { useAuth } from "../context/AuthContext";
+import SEO from "../components/common/SEO";
 
 interface ErrorResponse {
   message?: string;
@@ -16,10 +17,6 @@ const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const { login } = useAuth();
-
-  useEffect(() => {
-    document.title = "Login - TvShowManager";
-  }, []);
 
   const handleLogin = async (e: React.SubmitEvent) => {
     e.preventDefault();
@@ -49,6 +46,10 @@ const Login = () => {
 
   return (
     <div className="bg-primary flex justify-center items-center h-screen overflow-y-auto px-3">
+      <SEO
+        title="Login"
+        description="Login to your TvShowManager account to track your favorite series."
+      />
       <div className="bg-background shadow-login shadow-primary-dark min-h-125 w-full sm:w-[90%] md:w-[70%] lg:w-[50%] xl:w-[40%] flex flex-col items-center py-8">
         <div className="text-2xl sm:text-3xl md:text-4xl font-bold pt-8 sm:pt-16 text-center px-4">
           <Link to="/">TVSHOW MANAGER</Link>

@@ -8,6 +8,7 @@ import serieService from "../services/series";
 import Spinner from "../components/common/Spinner";
 import { Serie } from "../types";
 import { useAuth } from "../context/AuthContext";
+import SEO from "../components/common/SEO";
 
 const filterSeries = (series: Serie[]) => {
   return series.filter(
@@ -35,7 +36,6 @@ const Home = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    document.title = "Home - TvShowManager";
     setPage(1);
     setSerie(null);
   }, [search]);
@@ -160,6 +160,10 @@ const Home = () => {
         serie && serie.length === 1 ? "h-screen" : ""
       } bg-white dark:bg-background-dark px-3 sm:px-6 md:px-12 lg:px-24 xl:px-32 py-2`}
     >
+      <SEO
+        title="Home"
+        description="Discover popular TV shows, search for your favorites, and manage your watchlist with TvShowManager."
+      />
       <div className="">
         <SearchBar setSerie={setSerie} />
         <div className="conteiner">

@@ -1,7 +1,8 @@
 import { Link, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import register from "../services/register";
 import { AxiosError } from "axios";
+import SEO from "../components/common/SEO";
 
 interface RegisterErrorResponse {
   error: string;
@@ -14,10 +15,6 @@ const Register = () => {
   const [registered, setRegistered] = useState<string | null>(null);
 
   const navigate = useNavigate();
-
-  useEffect(() => {
-    document.title = "Register - TvShowManager";
-  }, []);
 
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -37,6 +34,10 @@ const Register = () => {
 
   return (
     <div className="h-screen flex justify-center items-center bg-primary px-3">
+      <SEO
+        title="Register"
+        description="Create a new account on TvShowManager and start tracking your favorite TV shows."
+      />
       <div className="min-h-150 w-full sm:w-[90%] md:w-[70%] lg:w-[50%] xl:w-[40%] flex flex-col shadow-login shadow-primary-dark justify-evenly items-center bg-white py-8">
         <div className="text-2xl sm:text-3xl md:text-4xl pt-4 sm:pt-8 font-bold text-center px-4">
           <Link to="/">TVSHOW MANAGER</Link>

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://tvshow-manager.vercel.app/sitemap.xml

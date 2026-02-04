@@ -9,6 +9,7 @@ import serieService from "../services/series";
 import getUser from "../services/user";
 import { Serie, Season } from "../types";
 import { useAuth } from "../context/AuthContext";
+import SEO from "../components/common/SEO";
 
 const SerieDetail = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -109,8 +110,20 @@ const SerieDetail = () => {
 
   if (!serie) return null;
 
+  const seoTitle = serie.name || serie.original_name || "TV Show Detail";
+  const seoDescription = serie.overview || `Details about ${seoTitle}`;
+  const seoImage = serie.poster_path
+    ? `https://image.tmdb.org/t/p/w500${serie.poster_path}`
+    : undefined;
+
   return (
     <div className="bg-white dark:bg-background-dark pb-10">
+      <SEO
+        title={seoTitle}
+        description={seoDescription}
+        image={seoImage}
+        type="video.tv_show"
+      />
       <CardDetail
         serie={serie}
         serieAdded={serieAdded}

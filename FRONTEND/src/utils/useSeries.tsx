@@ -65,7 +65,7 @@ const SeriesContext = createContext<SeriesContextType | undefined>(undefined);
 export const SeriesProvider = ({ children }: { children: ReactNode }) => {
   const navigate = useNavigate();
   const { user } = useAuth();
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const handleSeasonWatched = useCallback(
     async (

@@ -2,6 +2,7 @@ import { memo, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import useSeries from "../../utils/useSeries";
 import { Serie } from "../../types";
+import { useTranslation } from "react-i18next";
 
 const BASE_URL = "https://image.tmdb.org/t/p/w500/";
 
@@ -24,6 +25,7 @@ const SerieCard = memo(
   }: SerieCardProps) => {
     const navigate = useNavigate();
     const { handleSubmit } = useSeries();
+    const { t } = useTranslation();
 
     const tmdbId = serie.id ? Number(serie.id) : serie.tv_id;
     const isFavorite = seriesAdded.includes(tmdbId);
@@ -77,7 +79,7 @@ const SerieCard = memo(
                         : "hover:bg-primary dark:text-accent-purple dark:hover:bg-white hover:text-background text-warning-muted"
                     } text-sm sm:text-base md:text-lg px-4 sm:px-6 md:px-10 py-2 font-semibold`}
                   >
-                    QUITAR DE FAVORITOS
+                    {t("home.remove_from_favorites")}
                   </button>
                 ) : (
                   <button
@@ -89,7 +91,7 @@ const SerieCard = memo(
                         : "hover:bg-primary dark:text-warning dark:hover:bg-white dark:hover:text-primary hover:text-background text-primary"
                     } text-sm sm:text-base md:text-lg px-4 sm:px-6 md:px-10 py-2 font-semibold`}
                   >
-                    AGREGAR A FAVORITOS
+                    {t("home.add_to_favorites")}
                   </button>
                 )}
               </div>
@@ -111,12 +113,12 @@ const SerieCard = memo(
             <div className="text-center">
               <div>
                 <h2 className="text-background text-sm sm:text-base md:text-lg">
-                  Seasons: <span>{serie.number_of_seasons}</span>
+                  {t("detail.seasons").charAt(0).toUpperCase() + t("detail.seasons").slice(1).toLowerCase()}: <span>{serie.number_of_seasons}</span>
                 </h2>
               </div>
               <div className="">
                 <h2 className="text-background text-sm sm:text-base md:text-lg">
-                  Episodes: <span>{serie.number_of_episodes}</span>
+                  {t("detail.episodes").charAt(0).toUpperCase() + t("detail.episodes").slice(1).toLowerCase()}: <span>{serie.number_of_episodes}</span>
                 </h2>
               </div>
             </div>
@@ -130,7 +132,7 @@ const SerieCard = memo(
                 onClick={handleDetailsClick}
                 className="w-full text-xs sm:text-sm md:text-base lg:text-lg hover:bg-background hover:text-primary px-2 sm:px-4 md:px-6 lg:px-8 py-2 text-background font-semibold truncate"
               >
-                VER DETALLES
+                {t("home.view_details")}
               </button>
             </div>
           </div>

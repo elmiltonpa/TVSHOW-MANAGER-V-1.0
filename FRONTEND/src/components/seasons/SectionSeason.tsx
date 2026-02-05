@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import useSeries from "../../utils/useSeries";
 import { Season, Episode } from "../../types";
+import { useTranslation } from "react-i18next";
 
 const IMG = "https://image.tmdb.org/t/p/w500";
 
@@ -27,6 +28,7 @@ const SectionSeason = ({
   const [seasonIsFull, setSeasonIsFull] = useState(false);
   const { handleCapWatched, handleSeasonWatched } = useSeries();
   const [isLoadingVisto, setIsLoadingVisto] = useState(false);
+  const { t } = useTranslation();
 
   useEffect(() => {
     setArrayWatching(seasonwatching);
@@ -65,7 +67,7 @@ const SectionSeason = ({
           className="text-xl sm:text-2xl md:text-3xl h-full w-[90%] sm:w-[95%] hover:text-white font-semibold"
           onClick={toggleOpen}
         >
-          Temporada {season}{" "}
+          {t("detail.season")} {season}{" "}
           <span className="text-lg sm:text-xl md:text-2xl">
             ({episodes.length})
           </span>
@@ -149,7 +151,7 @@ const SectionSeason = ({
                       );
                     }}
                   >
-                    VISTO
+                    {t("detail.episode_seen")}
                   </button>
                 </div>
               </div>

@@ -12,6 +12,7 @@ import { Season, Serie } from "../types";
 import { AxiosResponse } from "axios";
 import { useAuth } from "../context/AuthContext";
 import toast from "react-hot-toast";
+import { useTranslation } from "react-i18next";
 
 type SetState<T> = React.Dispatch<React.SetStateAction<T>>;
 
@@ -64,6 +65,7 @@ const SeriesContext = createContext<SeriesContextType | undefined>(undefined);
 export const SeriesProvider = ({ children }: { children: ReactNode }) => {
   const navigate = useNavigate();
   const { user } = useAuth();
+  const { i18n } = useTranslation();
 
   const handleSeasonWatched = useCallback(
     async (
@@ -91,6 +93,7 @@ export const SeriesProvider = ({ children }: { children: ReactNode }) => {
         if (serieUser === undefined) {
           const serieCreada = await serieService.createSerie({
             tv_id: serieId,
+            language: i18n.language,
           } as Partial<Serie>);
 
           const createArray = infoOfSeasons.map((season) => {
@@ -138,7 +141,7 @@ export const SeriesProvider = ({ children }: { children: ReactNode }) => {
         toast.error("Error al actualizar la temporada");
       }
     },
-    [user, navigate],
+    [user, navigate, i18n.language],
   );
 
   const handleCapWatched = useCallback(
@@ -169,6 +172,7 @@ export const SeriesProvider = ({ children }: { children: ReactNode }) => {
         if (serieUser === undefined) {
           const serieCreada = await serieService.createSerie({
             tv_id: serieId,
+            language: i18n.language,
           } as Partial<Serie>);
           serieUser = serieCreada.data;
         }
@@ -198,7 +202,7 @@ export const SeriesProvider = ({ children }: { children: ReactNode }) => {
       }
       setIsLoadingVisto(false);
     },
-    [user, navigate],
+    [user, navigate, i18n.language],
   );
 
   const handleWatched = useCallback(
@@ -230,6 +234,7 @@ export const SeriesProvider = ({ children }: { children: ReactNode }) => {
         } else {
           const serieCreada = (await serieService.createSerie({
             tv_id: serieId,
+            language: i18n.language,
           } as Partial<Serie>)) as AxiosResponse<Serie>;
 
           await serieService.updateSerie(serieCreada.data.id!, {
@@ -243,7 +248,7 @@ export const SeriesProvider = ({ children }: { children: ReactNode }) => {
         toast.error("Ocurrió un error");
       }
     },
-    [user, navigate],
+    [user, navigate, i18n.language],
   );
 
   const handleSubmit = useCallback(
@@ -285,6 +290,7 @@ export const SeriesProvider = ({ children }: { children: ReactNode }) => {
         } else {
           const serieCreada = (await serieService.createSerie({
             tv_id: serieId,
+            language: i18n.language,
           } as Partial<Serie>)) as AxiosResponse<Serie>;
           await serieService.updateSerie(serieCreada.data.id!, {
             favorite: true,
@@ -297,7 +303,7 @@ export const SeriesProvider = ({ children }: { children: ReactNode }) => {
       }
       setIsLoadingToFavorite(false);
     },
-    [user, navigate],
+    [user, navigate, i18n.language],
   );
 
   const handleSubmitFromSerieDetail = useCallback(
@@ -333,6 +339,7 @@ export const SeriesProvider = ({ children }: { children: ReactNode }) => {
         } else {
           const serieCreada = (await serieService.createSerie({
             tv_id: serieId,
+            language: i18n.language,
           } as Partial<Serie>)) as AxiosResponse<Serie>;
           await serieService.updateSerie(serieCreada.data.id!, {
             favorite: true,
@@ -344,7 +351,7 @@ export const SeriesProvider = ({ children }: { children: ReactNode }) => {
         toast.error("Error al actualizar favoritos");
       }
     },
-    [user, navigate],
+    [user, navigate, i18n.language],
   );
 
   const handleUnfavoriteFromProfile = useCallback(

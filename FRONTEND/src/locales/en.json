@@ -1,0 +1,91 @@
+{
+  "header": {
+    "title": "TVSHOW MANAGER",
+    "my_profile": "My Profile",
+    "login": "Sign in",
+    "register": "Sign up"
+  },
+  "search": {
+    "placeholder": "Search tv show..."
+  },
+  "home": {
+    "popular": "Popular",
+    "top_rated": "Top Rated",
+    "no_series_found": "No TV shows found :(",
+    "view_details": "VIEW DETAILS",
+    "add_to_favorites": "ADD TO FAVORITES",
+    "remove_from_favorites": "REMOVE FROM FAVORITES"
+  },
+  "common": {
+    "loading": "Loading..."
+  },
+  "login": {
+    "title": "Sign in",
+    "username": "Username",
+    "password": "Password",
+    "placeholder_user": "Your username",
+    "placeholder_pass": "Your password",
+    "forgot": "Forgot your password?",
+    "create_account": "Create a new account",
+    "submit": "Sign in",
+    "error_unknown": "Unknown error",
+    "error_invalid": "Invalid credentials"
+  },
+  "register": {
+    "title": "Sign up",
+    "name": "Name",
+    "username": "Username",
+    "password": "Password",
+    "placeholder_name": "Your Name",
+    "placeholder_user": "Your username",
+    "placeholder_pass": "Your password",
+    "already_have_account": "Already have an account?",
+    "submit": "Sign up",
+    "error_register": "Error registering"
+  },
+  "profile": {
+    "fav_series": "Favorites",
+    "watched_series": "Watched",
+    "info": "Information",
+    "empty": "No series here",
+    "not_found": "Profile not found",
+    "no_favs": "You don't have any favorite series yet",
+    "no_watched": "You haven't watched any series yet",
+    "logout": "Logout",
+    "delete_fav": "Remove from favorites"
+  },
+  "my_series": {
+    "title": "My series",
+    "warning": "Deleting a series will remove all your progress",
+    "delete_success": "Series deleted successfully",
+    "delete_error": "Error deleting series",
+    "no_data": "You don't have any series saved yet"
+  },
+  "detail": {
+    "seasons": "SEASONS",
+    "episodes": "EPISODES",
+    "votes": "user votes",
+    "created_by": "Created by",
+    "add_fav": "Add to favorites",
+    "remove_fav": "Remove from favorites",
+    "add_watched": "Mark as watched",
+    "remove_watched": "Mark as unwatched",
+    "season": "Season",
+    "episode_seen": "WATCHED"
+  },
+  "footer": {
+    "description": "Organize, discover, and keep track of your favorite TV shows in one place.",
+    "navigation": "Navigation",
+    "home": "Home",
+    "my_series": "My Series",
+    "connect": "Connect",
+    "developed_by": "Developed with ❤️ by Milton",
+    "rights": "All rights reserved."
+  },
+  "errors": {
+    "AUTH_INVALID_CREDENTIALS": "Invalid username or password",
+    "AUTH_MISSING_FIELDS": "Missing required fields",
+    "AUTH_USERNAME_TAKEN": "This username is already taken",
+    "UNKNOWN_ERROR": "An unexpected error occurred"
+  }
+}

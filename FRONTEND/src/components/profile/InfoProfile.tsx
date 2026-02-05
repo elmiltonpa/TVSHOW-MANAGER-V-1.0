@@ -1,5 +1,6 @@
 import { useAuth } from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 interface InfoProfileProps {
     username: string;
@@ -8,6 +9,7 @@ interface InfoProfileProps {
 const InfoProfile = ({ username }: InfoProfileProps) => {
   const { logout } = useAuth();
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const handleLogout = () => {
     logout();
@@ -23,7 +25,7 @@ const InfoProfile = ({ username }: InfoProfileProps) => {
         onClick={handleLogout}
         className="mt-4 px-6 py-2 bg-primary text-white font-semibold rounded hover:bg-primary-dark transition-colors"
       >
-        Cerrar Sesión
+        {t("profile.logout")}
       </button>
     </div>
   );

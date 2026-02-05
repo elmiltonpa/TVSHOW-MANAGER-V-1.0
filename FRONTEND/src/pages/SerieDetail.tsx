@@ -10,6 +10,7 @@ import getUser from "../services/user";
 import { Serie, Season } from "../types";
 import { useAuth } from "../context/AuthContext";
 import SEO from "../components/common/SEO";
+import { useTranslation } from "react-i18next";
 
 const SerieDetail = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -25,16 +26,17 @@ const SerieDetail = () => {
 
   const { id } = useParams<{ id: string }>();
   const { user } = useAuth();
+  const { i18n } = useTranslation();
 
   useEffect(() => {
     const fetchData = async () => {
       if (!id) return;
 
       try {
-        const request = await api.searchTvShowById(id);
+        const request = await api.searchTvShowById(id, i18n.language);
         const fetchSeasons = Array.from(
           { length: request.number_of_seasons || 0 },
-          (_, i) => api.searchTvSeasonById(id, i + 1),
+          (_, i) => api.searchTvSeasonById(id, i + 1, i18n.language),
         );
         const seasonsData = await Promise.all(fetchSeasons);
 
@@ -94,7 +96,7 @@ const SerieDetail = () => {
     };
 
     fetchData();
-  }, [id, user]);
+  }, [id, user, i18n.language]);
 
   if (isLoading || isLoadingUserData) {
     return (

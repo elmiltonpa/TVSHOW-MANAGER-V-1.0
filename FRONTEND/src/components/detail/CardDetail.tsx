@@ -3,6 +3,7 @@ import useSeries from "../../utils/useSeries";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 import { IoIosHeart } from "react-icons/io";
 import { Serie } from "../../types";
+import { useTranslation } from "react-i18next";
 
 interface CardDetailProps {
   serie: Serie;
@@ -22,6 +23,7 @@ const CardDetail = ({
   setSerieWatched,
 }: CardDetailProps) => {
   const { handleSubmitFromSerieDetail, handleWatched } = useSeries();
+  const { t } = useTranslation();
 
   const tmdbId = serie.id || serie.tv_id;
 
@@ -38,11 +40,11 @@ const CardDetail = ({
               />
             )}
             <div className="flex flex-col justify-center py-4 items-center">
-              <h1 className="text-lg sm:text-xl font-semibold dark:text-info text-primary">
-                TEMPORADAS: {serie.number_of_seasons}
+              <h1 className="text-lg sm:text-xl font-semibold dark:text-info text-primary uppercase">
+                {t("detail.seasons")}: {serie.number_of_seasons}
               </h1>
-              <h1 className="text-lg sm:text-xl font-semibold dark:text-info text-primary">
-                EPISODIOS: {serie.number_of_episodes}
+              <h1 className="text-lg sm:text-xl font-semibold dark:text-info text-primary uppercase">
+                {t("detail.episodes")}: {serie.number_of_episodes}
               </h1>
             </div>
           </div>
@@ -84,7 +86,7 @@ const CardDetail = ({
                 <div className="flex justify-center sm:justify-end items-start pt-2 sm:pt-5">
                   <button
                     title={`${
-                      serieAdded ? "Quitar de favoritos" : "Añadir a favoritos"
+                      serieAdded ? t("detail.remove_fav") : t("detail.add_fav")
                     }`}
                     className={`${
                       serieAdded
@@ -111,7 +113,7 @@ const CardDetail = ({
               <div className="items-center flex flex-col justify-center">
                 <h1 className="text-base sm:text-lg dark:text-gray-light text-center font-normal">
                   {serie.created_by && serie.created_by.length > 0
-                    ? `Created by: ${serie.created_by[0].name}`
+                    ? `${t("detail.created_by")}: ${serie.created_by[0].name}`
                     : null}
                 </h1>
                 <h1 className="text-sm sm:text-base dark:text-gray-light font-medium text-center">
@@ -123,7 +125,7 @@ const CardDetail = ({
                   {parseFloat(serie.vote_average.toFixed(1))}/10
                 </h2>
                 <span className="font-medium dark:text-gray-light text-sm sm:text-base">
-                  {serie.vote_count} votos de usuarios
+                  {serie.vote_count} {t("detail.votes")}
                 </span>
               </div>
             </div>
@@ -133,7 +135,7 @@ const CardDetail = ({
         <div className="w-full border-t-2 flex gap-10 pt-3 justify-center">
           <div>
             <button
-              title={`${serieWatched ? "Quitar de vistos" : "Añadir a vistos"}`}
+              title={`${serieWatched ? t("detail.remove_watched") : t("detail.add_watched")}`}
               onClick={(e) => handleWatched(e, Number(tmdbId), setSerieWatched)}
               className="dark:text-gray-light"
             >

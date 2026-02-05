@@ -21,7 +21,7 @@ loginRouter.post(
 
       if (!(user && passwordCorrect)) {
         return response.status(401).json({
-          error: "invalid user or password",
+          error: "AUTH_INVALID_CREDENTIALS",
         });
       }
 

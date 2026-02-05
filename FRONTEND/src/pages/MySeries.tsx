@@ -7,11 +7,13 @@ import { Link } from "react-router-dom";
 import { Serie } from "../types";
 import { useAuth } from "../context/AuthContext";
 import toast from "react-hot-toast";
+import { useTranslation } from "react-i18next";
 
 const MySeries = () => {
   const [series, setSeries] = useState<Serie[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isLoadingToDelete, setIsLoadingToDelete] = useState(false);
+  const { t } = useTranslation();
 
   const { user } = useAuth();
 
@@ -21,10 +23,10 @@ const MySeries = () => {
     try {
       await seriesService.deleteSerie(id);
       setSeries(series.filter((serie) => serie.id != id));
-      toast.success("Serie eliminada correctamente");
+      toast.success(t("my_series.delete_success"));
     } catch (error) {
       console.error(error);
-      toast.error("Error al eliminar la serie");
+      toast.error(t("my_series.delete_error"));
     }
     setIsLoadingToDelete(false);
   };
@@ -58,10 +60,10 @@ const MySeries = () => {
       <div className="bg-white dark:bg-surface-dark overflow-y-auto w-full sm:w-[90%] md:w-[80%] lg:w-[70%] h-full py-5 px-3 sm:px-6 md:px-12 lg:px-44">
         <div className="py-5 min-h-22.5">
           <h1 className="text-2xl sm:text-3xl md:text-4xl dark:text-white text-center font-overview font-semibold">
-            Mis series
+            {t("my_series.title")}
           </h1>
           <h3 className="text-base sm:text-lg md:text-xl text-center dark:text-pink text-error font-noto font-normal px-2">
-            Si eliminas la serie, eliminas todos los datos
+            {t("my_series.warning")}
           </h3>
         </div>
         <div className="flex flex-col gap-4 py-4 items-center">
@@ -101,7 +103,7 @@ const MySeries = () => {
             ))
           ) : (
             <div className="text-xl sm:text-2xl dark:text-gray-light font-semibold text-foreground text-center">
-              No hay datos
+              {t("my_series.no_data")}
             </div>
           )}
         </div>

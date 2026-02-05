@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { AiFillDelete } from "react-icons/ai";
 import useSeries from "../../utils/useSeries";
 import { Serie } from "../../types";
+import { useTranslation } from "react-i18next";
 
 interface FavSeriesProps {
   seriesFav: Serie[];
@@ -10,11 +11,12 @@ interface FavSeriesProps {
 
 export const FavSeries = ({ seriesFav, setSeriesFav }: FavSeriesProps) => {
   const { handleUnfavoriteFromProfile } = useSeries();
+  const { t } = useTranslation();
 
   return (
     <div className="min-h-75 lg:h-full dark:bg-background-dark flex pb-5 flex-col overflow-y-auto bg-white gap-4">
       <h1 className="text-xl sm:text-2xl dark:text-gray-light text-center pt-2 font-bold text-primary">
-        Series favoritas
+        {t("profile.fav_series")}
       </h1>
       <div className="flex flex-col px-3 sm:px-5 gap-3 w-full">
         {" "}
@@ -33,7 +35,7 @@ export const FavSeries = ({ seriesFav, setSeriesFav }: FavSeriesProps) => {
               </div>
               <div className="w-[17%] flex hover:bg-foreground justify-center items-center">
                 <button
-                  title="Eliminar de favoritos"
+                  title={t("profile.delete_fav")}
                   onClick={(e) =>
                     handleUnfavoriteFromProfile(
                       e,
@@ -51,7 +53,7 @@ export const FavSeries = ({ seriesFav, setSeriesFav }: FavSeriesProps) => {
           ))
         ) : (
           <div className="text-lg sm:text-xl md:text-2xl dark:text-gray-light text-center px-2">
-            Aun no tienes series favoritas
+            {t("profile.no_favs")}
           </div>
         )}
       </div>

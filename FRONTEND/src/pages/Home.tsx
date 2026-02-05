@@ -9,6 +9,7 @@ import Spinner from "../components/common/Spinner";
 import { Serie } from "../types";
 import { useAuth } from "../context/AuthContext";
 import SEO from "../components/common/SEO";
+import { useTranslation } from "react-i18next";
 
 const filterSeries = (series: Serie[]) => {
   return series.filter(
@@ -25,6 +26,7 @@ const Home = () => {
   const [isFetchingMore, setIsFetchingMore] = useState(false);
 
   const { user } = useAuth();
+  const { t, i18n } = useTranslation();
 
   const searchRef = useRef<NodeJS.Timeout | null>(null);
   const isUpdatingPage = useRef(false);
@@ -38,7 +40,7 @@ const Home = () => {
   useEffect(() => {
     setPage(1);
     setSerie(null);
-  }, [search]);
+  }, [search, i18n.language]);
 
   useEffect(() => {
     if (searchRef.current) {
@@ -51,15 +53,15 @@ const Home = () => {
       try {
         const isSearching = search !== null && search !== "";
         const response = isSearching
-          ? await api.searchTvShow(search, page)
-          : await api.popularTvShow(page);
+          ? await api.searchTvShow(search, page, i18n.language)
+          : await api.popularTvShow(page, i18n.language);
 
         if (!isMounted) return;
 
         totalPagesRef.current = response.total_pages;
 
         const promesas = response.results.map((serie) =>
-          api.searchTvShowById(serie.id!),
+          api.searchTvShowById(serie.id!, i18n.language),
         );
 
         const data = await Promise.all(promesas);
@@ -92,7 +94,7 @@ const Home = () => {
         clearTimeout(searchRef.current);
       }
     };
-  }, [search, page]);
+  }, [search, page, i18n.language]);
 
   useEffect(() => {
     if (search === "") {
@@ -170,7 +172,7 @@ const Home = () => {
           {serie ? (
             serie.length === 0 ? (
               <div className="h-screen text-foreground dark:text-white text-xl sm:text-2xl md:text-3xl flex justify-center items-start pt-10">
-                No se encontraron series :(
+                {t("home.no_series_found")}
               </div>
             ) : (
               <div>

@@ -24,7 +24,7 @@ seriesRouter.post(
   "/",
   userExtractor,
   async (request: CustomRequest, response: Response, next: NextFunction) => {
-    const serie = request.body;
+    const { language, ...serie } = request.body;
     const { userId } = request;
 
     try {
@@ -33,7 +33,7 @@ seriesRouter.post(
         return response.status(404).json({ error: "user not found" });
       }
 
-      const serieApi = await getSerie(serie.tv_id);
+      const serieApi = await getSerie(serie.tv_id, language);
       const episodes = serieApi.seasons
         .map((season) => {
           if (season.season_number !== 0) {

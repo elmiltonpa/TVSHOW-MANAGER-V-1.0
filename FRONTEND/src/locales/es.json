@@ -1,0 +1,91 @@
+{
+  "header": {
+    "title": "TVSHOW MANAGER",
+    "my_profile": "Mi perfil",
+    "login": "Iniciar sesión",
+    "register": "Registrarse"
+  },
+  "search": {
+    "placeholder": "Buscar serie..."
+  },
+  "home": {
+    "popular": "Populares",
+    "top_rated": "Mejor Valoradas",
+    "no_series_found": "No se encontraron series :(",
+    "view_details": "VER DETALLES",
+    "add_to_favorites": "AGREGAR A FAVORITOS",
+    "remove_from_favorites": "QUITAR DE FAVORITOS"
+  },
+  "common": {
+    "loading": "Cargando..."
+  },
+  "login": {
+    "title": "Iniciar sesión",
+    "username": "Usuario",
+    "password": "Contraseña",
+    "placeholder_user": "Tu usuario",
+    "placeholder_pass": "Tu contraseña",
+    "forgot": "¿Olvidaste tu contraseña?",
+    "create_account": "Crear una cuenta nueva",
+    "submit": "Entrar",
+    "error_unknown": "Error desconocido",
+    "error_invalid": "Credenciales inválidas"
+  },
+  "register": {
+    "title": "Registrarse",
+    "name": "Nombre",
+    "username": "Usuario",
+    "password": "Contraseña",
+    "placeholder_name": "Tu nombre",
+    "placeholder_user": "Tu usuario",
+    "placeholder_pass": "Tu contraseña",
+    "already_have_account": "¿Ya tienes una cuenta?",
+    "submit": "Registrarse",
+    "error_register": "Error al registrar"
+  },
+  "profile": {
+    "fav_series": "Favoritos",
+    "watched_series": "Vistas",
+    "info": "Información",
+    "empty": "No hay series",
+    "not_found": "Perfil no encontrado",
+    "no_favs": "Aún no tienes series favoritas",
+    "no_watched": "Todavía no viste ninguna serie",
+    "logout": "Cerrar sesión",
+    "delete_fav": "Eliminar de favoritos"
+  },
+  "my_series": {
+    "title": "Mis series",
+    "warning": "Si eliminas la serie, se borrará todo tu progreso",
+    "delete_success": "Serie eliminada correctamente",
+    "delete_error": "Error al eliminar la serie",
+    "no_data": "No tienes series guardadas aún"
+  },
+  "detail": {
+    "seasons": "TEMPORADAS",
+    "episodes": "EPISODIOS",
+    "votes": "votos de usuarios",
+    "created_by": "Creado por",
+    "add_fav": "Añadir a favoritos",
+    "remove_fav": "Quitar de favoritos",
+    "add_watched": "Añadir a vistos",
+    "remove_watched": "Quitar de vistos",
+    "season": "Temporada",
+    "episode_seen": "VISTO"
+  },
+  "footer": {
+    "description": "Organiza, descubre y lleva el control de tus series favoritas en un solo lugar.",
+    "navigation": "Navegación",
+    "home": "Inicio",
+    "my_series": "Mis Series",
+    "connect": "Conecta",
+    "developed_by": "Desarrollado con ❤️ por Milton",
+    "rights": "Todos los derechos reservados."
+  },
+  "errors": {
+    "AUTH_INVALID_CREDENTIALS": "Usuario o contraseña incorrectos",
+    "AUTH_MISSING_FIELDS": "Faltan campos obligatorios",
+    "AUTH_USERNAME_TAKEN": "Este nombre de usuario ya está en uso",
+    "UNKNOWN_ERROR": "Ocurrió un error inesperado"
+  }
+}

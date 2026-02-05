@@ -9,7 +9,7 @@ registerRouter.post("/", async (request: Request, response: Response, next: Next
 
   if (!username || !password || !name) {
     return response.status(400).json({
-      error: "username, name or password missing",
+      error: "AUTH_MISSING_FIELDS",
     });
   }
 
@@ -18,7 +18,7 @@ registerRouter.post("/", async (request: Request, response: Response, next: Next
 
     if (existingUser) {
       return response.status(400).json({
-        error: "username must be unique",
+        error: "AUTH_USERNAME_TAKEN",
       });
     }
 

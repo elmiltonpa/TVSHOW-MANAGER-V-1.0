@@ -37,9 +37,10 @@ axiosClient.interceptors.response.use(
     return response;
   },
   (error) => {
-    // Don't redirect on 401 for login/register routes - those are expected auth failures
-    const isAuthRoute = error.config?.url?.includes("/login") || error.config?.url?.includes("/register");
-    
+    const isAuthRoute =
+      error.config?.url?.includes("/login") ||
+      error.config?.url?.includes("/register");
+
     if (error.response && error.response.status === 401 && !isAuthRoute) {
       window.localStorage.removeItem("session");
       toast.error(i18n.t("notifications.session_expired"));

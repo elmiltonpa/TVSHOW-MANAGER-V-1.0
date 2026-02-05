@@ -8,6 +8,7 @@ import {
 import { User } from "../types";
 import { jwtDecode } from "jwt-decode";
 import { toast } from "react-hot-toast";
+import { useTranslation } from "react-i18next";
 
 interface AuthContextType {
   user: Pick<User, "username"> | null;
@@ -27,6 +28,7 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<Pick<User, "username"> | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const { t } = useTranslation();
 
   useEffect(() => {
     const checkSession = () => {
@@ -42,7 +44,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
             } else {
               // Token expired
               window.localStorage.removeItem("session");
-              toast.error("Session expired, please login again");
+              toast.error(t("notifications.session_expired"));
               setUser(null);
             }
           } else {
@@ -59,7 +61,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     };
 
     checkSession();
-  }, []);
+  }, [t]);
 
   const login = (token: string, username: string) => {
     const session = {

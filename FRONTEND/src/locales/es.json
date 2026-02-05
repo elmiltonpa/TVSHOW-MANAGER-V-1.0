@@ -87,5 +87,21 @@
     "AUTH_MISSING_FIELDS": "Faltan campos obligatorios",
     "AUTH_USERNAME_TAKEN": "Este nombre de usuario ya está en uso",
     "UNKNOWN_ERROR": "Ocurrió un error inesperado"
+  },
+  "notifications": {
+    "login_required": "Debes iniciar sesión",
+    "login_required_progress": "Inicia sesión para guardar tu progreso",
+    "season_watched": "Temporada {{season}} marcada como vista",
+    "season_unwatched": "Temporada {{season}} desmarcada",
+    "season_error": "Error al actualizar la temporada",
+    "episode_error": "No se pudo marcar el episodio",
+    "serie_watched": "Serie marcada como vista",
+    "serie_unwatched": "Serie desmarcada de vistas",
+    "generic_error": "Ocurrió un error",
+    "fav_added": "Añadida a favoritos",
+    "fav_removed": "Eliminada de favoritos",
+    "fav_error": "Error al actualizar favoritos",
+    "session_expired": "Sesión expirada, por favor inicia sesión de nuevo",
+    "delete_fav_error": "No se pudo eliminar de favoritos"
   }
 }

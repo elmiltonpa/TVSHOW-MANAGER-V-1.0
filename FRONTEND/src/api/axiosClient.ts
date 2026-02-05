@@ -1,5 +1,6 @@
 import axios, { InternalAxiosRequestConfig } from "axios";
 import { toast } from "react-hot-toast";
+import i18n from "../i18n";
 
 const axiosClient = axios.create({
   baseURL: import.meta.env.VITE_BACKEND_URL,
@@ -41,7 +42,7 @@ axiosClient.interceptors.response.use(
     
     if (error.response && error.response.status === 401 && !isAuthRoute) {
       window.localStorage.removeItem("session");
-      toast.error("Session expired, please login again");
+      toast.error(i18n.t("notifications.session_expired"));
       window.location.href = "/";
     }
     return Promise.reject(error);

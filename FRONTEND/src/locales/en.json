@@ -87,5 +87,21 @@
     "AUTH_MISSING_FIELDS": "Missing required fields",
     "AUTH_USERNAME_TAKEN": "This username is already taken",
     "UNKNOWN_ERROR": "An unexpected error occurred"
+  },
+  "notifications": {
+    "login_required": "You must sign in",
+    "login_required_progress": "Sign in to save your progress",
+    "season_watched": "Season {{season}} marked as watched",
+    "season_unwatched": "Season {{season}} unmarked",
+    "season_error": "Error updating the season",
+    "episode_error": "Could not mark the episode",
+    "serie_watched": "Series marked as watched",
+    "serie_unwatched": "Series removed from watched",
+    "generic_error": "An error occurred",
+    "fav_added": "Added to favorites",
+    "fav_removed": "Removed from favorites",
+    "fav_error": "Error updating favorites",
+    "session_expired": "Session expired, please sign in again",
+    "delete_fav_error": "Could not remove from favorites"
   }
 }

@@ -82,7 +82,7 @@ export const SeriesProvider = ({ children }: { children: ReactNode }) => {
       try {
         if (!user) {
           navigate("/login");
-          toast.error("Debes iniciar sesión");
+          toast.error(t("notifications.login_required"));
           return;
         }
 
@@ -110,7 +110,7 @@ export const SeriesProvider = ({ children }: { children: ReactNode }) => {
 
           setSeasonInfo(createArray[season - 1]);
           setSeasonIsFull(true);
-          toast.success(`Temporada ${season} marcada como vista`);
+          toast.success(t("notifications.season_watched", { season }));
           return;
         }
 
@@ -132,16 +132,16 @@ export const SeriesProvider = ({ children }: { children: ReactNode }) => {
         setSeasonIsFull(!seassonIsFull);
 
         if (!seassonIsFull) {
-          toast.success(`Temporada ${season} marcada como vista`);
+          toast.success(t("notifications.season_watched", { season }));
         } else {
-          toast.success(`Temporada ${season} desmarcada`);
+          toast.success(t("notifications.season_unwatched", { season }));
         }
       } catch (error) {
         console.error(error);
-        toast.error("Error al actualizar la temporada");
+        toast.error(t("notifications.season_error"));
       }
     },
-    [user, navigate, i18n.language],
+    [user, navigate, i18n.language, t],
   );
 
   const handleCapWatched = useCallback(
@@ -162,7 +162,7 @@ export const SeriesProvider = ({ children }: { children: ReactNode }) => {
       try {
         if (!user) {
           navigate("/login");
-          toast.error("Inicia sesión para guardar tu progreso");
+          toast.error(t("notifications.login_required_progress"));
           return;
         }
         const User = await getUser(user.username);
@@ -198,11 +198,11 @@ export const SeriesProvider = ({ children }: { children: ReactNode }) => {
         });
       } catch (error) {
         console.error("Error al actualizar episodio", error);
-        toast.error("No se pudo marcar el episodio");
+        toast.error(t("notifications.episode_error"));
       }
       setIsLoadingVisto(false);
     },
-    [user, navigate, i18n.language],
+    [user, navigate, i18n.language, t],
   );
 
   const handleWatched = useCallback(
@@ -215,7 +215,7 @@ export const SeriesProvider = ({ children }: { children: ReactNode }) => {
 
       if (!user) {
         navigate("/login");
-        toast.error("Debes iniciar sesión");
+        toast.error(t("notifications.login_required"));
         return;
       }
       try {
@@ -229,8 +229,8 @@ export const SeriesProvider = ({ children }: { children: ReactNode }) => {
             watched: !serieWatched.watched,
           } as Partial<Serie>);
           setSerieWatched(!serieWatched.watched!);
-          if (!serieWatched.watched) toast.success("Serie marcada como vista");
-          else toast.success("Serie desmarcada de vistas");
+          if (!serieWatched.watched) toast.success(t("notifications.serie_watched"));
+          else toast.success(t("notifications.serie_unwatched"));
         } else {
           const serieCreada = (await serieService.createSerie({
             tv_id: serieId,
@@ -241,14 +241,14 @@ export const SeriesProvider = ({ children }: { children: ReactNode }) => {
             watched: true,
           } as Partial<Serie>);
           setSerieWatched(true);
-          toast.success("Serie marcada como vista");
+          toast.success(t("notifications.serie_watched"));
         }
       } catch (error) {
         console.error("Error al actualizar estado visto", error);
-        toast.error("Ocurrió un error");
+        toast.error(t("notifications.generic_error"));
       }
     },
-    [user, navigate, i18n.language],
+    [user, navigate, i18n.language, t],
   );
 
   const handleSubmit = useCallback(
@@ -265,7 +265,7 @@ export const SeriesProvider = ({ children }: { children: ReactNode }) => {
       try {
         if (!user) {
           navigate("/login");
-          toast.error("Debes iniciar sesión");
+          toast.error(t("notifications.login_required"));
           return;
         }
         const User = await getUser(user.username);
@@ -282,10 +282,10 @@ export const SeriesProvider = ({ children }: { children: ReactNode }) => {
           } as Partial<Serie>);
           if (serieAlreadyAdded.favorite) {
             setSeriesAdded(seriesAdded.filter((serie) => serie !== serieId));
-            toast.success("Eliminada de favoritos");
+            toast.success(t("notifications.fav_removed"));
           } else {
             setSeriesAdded([...seriesAdded, serieId]);
-            toast.success("Añadida a favoritos");
+            toast.success(t("notifications.fav_added"));
           }
         } else {
           const serieCreada = (await serieService.createSerie({
@@ -296,14 +296,14 @@ export const SeriesProvider = ({ children }: { children: ReactNode }) => {
             favorite: true,
           } as Partial<Serie>);
           setSeriesAdded([...seriesAdded, serieId]);
-          toast.success("Añadida a favoritos");
+          toast.success(t("notifications.fav_added"));
         }
       } catch {
-        toast.error("Error al actualizar favoritos");
+        toast.error(t("notifications.fav_error"));
       }
       setIsLoadingToFavorite(false);
     },
-    [user, navigate, i18n.language],
+    [user, navigate, i18n.language, t],
   );
 
   const handleSubmitFromSerieDetail = useCallback(
@@ -317,7 +317,7 @@ export const SeriesProvider = ({ children }: { children: ReactNode }) => {
       try {
         if (!user) {
           navigate("/login");
-          toast.error("Debes iniciar sesión");
+          toast.error(t("notifications.login_required"));
           return;
         }
         const User = await getUser(user.username);
@@ -331,10 +331,10 @@ export const SeriesProvider = ({ children }: { children: ReactNode }) => {
           } as Partial<Serie>);
           if (serieAlreadyAdded.favorite) {
             setSeriesAdded(false);
-            toast.success("Eliminada de favoritos");
+            toast.success(t("notifications.fav_removed"));
           } else {
             setSeriesAdded(true);
-            toast.success("Añadida a favoritos");
+            toast.success(t("notifications.fav_added"));
           }
         } else {
           const serieCreada = (await serieService.createSerie({
@@ -345,13 +345,13 @@ export const SeriesProvider = ({ children }: { children: ReactNode }) => {
             favorite: true,
           } as Partial<Serie>);
           setSeriesAdded(true);
-          toast.success("Añadida a favoritos");
+          toast.success(t("notifications.fav_added"));
         }
       } catch {
-        toast.error("Error al actualizar favoritos");
+        toast.error(t("notifications.fav_error"));
       }
     },
-    [user, navigate, i18n.language],
+    [user, navigate, i18n.language, t],
   );
 
   const handleUnfavoriteFromProfile = useCallback(
@@ -366,7 +366,7 @@ export const SeriesProvider = ({ children }: { children: ReactNode }) => {
       try {
         if (!user) {
           navigate("/login");
-          toast.error("Debes iniciar sesión");
+          toast.error(t("notifications.login_required"));
           return;
         }
         const User = await getUser(user.username);
@@ -384,14 +384,14 @@ export const SeriesProvider = ({ children }: { children: ReactNode }) => {
               seriesUserFav.filter((serie) => serie.tv_id !== serieId),
             );
           }
-          toast.success("Eliminada de favoritos");
+          toast.success(t("notifications.fav_removed"));
         }
       } catch (error) {
         console.error("Error al eliminar", error);
-        toast.error("No se pudo eliminar de favoritos");
+        toast.error(t("notifications.delete_fav_error"));
       }
     },
-    [user, navigate],
+    [user, navigate, t],
   );
 
   const value = useMemo(

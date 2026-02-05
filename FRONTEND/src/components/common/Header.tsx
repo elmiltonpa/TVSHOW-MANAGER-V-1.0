@@ -56,14 +56,22 @@ const Header = () => {
               className="text-background font-bold text-[11px] xs:text-xs sm:text-base md:text-lg whitespace-nowrap"
               to="/home"
             >
-              {t('header.title')}
+              {t("header.title")}
             </Link>
           </li>
-          {/* GitHub Links */}
-          <li className="hidden md:block ml-4">
-             <a 
-              href="https://github.com/elmiltonpa/TVSHOW-MANAGER" 
-              target="_blank" 
+          <li className="hidden md:flex gap-4 ml-4">
+            <a
+              href="https://github.com/elmiltonpa"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-background hover:text-warning transition-colors"
+              title="GitHub Profile"
+            >
+              <FaGithub size={20} />
+            </a>
+            <a
+              href="https://github.com/elmiltonpa/TVSHOW-MANAGER"
+              target="_blank"
               rel="noopener noreferrer"
               className="text-background hover:text-warning transition-colors"
               title="Repository"
@@ -81,7 +89,7 @@ const Header = () => {
                   className="text-background font-semibold text-[10px] xs:text-xs sm:text-sm md:text-base lg:text-lg whitespace-nowrap"
                   to={`/${user.username}`}
                 >
-                  {t('header.my_profile')}
+                  {t("header.my_profile")}
                 </Link>
               </li>
             ) : (
@@ -91,7 +99,7 @@ const Header = () => {
                     className="text-background font-semibold text-[10px] xs:text-xs sm:text-sm md:text-base lg:text-lg whitespace-nowrap"
                     to="/login"
                   >
-                    {t('header.login')}
+                    {t("header.login")}
                   </Link>
                 </li>
                 <li>
@@ -99,7 +107,7 @@ const Header = () => {
                     className="text-background font-semibold text-[10px] xs:text-xs sm:text-sm md:text-base lg:text-lg whitespace-nowrap"
                     to="/register"
                   >
-                    {t('header.register')}
+                    {t("header.register")}
                   </Link>
                 </li>
               </>
@@ -112,13 +120,17 @@ const Header = () => {
               <span className="text-background font-bold text-[9px] xs:text-[10px] sm:text-xs uppercase ml-1">
                 {i18n.language.substring(0, 2)}
               </span>
-              <select 
-                value={i18n.language} 
+              <select
+                value={i18n.language}
                 onChange={handleLanguageChange}
                 className="absolute inset-0 opacity-0 cursor-pointer w-full h-full"
               >
-                <option className="text-black" value="es">Español</option>
-                <option className="text-black" value="en">English</option>
+                <option className="text-black" value="es">
+                  Español
+                </option>
+                <option className="text-black" value="en">
+                  English
+                </option>
               </select>
             </div>
 
@@ -135,13 +147,15 @@ const Header = () => {
                       theme
                         ? "bg-background-dark transform translate-x-4 xs:translate-x-5 sm:translate-x-6.25 transition-transform duration-500 ease-out"
                         : "bg-background transition-transform duration-500 ease-out"
-                    } absolute top-[2px] sm:top-[3px] left-1 text-white h-4.5 w-4.5 xs:h-5 xs:w-5 sm:h-7 sm:w-7 rounded-full`}
+                    } absolute top-0.5 sm:top-0.75 left-1 text-white h-4.5 w-4.5 xs:h-5 xs:w-5 sm:h-7 sm:w-7 rounded-full`}
                   ></div>
-                  {/* Icons hidden on mobile to save space, or just made very small */}
-                  <div className="hidden xs:block pt-[2px] sm:pt-[3px] pl-[1px]">
-                    <MdDarkMode className="dark:text-background-dark" size={theme ? 18 : 0} />
+                  <div className="hidden xs:block pt-0.5 sm:pt-0.75 pl-px">
+                    <MdDarkMode
+                      className="dark:text-background-dark"
+                      size={theme ? 18 : 0}
+                    />
                   </div>
-                  <div className="hidden xs:block pt-[3px] sm:pt-[5px] pr-1">
+                  <div className="hidden xs:block pt-0.75 sm:pt-1.25 pr-1">
                     <MdOutlineLightMode size={theme ? 0 : 16} color="white" />
                   </div>
                 </button>

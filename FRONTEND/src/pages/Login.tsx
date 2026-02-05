@@ -14,6 +14,7 @@ interface ErrorResponse {
 const Login = () => {
   const [password, setPassword] = useState<string>("");
   const [username, setUsername] = useState<string>("");
+  const [rememberMe, setRememberMe] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const { t } = useTranslation();
@@ -25,7 +26,7 @@ const Login = () => {
     setIsLoading(true);
 
     try {
-      const userData = await loginService({ username, password });
+      const userData = await loginService({ username, password, rememberMe });
       if (userData && userData.token && userData.username) {
         login(userData.token, userData.username);
       } else if (userData && (userData as any).message) {
@@ -86,6 +87,21 @@ const Login = () => {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                 />
+              </div>
+              <div className="flex items-center gap-x-2 mt-1">
+                <input
+                  type="checkbox"
+                  id="rememberMe"
+                  className="w-4 h-4 cursor-pointer accent-primary"
+                  checked={rememberMe}
+                  onChange={(e) => setRememberMe(e.target.checked)}
+                />
+                <label 
+                  htmlFor="rememberMe" 
+                  className="text-sm font-semibold cursor-pointer select-none"
+                >
+                  {t("login.remember_me")}
+                </label>
               </div>
             </div>
             <div className="flex pt-5 h-[27.5px] text-error font-sans flex-col text-sm sm:text-base font-semibold items-center">

@@ -9,7 +9,7 @@ const loginRouter = Router();
 loginRouter.post(
   "/",
   async (request: Request, response: Response, next: NextFunction) => {
-    const { username, password } = request.body;
+    const { username, password, rememberMe } = request.body;
 
     try {
       const user = await User.findOne({ username });
@@ -30,8 +30,10 @@ loginRouter.post(
         username: user.username,
       };
 
+      const expiresIn = rememberMe ? "30d" : "24h";
+
       const token = jwt.sign(userForToken, config.JWT_SECRET, {
-        expiresIn: "30d",
+        expiresIn,
       });
 
       response.status(200).send({

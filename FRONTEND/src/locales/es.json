@@ -26,6 +26,7 @@
     "placeholder_user": "Tu usuario",
     "placeholder_pass": "Tu contraseña",
     "forgot": "¿Olvidaste tu contraseña?",
+    "remember_me": "Recordarme",
     "create_account": "Crear una cuenta nueva",
     "submit": "Entrar",
     "error_unknown": "Error desconocido",

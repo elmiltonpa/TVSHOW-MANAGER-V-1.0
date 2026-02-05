@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { Serie } from "../../types";
+import { useTranslation } from "react-i18next";
 
 import { TiDelete } from "react-icons/ti";
 
@@ -10,6 +11,7 @@ interface SearchBarProps {
 
 const SearchBar = ({ setSerie: _setSerie }: SearchBarProps) => {
   const [text, setText] = useState("");
+  const { t } = useTranslation();
 
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
@@ -35,7 +37,7 @@ const SearchBar = ({ setSerie: _setSerie }: SearchBarProps) => {
           className="placeholder-foreground border-2 border-primary-light w-full px-3 h-10 text-foreground text-base sm:text-lg md:text-xl bg-white"
           value={text}
           type="text"
-          placeholder="Buscar algo para ver..."
+          placeholder={t("search.placeholder")}
           onChange={(e) => {
             setText(e.target.value);
             onChangeSearch(e);

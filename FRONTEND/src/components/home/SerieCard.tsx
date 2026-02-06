@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import useSeries from "../../utils/useSeries";
 import { Serie } from "../../types";
 import { useTranslation } from "react-i18next";
-import { FaFilm, FaImage } from "react-icons/fa";
+import { FaFilm, FaImage, FaStar } from "react-icons/fa";
 
 const BASE_URL = "https://image.tmdb.org/t/p/w500/";
 
@@ -93,9 +93,9 @@ const SerieCard = memo(
                     onClick={handleFavoriteClick}
                     className={`${
                       isLoadingToFavorite
-                        ? "cursor-not-allowed text-warning-muted dark:text-accent-purple"
-                        : "hover:bg-primary dark:text-accent-purple dark:hover:bg-white hover:text-background text-warning-muted"
-                    } text-sm sm:text-base md:text-lg px-4 sm:px-6 md:px-10 py-2 font-semibold`}
+                        ? "cursor-not-allowed text-warning-muted opacity-50"
+                        : "hover:bg-warning hover:text-primary-dark dark:hover:bg-warning dark:hover:text-primary-dark transition-colors duration-200"
+                    } text-sm sm:text-base md:text-lg px-4 sm:px-6 md:px-10 py-2 font-bold text-warning-muted dark:text-warning`}
                   >
                     {t("home.remove_from_favorites")}
                   </button>
@@ -105,9 +105,9 @@ const SerieCard = memo(
                     onClick={handleFavoriteClick}
                     className={`${
                       isLoadingToFavorite
-                        ? "cursor-not-allowed dark:text-warning text-primary"
-                        : "hover:bg-primary dark:text-warning dark:hover:bg-white dark:hover:text-primary hover:text-background text-primary"
-                    } text-sm sm:text-base md:text-lg px-4 sm:px-6 md:px-10 py-2 font-semibold`}
+                        ? "cursor-not-allowed text-primary opacity-50"
+                        : "hover:bg-primary hover:text-white dark:hover:bg-white dark:hover:text-primary transition-colors duration-200"
+                    } text-sm sm:text-base md:text-lg px-4 sm:px-6 md:px-10 py-2 font-bold text-primary dark:text-accent-light`}
                   >
                     {t("home.add_to_favorites")}
                   </button>
@@ -140,8 +140,9 @@ const SerieCard = memo(
                 </h2>
               </div>
             </div>
-            <div>
-              <h2 className="text-warning text-xl sm:text-2xl font-semibold">
+            <div className="flex items-center justify-center gap-1.5 bg-background-dark/20 py-1 px-3 rounded-full">
+              <FaStar className="text-warning text-lg sm:text-xl" />
+              <h2 className="text-warning text-xl sm:text-2xl font-black">
                 {parseFloat(serie.vote_average.toFixed(2))}
               </h2>
             </div>

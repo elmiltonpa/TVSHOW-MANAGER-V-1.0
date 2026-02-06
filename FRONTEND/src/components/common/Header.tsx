@@ -7,24 +7,26 @@ import { useTranslation } from "react-i18next";
 
 const Header = () => {
   const location = useLocation().pathname;
-  const [theme, setTheme] = useState(false);
+  const [theme, setTheme] = useState(() => {
+    const themeInLocalStorage = window.localStorage.getItem("theme");
+    if (themeInLocalStorage) {
+      return themeInLocalStorage === "dark";
+    }
+    return true;
+  });
   const { t, i18n } = useTranslation();
 
   const { user } = useAuth();
 
   useEffect(() => {
     const themeInLocalStorage = window.localStorage.getItem("theme");
-    if (themeInLocalStorage) {
-      if (themeInLocalStorage === "light") {
-        setTheme(false);
-        document.documentElement.classList.remove("dark");
-      } else {
-        window.localStorage.setItem("theme", "dark");
-        setTheme(true);
-        document.documentElement.classList.add("dark");
-      }
+    if (themeInLocalStorage === "light") {
+      setTheme(false);
+      document.documentElement.classList.remove("dark");
     } else {
-      window.localStorage.setItem("theme", "light");
+      window.localStorage.setItem("theme", "dark");
+      setTheme(true);
+      document.documentElement.classList.add("dark");
     }
   }, []);
 

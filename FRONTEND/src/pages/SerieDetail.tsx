@@ -112,7 +112,7 @@ const SerieDetail = () => {
 
   if (!serie) return null;
 
-  const seoTitle = serie.name || serie.original_name || "TV Show Detail";
+  const seoTitle = serie.name || "TV Show Detail";
   const seoDescription = serie.overview || `Details about ${seoTitle}`;
   const seoImage = serie.poster_path
     ? `https://image.tmdb.org/t/p/w500${serie.poster_path}`

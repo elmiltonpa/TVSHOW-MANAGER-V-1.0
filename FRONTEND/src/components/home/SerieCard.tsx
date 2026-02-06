@@ -1,8 +1,9 @@
-import { memo, useCallback } from "react";
+import { memo, useCallback, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useSeries from "../../utils/useSeries";
 import { Serie } from "../../types";
 import { useTranslation } from "react-i18next";
+import { FaFilm, FaImage } from "react-icons/fa";
 
 const BASE_URL = "https://image.tmdb.org/t/p/w500/";
 
@@ -26,6 +27,8 @@ const SerieCard = memo(
     const navigate = useNavigate();
     const { handleSubmit } = useSeries();
     const { t } = useTranslation();
+    const [imageLoaded, setImageLoaded] = useState(false);
+    const [imageError, setImageError] = useState(false);
 
     const tmdbId = serie.id ? Number(serie.id) : serie.tv_id;
     const isFavorite = seriesAdded.includes(tmdbId);
@@ -48,16 +51,31 @@ const SerieCard = memo(
     }, [navigate, tmdbId]);
 
     return (
-      <div className="flex flex-col md:flex-row my-3 w-full bg-background dark:bg-surface-dark">
+      <div className="flex flex-col md:flex-row my-3 w-full bg-background dark:bg-surface-dark shadow-sm overflow-hidden">
         <div className="md:w-[78%] w-full md:border-r-4 border-gray-medium dark:border-background-dark">
           <div className="h-full flex flex-col sm:flex-row gap-2">
-            <div className="flex justify-center items-center sm:items-start">
-              <img
-                loading="lazy"
-                className="h-auto w-full sm:w-auto sm:h-[300px] object-cover"
-                src={BASE_URL + serie.poster_path}
-                alt={serie.name}
-              />
+            <div className="flex justify-center items-center sm:items-start bg-gray-100 dark:bg-surface-medium relative sm:min-w-[200px] min-h-[300px] sm:h-[300px]">
+              {!imageLoaded && !imageError && (
+                <div className="absolute inset-0 flex items-center justify-center bg-gray-200 dark:bg-surface-medium animate-pulse">
+                  <FaFilm className="text-gray-400 dark:text-gray-500 size-12" />
+                </div>
+              )}
+              
+              {(imageError || !serie.poster_path) ? (
+                <div className="flex flex-col items-center justify-center w-full h-full min-h-[300px] bg-gray-200 dark:bg-surface-medium text-gray-400 p-4">
+                  <FaImage size={48} className="mb-2" />
+                  <span className="text-xs font-bold uppercase tracking-tighter opacity-60">No Image available</span>
+                </div>
+              ) : (
+                <img
+                  loading="lazy"
+                  className={`h-auto w-full sm:w-auto sm:h-[300px] object-cover transition-opacity duration-300 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
+                  src={BASE_URL + serie.poster_path}
+                  alt={serie.name}
+                  onLoad={() => setImageLoaded(true)}
+                  onError={() => setImageError(true)}
+                />
+              )}
             </div>
             <div className="flex flex-col flex-1 px-3 sm:px-5 py-3 justify-between items-center">
               <div className="flex flex-col gap-y-2 items-center flex-1">

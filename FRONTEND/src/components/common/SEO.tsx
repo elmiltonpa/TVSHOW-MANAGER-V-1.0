@@ -22,14 +22,22 @@ const SEO = ({
   const defaultImage = `${siteUrl}/vite.svg`; // Fallback image
   const metaImage = image || defaultImage;
 
+  const schemaOrgJSONLD = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": name,
+    "url": siteUrl,
+  };
+
   return (
     <Helmet>
       {/* Standard metadata tags */}
       <title>{title} | {name}</title>
-      <meta name='description' content={description} />
+      <meta name="description" content={description} />
       <link rel="canonical" href={currentUrl} />
 
       {/* Facebook tags */}
+      <meta property="og:site_name" content={name} />
       <meta property="og:type" content={type} />
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
@@ -42,6 +50,11 @@ const SEO = ({
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />
       <meta name="twitter:image" content={metaImage} />
+
+      {/* Structured Data */}
+      <script type="application/ld+json">
+        {JSON.stringify(schemaOrgJSONLD)}
+      </script>
     </Helmet>
   );
 };
